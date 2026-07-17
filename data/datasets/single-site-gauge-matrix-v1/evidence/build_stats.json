@@ -1,0 +1,16 @@
+{
+  "commit": "1a3af4af02029a84cf998109cb60dc96217863c8",
+  "manifest_files": 1550,
+  "counts": {
+    "bare_native": 8568,
+    "R_converted_from_bare": 8568,
+    "R_native_continuation": 912,
+    "R_reoptimized_from_bare": 2180
+  },
+  "floor_limited": {
+    "R_converted_from_bare": 4075,
+    "R_reoptimized_from_bare": 1080,
+    "R_native_continuation": 448
+  },
+  "roundtrip_fail": 2447
+}

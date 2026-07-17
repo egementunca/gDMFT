@@ -1,0 +1,8 @@
+cell,lattice,grid_keys,T_files,T_total,attempted_keys,branch_not_found,complete,converged_branch_attempts,failed_branch_attempts,keys_with_at_least_one_converged_branch,n_eps_dos,solver_failed
+bethe_mg1_bare,bethe,884,17,17,884,884,1,884,0,884,,0
+bethe_mg1_Rnative,bethe,884,17,17,884,884,1,884,0,884,,0
+bethe_mg3_Rnative,bethe,884,17,17,884,0,1,1696,72,884,,0
+square_mg1_bare,square,400,10,10,400,400,1,400,0,400,2001,0
+square_mg1_Rnative,square,400,10,10,400,400,1,400,0,400,2001,0
+square_mg3_bare,square,400,10,10,400,0,1,731,69,400,2001,0
+square_mg3_Rnative,square,400,10,10,400,0,1,728,72,400,2001,0

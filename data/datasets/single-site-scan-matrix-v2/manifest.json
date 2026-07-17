@@ -1,0 +1,345 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "README.md",
+      "bytes": 2171,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "8ed157a56f45ecb9830d17b5e5184578a9f63a5096548d4e1abea910b60da2ec"
+    },
+    {
+      "artifact_id": "evidence.bare_R_pairing.csv",
+      "bytes": 854369,
+      "media_type": "text/csv",
+      "path": "evidence/bare_R_pairing.csv",
+      "role": "validation-evidence",
+      "sha256": "fa300a80f6ce01762f91d7143bd16a9db239ceffdd4f11a66bb67d05640147c5"
+    },
+    {
+      "artifact_id": "evidence.claim_ledger.csv",
+      "bytes": 2229,
+      "media_type": "text/csv",
+      "path": "evidence/claim_ledger.csv",
+      "role": "validation-evidence",
+      "sha256": "342ca2b5bbb871050578a5906f198482fb582dbd7a7fa6b40ef48af81d80a880"
+    },
+    {
+      "artifact_id": "evidence.coverage_after_v2.csv",
+      "bytes": 613,
+      "media_type": "text/csv",
+      "path": "evidence/coverage_after_v2.csv",
+      "role": "validation-evidence",
+      "sha256": "3de953288be175aeaa5ff45413f6b87c683fabf8d8553feb3ab9cdbc864103c6"
+    },
+    {
+      "artifact_id": "evidence.ed.ed_accepted.csv",
+      "bytes": 20964,
+      "media_type": "text/csv",
+      "path": "evidence/ed/ed_accepted.csv",
+      "role": "validation-evidence",
+      "sha256": "d208db317c6028b2fe150c1c39b5f7166ba0eacacd9d89590131dc8a6653be3d"
+    },
+    {
+      "artifact_id": "evidence.ed.ed_llk_protocol.json",
+      "bytes": 6995,
+      "media_type": "application/json",
+      "path": "evidence/ed/ed_llk_protocol.json",
+      "role": "validation-evidence",
+      "sha256": "7e211044e9ba4359d5ced5e9a19593a7c709444f5ce04b485091200285aec9f9"
+    },
+    {
+      "artifact_id": "evidence.ed.ed_raw_attempts.csv",
+      "bytes": 21815,
+      "media_type": "text/csv",
+      "path": "evidence/ed/ed_raw_attempts.csv",
+      "role": "validation-evidence",
+      "sha256": "910fca3077d1eec30f5b07420df4989eded818b2be7d800c92e080880534cd99"
+    },
+    {
+      "artifact_id": "evidence.ed.ed_validation.csv",
+      "bytes": 6098,
+      "media_type": "text/csv",
+      "path": "evidence/ed/ed_validation.csv",
+      "role": "validation-evidence",
+      "sha256": "14f04888311c420c2d38ac29981e08980736d8d0a198598f32eaac0c13405a8d"
+    },
+    {
+      "artifact_id": "evidence.ed.ed_validation_checks.csv",
+      "bytes": 725,
+      "media_type": "text/csv",
+      "path": "evidence/ed/ed_validation_checks.csv",
+      "role": "validation-evidence",
+      "sha256": "7f9bf5d4f470fc277eed3819be9389c964a24db658d916b2698f66bc459a94e7"
+    },
+    {
+      "artifact_id": "evidence.mg1_bound_expansion.csv",
+      "bytes": 2614,
+      "media_type": "text/csv",
+      "path": "evidence/mg1_bound_expansion.csv",
+      "role": "validation-evidence",
+      "sha256": "dee849404fefc751297ef7ef3cfdac505506a2196780876959e9b63d09154ad1"
+    },
+    {
+      "artifact_id": "evidence.square.square_branch_matches.csv",
+      "bytes": 2023,
+      "media_type": "text/csv",
+      "path": "evidence/square/square_branch_matches.csv",
+      "role": "validation-evidence",
+      "sha256": "e559aa71b95907d4581fafd9e55fc19fb862e67fdfd7cf6e0dc09a2c479078f4"
+    },
+    {
+      "artifact_id": "evidence.square.square_claim_gate_v2.csv",
+      "bytes": 54231,
+      "media_type": "text/csv",
+      "path": "evidence/square/square_claim_gate_v2.csv",
+      "role": "validation-evidence",
+      "sha256": "84995dc60660da2d988e26354cc7e7434112ece174650374333ef834191e5568"
+    },
+    {
+      "artifact_id": "evidence.square.square_integration_registry.json",
+      "bytes": 2207,
+      "media_type": "application/json",
+      "path": "evidence/square/square_integration_registry.json",
+      "role": "validation-evidence",
+      "sha256": "57b1192eda979012a79d7961ca9e3071ce92656516879c38328a072a73b67fd2"
+    },
+    {
+      "artifact_id": "evidence.square.square_node_certification.json",
+      "bytes": 1268,
+      "media_type": "application/json",
+      "path": "evidence/square/square_node_certification.json",
+      "role": "validation-evidence",
+      "sha256": "9d589976e03053af13fac2ba175f7f10e86cace7011bf19e2d4c32ee5f49b0d7"
+    },
+    {
+      "artifact_id": "evidence.square.square_pilot_v2_raw.csv",
+      "bytes": 88141,
+      "media_type": "text/csv",
+      "path": "evidence/square/square_pilot_v2_raw.csv",
+      "role": "validation-evidence",
+      "sha256": "b782301d6ee87cc7cfcf44423db94f23a93de2ce743bf1646aea8107b1fa5059"
+    },
+    {
+      "artifact_id": "evidence.square.square_resolution_decision.md",
+      "bytes": 5732,
+      "media_type": "text/markdown",
+      "path": "evidence/square/square_resolution_decision.md",
+      "role": "validation-evidence",
+      "sha256": "43ca46c07a7a9c8bd74110a442ac8186075aa52bc8c0fa86d089f3d543ee8b80"
+    },
+    {
+      "artifact_id": "evidence.square.square_stationary_convergence_v2.csv",
+      "bytes": 141035,
+      "media_type": "text/csv",
+      "path": "evidence/square/square_stationary_convergence_v2.csv",
+      "role": "validation-evidence",
+      "sha256": "4d5f7a43192049b91aec7c3e57aadbc50d611dce82d933de595d117485996590"
+    },
+    {
+      "artifact_id": "evidence.stage3_audit_v2.csv",
+      "bytes": 340,
+      "media_type": "text/csv",
+      "path": "evidence/stage3_audit_v2.csv",
+      "role": "validation-evidence",
+      "sha256": "338875d1bf429378f53c94e4171c6214ca7b0223fd456bfc51e02a0632a5bdfc"
+    },
+    {
+      "artifact_id": "evidence.unresolved_conditions_v2.csv",
+      "bytes": 80774,
+      "media_type": "text/csv",
+      "path": "evidence/unresolved_conditions_v2.csv",
+      "role": "validation-evidence",
+      "sha256": "5a3e742693c97c25e3ac0a438354bed3389c50ff7525bda0a7ee0b54c9c8f23a"
+    },
+    {
+      "artifact_id": "points.csv",
+      "bytes": 10650627,
+      "media_type": "text/csv",
+      "path": "points.csv",
+      "role": "canonical-scalar-point-table",
+      "rows": 15240,
+      "schema": "gdmft.point.v1",
+      "sha256": "6befa926bb5bfe4d8d3c641a36a5eb74aa74ded133dc7a85877d262d9ddc7764"
+    },
+    {
+      "artifact_id": "provenance.execution_patch.diff",
+      "bytes": 3677,
+      "media_type": "text/x-diff",
+      "path": "provenance/execution_patch.diff",
+      "role": "provenance",
+      "sha256": "3579a4835a478f5ebd445537c938f027a0d060644577e523a9c6cb25a1992a10"
+    },
+    {
+      "artifact_id": "provenance.migration_report.json",
+      "bytes": 11690,
+      "media_type": "application/json",
+      "path": "provenance/migration_report.json",
+      "role": "provenance",
+      "sha256": "80acc3abb413716ddcf232fa09b828cdddba3e391c71fc2a7905ce7763c9726b"
+    },
+    {
+      "artifact_id": "provenance.source-code-inventory.csv",
+      "bytes": 14654,
+      "media_type": "text/csv",
+      "path": "provenance/source-code-inventory.csv",
+      "role": "provenance",
+      "sha256": "e400a54e482de6b58ef7421756fe26ab21059051386fbad64a7e75417482de74"
+    },
+    {
+      "artifact_id": "provenance.source-code-portable-1d987593.tar.gz",
+      "bytes": 209771,
+      "compression": "gzip",
+      "media_type": "application/x-tar",
+      "path": "provenance/source-code-portable-1d987593.tar.gz",
+      "role": "provenance",
+      "sha256": "aab2ec3d1f85edd9206aeac49b368c8ecbd57b822864e676806f6f3b272256b6"
+    },
+    {
+      "artifact_id": "provenance.source_README.md",
+      "bytes": 11883,
+      "media_type": "text/markdown",
+      "path": "provenance/source_README.md",
+      "role": "provenance",
+      "sha256": "319930494e6fc44c5ac3c4a03d8bc9493b59be8d1d1478159b16eabb40445d61"
+    },
+    {
+      "artifact_id": "provenance.stage3_source_manifest.csv",
+      "bytes": 40589,
+      "media_type": "text/csv",
+      "path": "provenance/stage3_source_manifest.csv",
+      "role": "provenance",
+      "sha256": "a58e1120e65d870b9005300c277275489c0378e14b178a74c22271968382cf8a"
+    },
+    {
+      "artifact_id": "raw.raw_campaign.tar.gz",
+      "bytes": 6888414,
+      "compression": "gzip",
+      "media_type": "application/x-tar",
+      "path": "raw/raw_campaign.tar.gz",
+      "role": "lossless-raw-archive",
+      "sha256": "bee997175ebe211853638c4e657e77c784e09aad95232b2f3a91c44842807f0e"
+    },
+    {
+      "artifact_id": "source_views.stage3_scalar_projection.csv",
+      "bytes": 8952050,
+      "media_type": "text/csv",
+      "path": "source_views/stage3_scalar_projection.csv",
+      "role": "source-scalar-projection",
+      "sha256": "ca07329ae1033d3b3279aa321efb454a2ab0186334482d66c47f29a7396bfcd2"
+    }
+  ],
+  "conventions": {
+    "double_occupancy": "per physical site",
+    "energy_unit": "D in the canonical point view",
+    "grand_potential": "raw and divided by D are separate columns",
+    "half_bandwidth": 1.0,
+    "interaction_axis": "u_over_d",
+    "particle_hole": "half filling, density = 1",
+    "solution_difference": "second solution minus first solution",
+    "temperature_axis": "t_over_d"
+  },
+  "created_at": "2026-07-17T21:32:07Z",
+  "data_stage": "validated",
+  "dataset_id": "single-site.scan-matrix-v2",
+  "dataset_kind": "aggregate",
+  "description": "Authoritative lossless Bethe/square, Mg=1/3, bare/canonical-R single-site scan matrix.",
+  "extensions": {
+    "attempt_counts": {
+      "bare_native": 3368,
+      "canonical_r_converted": 3368,
+      "canonical_r_native": 5136,
+      "canonical_r_reoptimized": 3368,
+      "total": 15240
+    },
+    "gauge_mode_counting": {
+      "bare_m_h": 2,
+      "canonical_n_modes": 3,
+      "rule": "canonical_n_modes = bare_m_h + 1"
+    },
+    "keys_with_at_least_one_converged_branch": {
+      "complete": true,
+      "registered": 4252
+    },
+    "preservation_revision": "1d987593969520b8cd6e191ca284682738778a6d",
+    "raw_half_bandwidth": {
+      "bethe": 1.0,
+      "square": 2.0
+    },
+    "selection_status": "not applied",
+    "source_categories": {
+      "branch_not_found": 5136,
+      "converged_branch": 9753,
+      "failed_branch": 351
+    },
+    "source_code_archive_is_byte_exact": false,
+    "source_code_archive_is_importable_core": false,
+    "source_code_archive_path_changes_only": true
+  },
+  "external_sources": [
+    {
+      "id": "doi:10.1103/PhysRevB.107.L121104",
+      "revision": "pdf-sha256:32f39c77020c5f5e7389828c268219ffaf3dfbd34a14de51ea966c4b1b5d65f9"
+    }
+  ],
+  "gate_contract": {
+    "decision_fields": [
+      "physically_admissible",
+      "selected"
+    ],
+    "evidence_fields": [
+      "solver_succeeded",
+      "equations_accepted",
+      "density_consistent",
+      "physical_guards_clear",
+      "bounds_clear",
+      "continuity_passed"
+    ],
+    "point_schema": "gdmft.point.v1",
+    "unknown_encoding": "null"
+  },
+  "grid": {
+    "bethe": {
+      "keys": 884,
+      "temperatures": 17
+    },
+    "cells": [
+      "bethe_mg1_Rnative",
+      "bethe_mg1_bare",
+      "bethe_mg3_Rnative",
+      "square_mg1_Rnative",
+      "square_mg1_bare",
+      "square_mg3_Rnative",
+      "square_mg3_bare"
+    ],
+    "m_g": [
+      1,
+      3
+    ],
+    "m_h": 2,
+    "square": {
+      "keys": 400,
+      "n_eps": 2001,
+      "quadrature": "continuum_elliptic_dos",
+      "temperatures": 10
+    }
+  },
+  "parent_dataset_ids": [
+    "single-site.gauge-matrix-v1"
+  ],
+  "provenance": {
+    "command": [
+      "python3",
+      "scripts/gauge_matrix/build_stage3_v2.py",
+      "--strict"
+    ],
+    "dirty": true,
+    "python": "3 (exact execution patch version not recorded)",
+    "repository": "paper-consolidation",
+    "revision": "1a3af4af02029a84cf998109cb60dc96217863c8"
+  },
+  "release_status": "draft",
+  "schema_version": "gdmft.dataset.v1",
+  "title": "Single-site scan matrix v2",
+  "version": "0.1.0"
+}

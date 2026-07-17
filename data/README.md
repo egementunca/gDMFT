@@ -22,3 +22,24 @@ the manifest that locates the full archive.
 
 Every scalar point table must follow `docs/data-contract.md`. Do not pack
 pole arrays, Matsubara functions, or spectra into JSON strings in a CSV.
+
+## Available draft datasets
+
+- `single-site-gauge-matrix-v1`: frozen D08 predecessor with 20,228 native
+  point rows and the lossless root archive.
+- `single-site-scan-matrix-v2`: authoritative D09 matrix with 15,240 native
+  point rows, the lossless raw campaign, validation evidence, and a portable
+  producer-code audit archive.
+
+Both manifests validate locally:
+
+```bash
+gdmft-data validate \
+  data/datasets/single-site-gauge-matrix-v1/manifest.json
+gdmft-data validate \
+  data/datasets/single-site-scan-matrix-v2/manifest.json
+```
+
+They remain `draft`: numerical validation is recorded, while physical
+admissibility, branch continuity, thermodynamic selection, release rights,
+and immutable publication metadata are not yet complete.

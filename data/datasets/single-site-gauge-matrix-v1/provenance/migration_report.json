@@ -1,0 +1,134 @@
+{
+  "derived": {
+    "points.csv": {
+      "rows": 20228,
+      "source": "source_views/scalar_projection.csv"
+    }
+  },
+  "excluded": [
+    ".gitattributes (source repository metadata)",
+    ".gitignore (source repository metadata)",
+    "expanded roots.jsonl (regenerable from roots.jsonl.gz)"
+  ],
+  "execution_revision": "1a3af4af02029a84cf998109cb60dc96217863c8",
+  "imports": [
+    {
+      "imported_bytes": 4845719,
+      "imported_path": "raw/roots.jsonl.gz",
+      "imported_sha256": "c565118e41c0c8e8e7582871c97b31e7b79b267c934eac91d16f7eb86f83ae6f",
+      "source_bytes": 4845719,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/roots.jsonl.gz",
+      "source_sha256": "c565118e41c0c8e8e7582871c97b31e7b79b267c934eac91d16f7eb86f83ae6f",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 381,
+      "imported_path": "raw/roots_archive_manifest.json",
+      "imported_sha256": "ac4fedf807d4daf17a07a868114c78905ffe441cc109f2415165c6085feb2183",
+      "source_bytes": 381,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/roots_archive_manifest.json",
+      "source_sha256": "ac4fedf807d4daf17a07a868114c78905ffe441cc109f2415165c6085feb2183",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 9856519,
+      "imported_path": "source_views/scalar_projection.csv",
+      "imported_sha256": "58eae88cedfed6bf9aa6b4ac3f61ec66cb3b233e3f51c29439ce7a1653106df8",
+      "source_bytes": 9856519,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/scalar_projection.csv",
+      "source_sha256": "58eae88cedfed6bf9aa6b4ac3f61ec66cb3b233e3f51c29439ce7a1653106df8",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 3156,
+      "imported_path": "metadata/grid_registry.json",
+      "imported_sha256": "d8fe3fb50bfc4488dffa85b4f0b70c606acf3457b5cdfdd4ff1f8737fd6a7354",
+      "source_bytes": 3156,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/grid_registry.json",
+      "source_sha256": "d8fe3fb50bfc4488dffa85b4f0b70c606acf3457b5cdfdd4ff1f8737fd6a7354",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 80253,
+      "imported_path": "evidence/coverage_matrix.csv",
+      "imported_sha256": "793b1f0060a16c77bc90b1f6c9564e82cf2eede0ae1b83509f9a4b9f3df22138",
+      "source_bytes": 80253,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/coverage_matrix.csv",
+      "source_sha256": "793b1f0060a16c77bc90b1f6c9564e82cf2eede0ae1b83509f9a4b9f3df22138",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 2678,
+      "imported_path": "evidence/coverage_report.md",
+      "imported_sha256": "d885d71ceac049220520f8d5a8435106e3aecfca0a28238b992913265ce4c005",
+      "source_bytes": 2678,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/coverage_report.md",
+      "source_sha256": "d885d71ceac049220520f8d5a8435106e3aecfca0a28238b992913265ce4c005",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 390,
+      "imported_path": "evidence/build_stats.json",
+      "imported_sha256": "b1bd40bf5949032b03bfc6662173e1f3c7a0cb2352837433482491dafba2b79c",
+      "source_bytes": 390,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/_build_stats.json",
+      "source_sha256": "b1bd40bf5949032b03bfc6662173e1f3c7a0cb2352837433482491dafba2b79c",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 373218,
+      "imported_path": "provenance/source_manifest.csv",
+      "imported_sha256": "5021e83d81947200b75b1f9063ad8d9632a69b958bb43eb82c3f96cb370bee86",
+      "source_bytes": 373218,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/source_manifest.csv",
+      "source_sha256": "5021e83d81947200b75b1f9063ad8d9632a69b958bb43eb82c3f96cb370bee86",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 112586,
+      "imported_path": "legacy/ed/accepted.csv",
+      "imported_sha256": "3cab45b9dd5d150e36430d187fae7b761f5a7da7977c73dee823fa4855672a58",
+      "source_bytes": 112586,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/ed_accepted.csv",
+      "source_sha256": "3cab45b9dd5d150e36430d187fae7b761f5a7da7977c73dee823fa4855672a58",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 132389,
+      "imported_path": "legacy/ed/raw_attempts.csv",
+      "imported_sha256": "5f7bb5f9fc13a8460740fe9bbba94f7ef49609f88def3e633532c3804a57defa",
+      "source_bytes": 132389,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/ed_raw_attempts.csv",
+      "source_sha256": "5f7bb5f9fc13a8460740fe9bbba94f7ef49609f88def3e633532c3804a57defa",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 3138,
+      "imported_path": "legacy/ed/config.json",
+      "imported_sha256": "579a35bb2380bd246f6c8659f300cb745cb34dd5b1d255729a833e2da8df740b",
+      "source_bytes": 3138,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/ed_llk_config.json",
+      "source_sha256": "579a35bb2380bd246f6c8659f300cb745cb34dd5b1d255729a833e2da8df740b",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 4113,
+      "imported_path": "legacy/square/quadrature_pilot.csv",
+      "imported_sha256": "8cfe74a24a783405e5c5edeb0eda747bf6204a92d4bc58cc36e27401646b562f",
+      "source_bytes": 4113,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/square_quadrature_pilot.csv",
+      "source_sha256": "8cfe74a24a783405e5c5edeb0eda747bf6204a92d4bc58cc36e27401646b562f",
+      "transformation": "byte-for-byte"
+    },
+    {
+      "imported_bytes": 10135,
+      "imported_path": "provenance/source_README.md",
+      "imported_sha256": "950450d7fcf98934dc7564e555d4483a30a62876b1e455a42925d7b7fbc0f4e7",
+      "source_bytes": 10135,
+      "source_path": "results/deliverables/08_single_site_gauge_matrix/README.md",
+      "source_sha256": "950450d7fcf98934dc7564e555d4483a30a62876b1e455a42925d7b7fbc0f4e7",
+      "transformation": "byte-for-byte"
+    }
+  ],
+  "source_revision": "1d987593969520b8cd6e191ca284682738778a6d"
+}

@@ -1,0 +1,83 @@
+diff --git a/BHFM2/core/solve_min.py b/BHFM2/core/solve_min.py
+index 75b4446..ebb9b0c 100644
+--- a/BHFM2/core/solve_min.py
++++ b/BHFM2/core/solve_min.py
+@@ -9,6 +9,7 @@ from functools import lru_cache
+ import numpy as np
+ from numpy.linalg import eigh
+ from scipy.optimize import least_squares
++from scipy.special import ellipk
+ 
+ from .ghost_dmft_bond import build_sector
+ from .ed_fast import (
+@@ -85,8 +86,38 @@ def _normalize_lattice(lattice: str | None) -> str:
+     return out
+ 
+ 
++LATTICE_QUAD_KMESH = "uniform_kmesh"
++LATTICE_QUAD_CONTINUUM = "continuum_elliptic_dos"
++
++
++@lru_cache(maxsize=16)
++def _square_dos_nodes(t: float, n_eps: int):
++    """Graded 1-D quadrature of the exact square-lattice DOS rho(eps) =
++    K(m)/(2 pi^2 t), m = 1-(eps/4t)^2 (band [-4t,4t]). Midpoint rule on a grid
++    tightened toward the eps=0 van Hove point; weights renormalized to sum 1.
++    Returns (eps[n_eps], weight[n_eps]) as numpy arrays."""
++    band = 4.0 * t
++    grade = 3.0
++    u = np.linspace(-1.0, 1.0, n_eps + 1)
++    edges = band * np.sign(u) * np.abs(u) ** grade
++    centers = 0.5 * (edges[1:] + edges[:-1])
++    deps = np.diff(edges)
++    m = np.clip(1.0 - (centers / band) ** 2, 0.0, 1.0 - 1e-15)
++    rho = np.where(m > 0.0, ellipk(m) / (2.0 * np.pi ** 2 * t), 0.0)
++    w = rho * deps
++    w = w / w.sum()
++    return centers, w
++
++
+ def _lattice_quadrature(mp, mode: str = MODE_BONDING_ONLY, Mb: int = 0):
+-    """Yield (eps, weight, ckx, cky, skx, sky, cos_kx) lattice integration nodes."""
++    """Yield (eps, weight, ckx, cky, skx, sky, cos_kx) lattice integration nodes.
++
++    Square lattice supports two provenance-recorded quadratures via
++    ``mp.lattice_quadrature``: ``uniform_kmesh`` (Nk x Nk (kx,ky) grid, the
++    production default) and ``continuum_elliptic_dos`` (a graded 1-D integral of
++    the exact square DOS -- the D=1 continuum limit, single_impurity only; its
++    k-form-factor fields are 0 because it carries no (kx,ky) resolution).
++    """
+     lattice = _normalize_lattice(getattr(mp, "lattice", LATTICE_SQUARE))
+     mode = _normalize_mode(mode)
+     if lattice == LATTICE_BETHE:
+@@ -103,6 +134,18 @@ def _lattice_quadrature(mp, mode: str = MODE_BONDING_ONLY, Mb: int = 0):
+             yield float(ee), float(ww), 0.0, 0.0, 0.0, 0.0, 0.0
+         return
+ 
++    quad = getattr(mp, "lattice_quadrature", LATTICE_QUAD_KMESH)
++    if quad == LATTICE_QUAD_CONTINUUM:
++        if not _is_single_impurity(mode) or int(Mb) != 0:
++            raise ValueError(
++                "continuum_elliptic_dos square quadrature is single_impurity "
++                "only (no k-form-factors for bond/antibond channels)")
++        centers, weights = _square_dos_nodes(float(mp.t),
++                                             int(getattr(mp, "n_eps_dos", 4001)))
++        for ee, ww in zip(centers, weights):
++            yield float(ee), float(ww), 0.0, 0.0, 0.0, 0.0, 0.0
++        return
++
+     Nk = int(mp.Nk)
+     kvals = np.linspace(-np.pi, np.pi, Nk, endpoint=False)
+     wk = 1.0 / (Nk * Nk)
+@@ -137,6 +180,11 @@ class ModelParamsMin:
+     n_moments: int = 4
+     lattice: str = LATTICE_SQUARE
+     ground_state: bool = False  # T=0: force beta->GS_BETA so only the ground manifold contributes
++    # square-lattice integration route (provenance-recorded); default preserves
++    # the production uniform Nk x Nk k-mesh. "continuum_elliptic_dos" selects the
++    # graded exact-DOS 1-D integral (single_impurity only).
++    lattice_quadrature: str = LATTICE_QUAD_KMESH
++    n_eps_dos: int = 4001       # nodes for the continuum_elliptic_dos route
+ 
+     def __post_init__(self):
+         self.lattice = _normalize_lattice(self.lattice)

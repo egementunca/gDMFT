@@ -1,4 +1,17 @@
 schema_version = "gdmft.registry.v1"
 
-# Add one [[dataset]] entry only after its manifest validates and its storage
-# location is immutable. The example dataset is intentionally not a release.
+# The example dataset is intentionally not registered.
+
+[[dataset]]
+id = "single-site.gauge-matrix-v1"
+version = "0.1.0"
+manifest = "data/datasets/single-site-gauge-matrix-v1/manifest.json"
+data_stage = "validated"
+release_status = "draft"
+
+[[dataset]]
+id = "single-site.scan-matrix-v2"
+version = "0.1.0"
+manifest = "data/datasets/single-site-scan-matrix-v2/manifest.json"
+data_stage = "validated"
+release_status = "draft"

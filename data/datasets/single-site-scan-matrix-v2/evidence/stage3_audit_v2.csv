@@ -1,0 +1,8 @@
+cell,have_full_arrays,have_native_vector,n_modes,records,selected_set
+bethe_mg1_bare,5304,5304,[3],5304,0
+bethe_mg1_Rnative,1768,1768,[3],1768,0
+bethe_mg3_Rnative,1768,1768,[3],1768,0
+square_mg1_bare,2400,2400,[3],2400,0
+square_mg1_Rnative,800,800,[3],800,0
+square_mg3_bare,2400,2400,[3],2400,0
+square_mg3_Rnative,800,800,[3],800,0

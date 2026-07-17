@@ -26,6 +26,16 @@ numerical gate fields. The solver modules will be added behind stable
 interfaces as they pass parity and end-to-end tests. APIs may change before
 version `1.0`.
 
+The first validated draft data import is available:
+
+- [single-site gauge matrix v1](data/datasets/single-site-gauge-matrix-v1/)
+  preserves the historical 20,228-root gauge matrix;
+- [single-site scan matrix v2](data/datasets/single-site-scan-matrix-v2/)
+  is the authoritative 15,240-attempt Bethe/square scan matrix.
+
+See the [single-site data snapshot](docs/datasets/single-site-20260717.md) for
+coverage, observables, validation evidence, and remaining selection work.
+
 ## Quick start
 
 ```bash
@@ -34,6 +44,8 @@ source .venv/bin/activate
 python -m pip install -e '.[dev]'
 
 gdmft-data validate data/example/manifest.json
+gdmft-data validate \
+  data/datasets/single-site-scan-matrix-v2/manifest.json
 pytest
 ```
 

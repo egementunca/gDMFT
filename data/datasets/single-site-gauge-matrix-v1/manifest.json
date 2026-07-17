@@ -1,0 +1,218 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "README.md",
+      "bytes": 1352,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "e5933ef569567a9b44ad3f07942897225fd451ec3bface4dfb4786d6b9212344"
+    },
+    {
+      "artifact_id": "evidence.build_stats.json",
+      "bytes": 390,
+      "media_type": "application/json",
+      "path": "evidence/build_stats.json",
+      "role": "validation-evidence",
+      "sha256": "b1bd40bf5949032b03bfc6662173e1f3c7a0cb2352837433482491dafba2b79c"
+    },
+    {
+      "artifact_id": "evidence.coverage_matrix.csv",
+      "bytes": 80253,
+      "media_type": "text/csv",
+      "path": "evidence/coverage_matrix.csv",
+      "role": "validation-evidence",
+      "sha256": "793b1f0060a16c77bc90b1f6c9564e82cf2eede0ae1b83509f9a4b9f3df22138"
+    },
+    {
+      "artifact_id": "evidence.coverage_report.md",
+      "bytes": 2678,
+      "media_type": "text/markdown",
+      "path": "evidence/coverage_report.md",
+      "role": "validation-evidence",
+      "sha256": "d885d71ceac049220520f8d5a8435106e3aecfca0a28238b992913265ce4c005"
+    },
+    {
+      "artifact_id": "legacy.ed.accepted.csv",
+      "bytes": 112586,
+      "media_type": "text/csv",
+      "path": "legacy/ed/accepted.csv",
+      "role": "legacy-supporting-evidence",
+      "sha256": "3cab45b9dd5d150e36430d187fae7b761f5a7da7977c73dee823fa4855672a58"
+    },
+    {
+      "artifact_id": "legacy.ed.config.json",
+      "bytes": 3138,
+      "media_type": "application/json",
+      "path": "legacy/ed/config.json",
+      "role": "legacy-supporting-evidence",
+      "sha256": "579a35bb2380bd246f6c8659f300cb745cb34dd5b1d255729a833e2da8df740b"
+    },
+    {
+      "artifact_id": "legacy.ed.raw_attempts.csv",
+      "bytes": 132389,
+      "media_type": "text/csv",
+      "path": "legacy/ed/raw_attempts.csv",
+      "role": "legacy-supporting-evidence",
+      "sha256": "5f7bb5f9fc13a8460740fe9bbba94f7ef49609f88def3e633532c3804a57defa"
+    },
+    {
+      "artifact_id": "legacy.square.quadrature_pilot.csv",
+      "bytes": 4113,
+      "media_type": "text/csv",
+      "path": "legacy/square/quadrature_pilot.csv",
+      "role": "legacy-supporting-evidence",
+      "sha256": "8cfe74a24a783405e5c5edeb0eda747bf6204a92d4bc58cc36e27401646b562f"
+    },
+    {
+      "artifact_id": "metadata.grid_registry.json",
+      "bytes": 3156,
+      "media_type": "application/json",
+      "path": "metadata/grid_registry.json",
+      "role": "documentation",
+      "sha256": "d8fe3fb50bfc4488dffa85b4f0b70c606acf3457b5cdfdd4ff1f8737fd6a7354"
+    },
+    {
+      "artifact_id": "points.csv",
+      "bytes": 11471375,
+      "media_type": "text/csv",
+      "path": "points.csv",
+      "role": "canonical-scalar-point-table",
+      "rows": 20228,
+      "schema": "gdmft.point.v1",
+      "sha256": "f9b4602b0885ca5a2bfb6edcca2d4a0debffca8a24b1ba603ab929e1c06725bf"
+    },
+    {
+      "artifact_id": "provenance.migration_report.json",
+      "bytes": 6218,
+      "media_type": "application/json",
+      "path": "provenance/migration_report.json",
+      "role": "provenance",
+      "sha256": "b8a8da145ab97adfc6867730a064076f110f57580b70817a62f8fc75311a2e65"
+    },
+    {
+      "artifact_id": "provenance.source_README.md",
+      "bytes": 10135,
+      "media_type": "text/markdown",
+      "path": "provenance/source_README.md",
+      "role": "provenance",
+      "sha256": "950450d7fcf98934dc7564e555d4483a30a62876b1e455a42925d7b7fbc0f4e7"
+    },
+    {
+      "artifact_id": "provenance.source_manifest.csv",
+      "bytes": 373218,
+      "media_type": "text/csv",
+      "path": "provenance/source_manifest.csv",
+      "role": "provenance",
+      "sha256": "5021e83d81947200b75b1f9063ad8d9632a69b958bb43eb82c3f96cb370bee86"
+    },
+    {
+      "artifact_id": "raw.roots.jsonl.gz",
+      "bytes": 4845719,
+      "compression": "gzip",
+      "media_type": "application/x-ndjson",
+      "path": "raw/roots.jsonl.gz",
+      "role": "lossless-raw-archive",
+      "sha256": "c565118e41c0c8e8e7582871c97b31e7b79b267c934eac91d16f7eb86f83ae6f"
+    },
+    {
+      "artifact_id": "raw.roots_archive_manifest.json",
+      "bytes": 381,
+      "media_type": "application/json",
+      "path": "raw/roots_archive_manifest.json",
+      "role": "lossless-raw-archive",
+      "sha256": "ac4fedf807d4daf17a07a868114c78905ffe441cc109f2415165c6085feb2183"
+    },
+    {
+      "artifact_id": "source_views.scalar_projection.csv",
+      "bytes": 9856519,
+      "media_type": "text/csv",
+      "path": "source_views/scalar_projection.csv",
+      "role": "source-scalar-projection",
+      "sha256": "58eae88cedfed6bf9aa6b4ac3f61ec66cb3b233e3f51c29439ce7a1653106df8"
+    }
+  ],
+  "conventions": {
+    "double_occupancy": "per physical site",
+    "energy_unit": "D in the canonical point view",
+    "grand_potential": "raw and divided by D are separate columns",
+    "half_bandwidth": 1.0,
+    "interaction_axis": "u_over_d",
+    "particle_hole": "half filling, density = 1",
+    "solution_difference": "second solution minus first solution",
+    "temperature_axis": "t_over_d"
+  },
+  "created_at": "2026-07-17T21:32:07Z",
+  "data_stage": "validated",
+  "dataset_id": "single-site.gauge-matrix-v1",
+  "dataset_kind": "aggregate",
+  "description": "Frozen historical bare/canonical-R gauge matrix and full root archive.",
+  "extensions": {
+    "gauge_mode_counting": {
+      "bare_m_h": 2,
+      "canonical_n_modes": 3,
+      "rule": "canonical_n_modes = bare_m_h + 1"
+    },
+    "preservation_revision": "1d987593969520b8cd6e191ca284682738778a6d",
+    "raw_half_bandwidth": {
+      "bethe": 1.0,
+      "square": 2.0
+    },
+    "record_counts": {
+      "bare_native": 8568,
+      "canonical_r_converted": 8568,
+      "canonical_r_native": 912,
+      "canonical_r_reoptimized": 2180,
+      "total": 20228
+    },
+    "selection_status": "not applied",
+    "square_status": "historical N_k=16; not canonical for sub-percent claims"
+  },
+  "external_sources": [
+    {
+      "id": "doi:10.1103/PhysRevB.107.L121104",
+      "revision": "pdf-sha256:32f39c77020c5f5e7389828c268219ffaf3dfbd34a14de51ea966c4b1b5d65f9"
+    }
+  ],
+  "gate_contract": {
+    "decision_fields": [
+      "physically_admissible",
+      "selected"
+    ],
+    "evidence_fields": [
+      "solver_succeeded",
+      "equations_accepted",
+      "density_consistent",
+      "physical_guards_clear",
+      "bounds_clear",
+      "continuity_passed"
+    ],
+    "point_schema": "gdmft.point.v1",
+    "unknown_encoding": "null"
+  },
+  "grid": {
+    "lattices": [
+      "bethe",
+      "square"
+    ],
+    "m_g": [
+      1,
+      3
+    ],
+    "source": "metadata/grid_registry.json"
+  },
+  "provenance": {
+    "command": [
+      "python3",
+      "scripts/gauge_matrix/build.py"
+    ],
+    "dirty": true,
+    "python": "3 (exact execution patch version not recorded)",
+    "repository": "paper-consolidation",
+    "revision": "1a3af4af02029a84cf998109cb60dc96217863c8"
+  },
+  "release_status": "draft",
+  "schema_version": "gdmft.dataset.v1",
+  "title": "Single-site gauge matrix v1",
+  "version": "0.1.0"
+}

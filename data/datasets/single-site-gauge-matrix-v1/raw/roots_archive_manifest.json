@@ -1,0 +1,11 @@
+{
+  "archive": "roots.jsonl.gz",
+  "archive_bytes": 4845719,
+  "archive_sha256": "c565118e41c0c8e8e7582871c97b31e7b79b267c934eac91d16f7eb86f83ae6f",
+  "compression_level": 9,
+  "deterministic_gzip_mtime": 0,
+  "format": "gzip",
+  "record_count": 20228,
+  "uncompressed_bytes": 53244630,
+  "uncompressed_sha256": "21f9244f8ebefaf0525f9b2077445f5d41a65ae82099e97a697eda4fc8620325"
+}

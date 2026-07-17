@@ -8,5 +8,7 @@ Start with these documents:
 4. [Data contract](data-contract.md): tables, functions, provenance, and gates.
 5. [Data policy](data-policy.md): repository, archive, and external sources.
 6. [Roadmap](roadmap.md): planned implementation sequence.
+7. [Single-site data snapshot](datasets/single-site-20260717.md): imported
+   grids, observables, evidence, and unresolved decisions.
 
 The repository README provides installation and the shortest working example.

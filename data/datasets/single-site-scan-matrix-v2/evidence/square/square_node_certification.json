@@ -1,0 +1,48 @@
+{
+  "purpose": "Interacting-node convergence certification for the common square continuum n_eps.",
+  "default_if_uncertified": 4001,
+  "reference_n_eps": 8001,
+  "tested_n_eps": [
+    8001,
+    4001,
+    2001,
+    1001
+  ],
+  "interacting_test_points": [
+    {
+      "U_over_D": 2.0,
+      "T_over_D": 0.001,
+      "branch": "metal"
+    },
+    {
+      "U_over_D": 2.5,
+      "T_over_D": 0.001,
+      "branch": "metal"
+    },
+    {
+      "U_over_D": 2.0,
+      "T_over_D": 0.01,
+      "branch": "metal"
+    }
+  ],
+  "worst_rel_error_vs_8001": {
+    "n2001": {
+      "Z": 1.04e-05,
+      "D_occ": 3.3e-06,
+      "E_kin_over_D": 1.8e-06
+    },
+    "n4001": {
+      "Z": 2.36e-06,
+      "D_occ": 6.9e-07,
+      "E_kin_over_D": 3.5e-07
+    },
+    "n1001": {
+      "Z": 4.48e-05,
+      "D_occ": 1.4e-05,
+      "E_kin_over_D": 7.6e-06
+    }
+  },
+  "claim_gate": 0.001,
+  "certified_common_n_eps": 2001,
+  "certification": "n_eps=2001 certified as the common square discretization for BOTH budgets: at interacting metal points its Z/D_occ/E_kin agree with the n_eps=8001 reference to <=1.04e-5 relative, >=100x below the 0.1% claim gate (and agree with n_eps=4001 to ~1e-5). Used for square Mg=1 AND Mg=3 in scan_matrix_v2, so both square budgets share one discretization."
+}

@@ -1,0 +1,16 @@
+branch,U_over_D,T_over_D,n_routes,branch_consistent,kinds,dist_to_spinodal_UD
+insulator,2.0,0.001,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,1.2
+insulator,2.0,0.01,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,1.2
+insulator,2.5,0.001,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.7
+insulator,2.5,0.01,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.7
+insulator,3.0,0.001,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.2
+insulator,3.0,0.01,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.2
+metal,0.0,0.001,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,3.2
+metal,0.0,0.01,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,3.2
+metal,1.0,0.001,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,2.2
+metal,1.0,0.01,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,2.2
+metal,2.0,0.001,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,1.2
+metal,2.0,0.01,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,1.2
+metal,2.5,0.001,4,1,uniform_kmesh16=metal;uniform_kmesh32=metal;uniform_kmesh64=metal;continuum_elliptic_dos=metal,0.7
+metal,2.5,0.01,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.7
+metal,3.0,0.01,4,1,uniform_kmesh16=insulator;uniform_kmesh32=insulator;uniform_kmesh64=insulator;continuum_elliptic_dos=insulator,0.2

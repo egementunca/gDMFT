@@ -1,0 +1,22 @@
+check,pass
+U=0 docc=0.25 (Nb1),1
+U=0 ekin=-4/3pi (Nb1),1
+U=0 docc=0.25 (Nb3),1
+U=0 ekin=-4/3pi (Nb3),1
+U=0 docc=0.25 (Nb5),1
+U=0 ekin=-4/3pi (Nb5),1
+"CG==LM docc (Nb3,U/D=2.4)",1
+docc monotone Nb1<Nb3<Nb5 (U/D=2.4),1
+Z monotone Nb1<Nb3<Nb5 (LLK order),1
+Nb5 docc matches CTQMC (U/D=2.4),1
+Nb5 etot matches CTQMC (U/D=2.4),1
+common-norm bath chi2 decreases Nb1>Nb3>Nb5,1
+"LLK Fig3 DMFT docc (Nb1, U/D=2.4)",1
+"LLK Fig3 DMFT Z (Nb1, U/D=2.4)",1
+"LLK Fig3 DMFT etot (Nb1, U/D=2.4)",1
+"LLK Fig3 DMFT docc (Nb3, U/D=2.4)",1
+"LLK Fig3 DMFT Z (Nb3, U/D=2.4)",1
+"LLK Fig3 DMFT etot (Nb3, U/D=2.4)",1
+"LLK Fig3 DMFT docc (Nb5, U/D=2.4)",1
+"LLK Fig3 DMFT Z (Nb5, U/D=2.4)",1
+"LLK Fig3 DMFT etot (Nb5, U/D=2.4)",1

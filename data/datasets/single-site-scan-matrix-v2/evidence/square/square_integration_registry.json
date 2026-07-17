@@ -1,0 +1,55 @@
+{
+  "lattice": "square",
+  "D_code": 2.0,
+  "t": 0.5,
+  "band": "[-4t,4t]",
+  "dispersion": "eps_k = -2 t (cos kx + cos ky)",
+  "half_bandwidth_D": "4t = 2.0 (code units)",
+  "code_commit": "1a3af4af02029a84cf998109cb60dc96217863c8",
+  "dirty_state": "uncommitted working tree (BHFM2/core/solve_min.py modified: adds selectable route)",
+  "solver_api": "BHFM2.core.solve_min._lattice_quadrature via ModelParamsMin.lattice_quadrature",
+  "routes_registered": [
+    "uniform_kmesh (Nk=16,32,64)",
+    "continuum_elliptic_dos (single_impurity only)"
+  ],
+  "U0_validation": {
+    "reference_Ekin_over_D": -0.4052847345693511,
+    "second_moment_over_D2_exact": 0.25,
+    "anchors": {
+      "uniform_kmesh_Nk16": {
+        "n_nodes": 256,
+        "normalization": 1.0,
+        "first_moment": -1.1102230246251565e-16,
+        "E_kin_over_D": -0.40272097451700284,
+        "second_moment_over_D2": 0.25,
+        "abs_Ekin_err_vs_continuum": 0.002563760052348263
+      },
+      "uniform_kmesh_Nk32": {
+        "n_nodes": 1024,
+        "normalization": 1.0,
+        "first_moment": -8.326672684688674e-17,
+        "E_kin_over_D": -0.404636206718037,
+        "second_moment_over_D2": 0.24999999999999997,
+        "abs_Ekin_err_vs_continuum": 0.0006485278513140846
+      },
+      "uniform_kmesh_Nk64": {
+        "n_nodes": 4096,
+        "normalization": 1.0,
+        "first_moment": -1.1102230246251565e-16,
+        "E_kin_over_D": -0.4051221310858414,
+        "second_moment_over_D2": 0.25,
+        "abs_Ekin_err_vs_continuum": 0.00016260348350971565
+      },
+      "continuum_elliptic_dos": {
+        "n_nodes": 20001,
+        "normalization": 1.0,
+        "first_moment": 0.0,
+        "E_kin_over_D": -0.4052847425021841,
+        "second_moment_over_D2": 0.25000000340537326,
+        "abs_Ekin_err_vs_continuum": 7.932833001600414e-09
+      }
+    }
+  },
+  "canonical_route_for_local_observables": "continuum_elliptic_dos",
+  "notes": "continuum_elliptic_dos: graded 1-D integral of rho(eps)=K(m)/(2 pi^2 t), m=1-(eps/4t)^2; U=0 E_kin/D matches -4/pi^2 to 8e-9. Backward-compatible: default uniform_kmesh reproduces the pre-edit stationary solutions byte-for-byte (verified: stored resnorm == re-eval at Nk=16)."
+}

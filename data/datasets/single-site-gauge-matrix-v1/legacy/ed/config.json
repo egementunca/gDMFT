@@ -1,0 +1,53 @@
+{
+  "reference_paper": "PhysRevB.107.L121104-accepted.pdf (LLK)",
+  "method": "ground-state finite-pole DMFT-ED (dense sector diagonalization)",
+  "temperature_semantics": {
+    "temperature_semantics": "ground_state",
+    "T_over_D": 0,
+    "bath_fit_beta": 200,
+    "note": "beta=200 is a FICTITIOUS Matsubara bath-fit grid, NOT a physical T/D=0.005. ED rows must never enter a finite-T exact-key join; compare only with exact T=0 or clearly labelled low-T approximations."
+  },
+  "primary_budgets": [
+    1,
+    3
+  ],
+  "optional_budget": 5,
+  "out_of_scope_budget": 7,
+  "budget_note": "N_b={1,3} matched to M_g={1,3}; N_b=5 optional convergence control (validate only if it materially supports the paper); N_b=7 explicitly out of scope (4900-dim sectors).",
+  "lattice_scope": {
+    "bethe": "LLK reproduction target (half-filled Bethe, D=1)",
+    "square": "THIS WORK'S EXTENSION, not an LLK-paper reproduction; square continuum elliptic DOS, separate research task."
+  },
+  "bath_fit": {
+    "paper_optimizer": "conjugate_gradient",
+    "prototype_optimizer": "scipy.least_squares(method='lm')  (Levenberg-Marquardt -- DEVIATES from paper CG)",
+    "fit_beta": 200,
+    "Nw": 200,
+    "fit_frequencies": "Matsubara wn = (2n+1) pi / beta, n=0..Nw-1",
+    "weights": "1/wn for N_b=1; uniform for N_b>1 (matches paper)",
+    "objective_convention": "chi2 = sum_n w_n |Delta_fit(iwn) - Delta_target(iwn)|^2. The stored CSV column `fit_chi` is scipy `.cost` = 0.5*chi2 (HALF the weighted sum of squares) -- do NOT report it as an unqualified chi-squared."
+  },
+  "dmft_acceptance": {
+    "convergence_gate": "sup_n |Sigma'_new(iwn) - Sigma'(iwn)| < 1e-8",
+    "max_iterations": 200,
+    "mixing": 0.5,
+    "note": "acceptance is on the self-energy fixed point only; the bath-fit quality (fit_chi) is recorded but is NOT part of the gate. A full acceptance should combine both; stalled rows (converged=0) are preserved as raw attempts and excluded from accepted views."
+  },
+  "Z_prescription": {
+    "prototype": "Z = 1/(1 - Im Sigma'(iw0)/w0)  (single lowest-Matsubara finite-difference; PH => Sigma'(0)=0)",
+    "paper": "derivative prescription / documented low-frequency extrapolation -- reconcile before an accuracy claim."
+  },
+  "energy_conventions": {
+    "E_kin": "2*T*sum_n (zeta*G_latt - 1) with a trigamma high-frequency tail from the lattice Green function G_latt (NOT the finite impurity-cluster G); U=0 Bethe anchor E_kin=-4/(3 pi)",
+    "E_tot": "E_kin + U*docc",
+    "spectra_caveat": "real-frequency A(w) in the prototype uses the finite impurity-cluster Green function, not a lattice-DOS + converged-Sigma reconstruction -- fix before an A(w) accuracy claim."
+  },
+  "hilbert_space_dims": {
+    "Nb1": 4,
+    "Nb3": 36,
+    "Nb5": 400,
+    "Nb7_excluded": 4900
+  },
+  "solver": "dense np.linalg.eigh (no Lanczos truncation for N_b<=5)",
+  "validation_status": "PROTOTYPE. Unit tests for the impurity Hamiltonian, Lehmann G, Dyson Sigma, causality, sum rules and PH symmetry are in tests/test_dmft_ed.py. Paper-anchor reproduction for N_b={1,3} and the CG bath-fit route are pending solver runs (require approval)."
+}
