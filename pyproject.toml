@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gdmft"
+version = "0.1.0.dev0"
+description = "Reproducible ghost dynamical mean-field theory"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+solver = [
+  "numba>=0.59",
+  "numpy>=1.24,<3",
+  "scipy>=1.10,<2",
+]
+io = ["h5py>=3.10"]
+plot = ["matplotlib>=3.7"]
+dev = [
+  "build>=1.2",
+  "pytest>=8",
+  "ruff>=0.6",
+]
+
+[project.scripts]
+gdmft-data = "gdmft.data.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"gdmft.schemas" = ["*.json"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

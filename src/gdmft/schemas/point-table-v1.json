@@ -1,0 +1,48 @@
+{
+  "schema_version": "gdmft.point.v1",
+  "format": "text/csv",
+  "allow_additional_columns": true,
+  "required_columns": [
+    "schema_version",
+    "run_id",
+    "point_id",
+    "lattice",
+    "m_h",
+    "m_g",
+    "solution_family",
+    "gauge",
+    "solver",
+    "u_over_d",
+    "t_over_d",
+    "solver_succeeded",
+    "equations_accepted",
+    "density_consistent",
+    "physical_guards_clear",
+    "bounds_clear",
+    "continuity_passed",
+    "physically_admissible",
+    "selected",
+    "selection_reason"
+  ],
+  "text_columns": [
+    "run_id",
+    "point_id",
+    "lattice",
+    "solution_family",
+    "gauge",
+    "solver"
+  ],
+  "integer_columns": ["m_h", "m_g"],
+  "number_columns": ["u_over_d", "t_over_d"],
+  "evidence_fields": [
+    "solver_succeeded",
+    "equations_accepted",
+    "density_consistent",
+    "physical_guards_clear",
+    "bounds_clear",
+    "continuity_passed"
+  ],
+  "decision_fields": ["physically_admissible", "selected"],
+  "unique_key": ["run_id", "point_id"],
+  "null_values": ["", "null"]
+}

@@ -1,0 +1,19 @@
+.DS_Store
+.coverage
+.external/
+.pytest_cache/
+.ruff_cache/
+.venv/
+__pycache__/
+*.egg-info/
+*.py[cod]
+build/
+dist/
+
+# Solver output is registered and archived deliberately, never added by
+# accident. Small release tables belong under data/datasets/<dataset-id>/.
+runs/
+data/cache/
+data/staging/
+*.h5.tmp
+*.npz.tmp

@@ -1,0 +1,15 @@
+schema_version = "gdmft.external.v1"
+
+[[source]]
+id = "gem"
+kind = "git"
+url = "https://github.com/TRIQS/gem.git"
+revision = "e76cb4c288608b28de4f7e6da31dfaefaefff73f"
+upstream_branch = "unstable"
+license = "GPL-3.0-or-later"
+license_url = "https://github.com/TRIQS/gem/blob/e76cb4c288608b28de4f7e6da31dfaefaefff73f/LICENSE.txt"
+citation = "Giuli et al., arXiv:2603.20559"
+checkout = ".external/gem"
+integration = "planned-file-adapter"
+status = "pinned"
+notes = "Use this immutable revision for comparison datasets."

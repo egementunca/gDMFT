@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "gDMFT dataset manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "dataset_id",
+    "title",
+    "version",
+    "dataset_kind",
+    "data_stage",
+    "release_status",
+    "created_at",
+    "provenance",
+    "conventions",
+    "artifacts"
+  ],
+  "properties": {
+    "schema_version": {"const": "gdmft.dataset.v1"},
+    "dataset_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,127}$"
+    },
+    "title": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "dataset_kind": {
+      "enum": [
+        "solver_run",
+        "aggregate",
+        "derived",
+        "external_reference",
+        "comparison"
+      ]
+    },
+    "data_stage": {"enum": ["raw", "validated", "selection_applied"]},
+    "release_status": {"enum": ["draft", "published", "superseded"]},
+    "created_at": {"type": "string", "format": "date-time"},
+    "description": {"type": "string"},
+    "provenance": {"$ref": "#/$defs/provenance"},
+    "parent_dataset_ids": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "model": {"$ref": "#/$defs/model"},
+    "conventions": {"$ref": "#/$defs/conventions"},
+    "grid": {"type": "object", "minProperties": 1},
+    "gate_contract": {"$ref": "#/$defs/gateContract"},
+    "selection": {"$ref": "#/$defs/selection"},
+    "rights": {"$ref": "#/$defs/rights"},
+    "publication": {"$ref": "#/$defs/publication"},
+    "external_sources": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/sourceRef"},
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/artifact"}
+    },
+    "extensions": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"dataset_kind": {"const": "solver_run"}}},
+      "then": {"required": ["model", "grid", "gate_contract"]}
+    },
+    {
+      "if": {"properties": {"data_stage": {"const": "selection_applied"}}},
+      "then": {"required": ["selection"]}
+    },
+    {
+      "if": {"properties": {"release_status": {"const": "published"}}},
+      "then": {
+        "required": ["rights", "publication"],
+        "properties": {
+          "provenance": {
+            "required": ["environment_lock_sha256"],
+            "properties": {"dirty": {"const": false}}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "revision", "dirty", "command", "python"],
+      "properties": {
+        "repository": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "pattern": "^[0-9a-f]{7,64}$"},
+        "dirty": {"type": "boolean"},
+        "command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"}
+        },
+        "python": {"type": "string", "minLength": 1},
+        "environment_lock_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "lattice", "m_h", "m_g", "solver", "gauge"],
+      "properties": {
+        "family": {"type": "string", "minLength": 1},
+        "lattice": {"type": "string", "minLength": 1},
+        "m_h": {"type": "integer", "minimum": 0},
+        "m_g": {"type": "integer", "minimum": 0},
+        "solver": {"type": "string", "minLength": 1},
+        "gauge": {"type": "string", "minLength": 1},
+        "solution_family": {"type": "string"},
+        "symmetry": {"type": "string"}
+      }
+    },
+    "conventions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "energy_unit",
+        "half_bandwidth",
+        "interaction_axis",
+        "temperature_axis",
+        "double_occupancy"
+      ],
+      "properties": {
+        "energy_unit": {"type": "string", "minLength": 1},
+        "half_bandwidth": {"type": "number", "exclusiveMinimum": 0},
+        "interaction_axis": {"enum": ["u", "u_over_d"]},
+        "temperature_axis": {"enum": ["t", "t_over_d"]},
+        "double_occupancy": {"type": "string", "minLength": 1},
+        "grand_potential": {"type": "string"},
+        "solution_difference": {"type": "string"},
+        "particle_hole": {"type": "string"}
+      }
+    },
+    "gateContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "point_schema",
+        "evidence_fields",
+        "decision_fields",
+        "unknown_encoding"
+      ],
+      "properties": {
+        "point_schema": {"const": "gdmft.point.v1"},
+        "evidence_fields": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "solver_succeeded",
+              "equations_accepted",
+              "density_consistent",
+              "physical_guards_clear",
+              "bounds_clear",
+              "continuity_passed"
+            ]
+          }
+        },
+        "decision_fields": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {"enum": ["physically_admissible", "selected"]}
+        },
+        "unknown_encoding": {"const": "null"}
+      }
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "implementation", "reviewed"],
+      "properties": {
+        "policy": {"type": "string", "minLength": 1},
+        "implementation": {"type": "string", "minLength": 1},
+        "reviewed": {"type": "boolean"},
+        "notes": {"type": "string"}
+      }
+    },
+    "rights": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["creators", "license", "citation", "redistributable"],
+      "properties": {
+        "creators": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "license": {"type": "string", "minLength": 1},
+        "citation": {"type": "string", "minLength": 1},
+        "redistributable": {"type": "boolean"},
+        "permission_evidence": {"type": "string"}
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["archive_uri", "released_at"],
+      "properties": {
+        "archive_uri": {"type": "string", "format": "uri"},
+        "doi": {"type": "string"},
+        "released_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "sourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "revision": {"type": "string", "minLength": 1}
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "role",
+        "media_type",
+        "sha256",
+        "bytes"
+      ],
+      "oneOf": [
+        {"required": ["path"], "not": {"required": ["uri"]}},
+        {"required": ["uri"], "not": {"required": ["path"]}}
+      ],
+      "properties": {
+        "artifact_id": {"type": "string", "minLength": 1},
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "not": {"pattern": "(^/)|(^|/)\\.\\.(/|$)"}
+        },
+        "uri": {"type": "string", "format": "uri"},
+        "role": {"type": "string", "minLength": 1},
+        "media_type": {"type": "string", "minLength": 1},
+        "schema": {"type": "string"},
+        "compression": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "rows": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+schema_version = "gdmft.registry.v1"
+
+# Add one [[dataset]] entry only after its manifest validates and its storage
+# location is immutable. The example dataset is intentionally not a release.

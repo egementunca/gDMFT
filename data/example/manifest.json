@@ -1,0 +1,70 @@
+{
+  "schema_version": "gdmft.dataset.v1",
+  "dataset_id": "example.single-site-smoke",
+  "title": "Minimal gDMFT point-table example",
+  "version": "0.1.0",
+  "dataset_kind": "solver_run",
+  "data_stage": "validated",
+  "release_status": "draft",
+  "created_at": "2026-07-16T00:00:00Z",
+  "description": "Synthetic schema example; not a scientific result.",
+  "provenance": {
+    "repository": "gdmft-example",
+    "revision": "0000000000000000000000000000000000000000",
+    "dirty": false,
+    "command": ["gdmft-example"],
+    "python": "3.12"
+  },
+  "parent_dataset_ids": [],
+  "model": {
+    "family": "single-site",
+    "lattice": "bethe",
+    "m_h": 1,
+    "m_g": 1,
+    "solver": "example",
+    "gauge": "bare",
+    "solution_family": "metal-up",
+    "symmetry": "paramagnetic-half-filled"
+  },
+  "conventions": {
+    "energy_unit": "d",
+    "half_bandwidth": 1.0,
+    "interaction_axis": "u_over_d",
+    "temperature_axis": "t_over_d",
+    "double_occupancy": "per physical site",
+    "grand_potential": "per physical site",
+    "solution_difference": "solution_b - solution_a",
+    "particle_hole": "density = 1"
+  },
+  "grid": {
+    "u_over_d": [1.0],
+    "t_over_d": [0.05]
+  },
+  "gate_contract": {
+    "point_schema": "gdmft.point.v1",
+    "evidence_fields": [
+      "solver_succeeded",
+      "equations_accepted",
+      "density_consistent",
+      "physical_guards_clear",
+      "bounds_clear",
+      "continuity_passed"
+    ],
+    "decision_fields": ["physically_admissible", "selected"],
+    "unknown_encoding": "null"
+  },
+  "external_sources": [],
+  "artifacts": [
+    {
+      "artifact_id": "scalar-points",
+      "path": "points.csv",
+      "role": "scalar-point-table",
+      "media_type": "text/csv",
+      "schema": "gdmft.point.v1",
+      "sha256": "5508391595d75a6b97ba9bf46d6a8b844cb9547c9543a2e084e469bf56210425",
+      "bytes": 454,
+      "rows": 1
+    }
+  ],
+  "extensions": {}
+}

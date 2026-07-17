@@ -1,0 +1,2 @@
+schema_version,run_id,point_id,lattice,m_h,m_g,solution_family,gauge,solver,u_over_d,t_over_d,solver_succeeded,equations_accepted,density_consistent,physical_guards_clear,bounds_clear,continuity_passed,physically_admissible,selected,selection_reason,double_occupancy_ncs,quasiparticle_weight_fs,grand_potential_total
+gdmft.point.v1,example-run,example-000,bethe,1,1,metal-up,bare,example,1.0,0.05,true,true,true,true,true,null,null,null,,0.12,0.40,-0.75
