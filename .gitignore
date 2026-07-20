@@ -17,3 +17,4 @@ data/cache/
 data/staging/
 *.h5.tmp
 *.npz.tmp
+.gstack/

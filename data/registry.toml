@@ -15,3 +15,17 @@ version = "0.1.0"
 manifest = "data/datasets/single-site-scan-matrix-v2/manifest.json"
 data_stage = "validated"
 release_status = "draft"
+
+[[dataset]]
+id = "references.gem-gga-v1"
+version = "0.1.0"
+manifest = "data/datasets/references-gem-gga-v1/manifest.json"
+data_stage = "validated"
+release_status = "draft"
+
+[[dataset]]
+id = "references.benchmarks-v1"
+version = "0.1.0"
+manifest = "data/datasets/references-benchmarks-v1/manifest.json"
+data_stage = "validated"
+release_status = "draft"

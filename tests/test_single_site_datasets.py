@@ -73,10 +73,10 @@ def test_d09_attempt_and_gate_counts_are_preserved() -> None:
 
 def test_d09_grid_and_square_quadrature_are_canonical() -> None:
     rows = _rows(D09 / "points.csv")
+    bethe = [row for row in rows if row["lattice"] == "bethe"]
     bethe_keys = {
         (row["u_over_d"], row["t_over_d"])
-        for row in rows
-        if row["lattice"] == "bethe"
+        for row in bethe
     }
     square = [row for row in rows if row["lattice"] == "square"]
     square_keys = {(row["u_over_d"], row["t_over_d"]) for row in square}
@@ -86,6 +86,31 @@ def test_d09_grid_and_square_quadrature_are_canonical() -> None:
         "continuum_elliptic_dos"
     }
     assert {row["dos_node_count"] for row in square} == {"2001"}
+    assert {row["quadrature_node_count"] for row in bethe} == {"256"}
+    manifest = json.loads((D09 / "manifest.json").read_text())
+    corrections = manifest["extensions"]["metadata_corrections"]
+    assert corrections[0]["id"] == "d09-bethe-effective-node-count-v1"
+    assert corrections[0]["source_value"] == 65536
+
+
+def test_quasiparticle_weight_estimators_are_not_mislabeled() -> None:
+    d09 = _rows(D09 / "points.csv")
+    assert all(row["quasiparticle_weight_from_r"] for row in d09)
+    assert all(not row["quasiparticle_weight_matsubara"] for row in d09)
+    assert max(
+        abs(
+            float(row["quasiparticle_weight_pole"])
+            - float(row["quasiparticle_weight_from_r"])
+        )
+        for row in d09
+    ) < 2e-14
+
+    d08 = _rows(D08 / "points.csv")
+    mg3 = [row for row in d08 if row["m_g"] == "3"]
+    mg1 = [row for row in d08 if row["m_g"] == "1"]
+    assert all(not row["quasiparticle_weight_matsubara"] for row in mg3)
+    assert any(row["quasiparticle_weight_from_r"] for row in mg3)
+    assert any(row["quasiparticle_weight_matsubara"] for row in mg1)
 
 
 def test_lossless_archive_checksums_and_record_counts() -> None:

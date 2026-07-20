@@ -1,0 +1,169 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "README.md",
+      "bytes": 3600,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "b65b6632b539b7e0e460c628a7c4038475d762782e660fda8c1b2f68bf15ca1b"
+    },
+    {
+      "artifact_id": "points.csv",
+      "bytes": 1682865,
+      "media_type": "text/csv",
+      "path": "points.csv",
+      "role": "reference-scalar-table",
+      "rows": 5136,
+      "schema": "gdmft.reference.v1",
+      "sha256": "0152cd12a661b3f52de542e97484a860836f083557bf0509b51cee3a8e14092e"
+    },
+    {
+      "artifact_id": "provenance.gem_scan.py",
+      "bytes": 9821,
+      "media_type": "text/x-python",
+      "path": "provenance/gem_scan.py",
+      "role": "provenance",
+      "sha256": "f80ae03d8503f94e769c88ab3e4f62e78b4041d2438620527a6fe27d1e5ed2b9"
+    },
+    {
+      "artifact_id": "provenance.import_report.json",
+      "bytes": 1766,
+      "media_type": "application/json",
+      "path": "provenance/import_report.json",
+      "role": "provenance",
+      "sha256": "be4c6e7535c45c340ef1e1010f33fbe5f9a48007697d237cca1ae67790c7b47e"
+    },
+    {
+      "artifact_id": "provenance.source_files.csv",
+      "bytes": 7210,
+      "media_type": "text/csv",
+      "path": "provenance/source_files.csv",
+      "role": "provenance",
+      "sha256": "49ef92f81c57ec964a2496c8402f5677f0033302ca6e5349a90d9dbdf6d57d39"
+    },
+    {
+      "artifact_id": "raw.gem_scan_outputs.tar.gz",
+      "bytes": 447510,
+      "compression": "gzip",
+      "media_type": "application/x-tar",
+      "path": "raw/gem_scan_outputs.tar.gz",
+      "role": "lossless-raw-archive",
+      "sha256": "3c585cbc8b82500ca2b2d814945cb7c52b4fd94381c880ad1432e1742b584041"
+    }
+  ],
+  "conventions": {
+    "double_occupancy": "per physical site",
+    "energy_unit": "D (reduced units; the square DOS was rescaled to half bandwidth 1 before running gem)",
+    "grand_potential": "not recorded by the gem scans",
+    "half_bandwidth": 1.0,
+    "interaction_axis": "u_over_d",
+    "particle_hole": "half filling; mu = 0, eloc = -U/2, total_energy = kinetic_energy + U * double_occupancy (LLK)",
+    "temperature_axis": "t_over_d"
+  },
+  "created_at": "2026-07-18T03:26:13Z",
+  "data_stage": "validated",
+  "dataset_id": "references.gem-gga-v1",
+  "dataset_kind": "external_reference",
+  "description": "TRIQS/gem ghost-GA scans matched point-for-point to the single-site scan matrix grids (bethe 17 T x 52 U, square 10 T x 40 U, B = 1 and 3, both sweep directions), in reduced units with the LLK energy convention.",
+  "extensions": {
+    "budget_map": "gem bath_budget B corresponds to scan-matrix m_g",
+    "caveats": [
+      "bethe T/D >= 0.05 rows are qualitative only (spin-penalty thermal weights, sum-rule drift, Z inflation)",
+      "compare double occupancy and energies tightly; compare Z only on cold rows (framework-sensitive observable)",
+      "sum_r_squared > 1.1 marks junk fixed points",
+      "never compare raw R magnitudes across frameworks"
+    ],
+    "convention_cross_check": {
+      "bethe_b1": {
+        "median_abs_d_docc": 0.00103019,
+        "median_abs_d_etot_over_d": 0.00236288,
+        "our_gauge": "bare",
+        "our_source": "v2",
+        "shared_cold_metal_points": 52
+      },
+      "bethe_b3": {
+        "median_abs_d_docc": 0.00040804,
+        "our_gauge": "bare",
+        "our_source": "v1",
+        "shared_cold_metal_points": 34
+      },
+      "square_b1": {
+        "median_abs_d_docc": 0.00145962,
+        "median_abs_d_etot_over_d": 0.00363536,
+        "our_gauge": "bare",
+        "our_source": "v2",
+        "shared_cold_metal_points": 40
+      },
+      "square_b3": {
+        "median_abs_d_docc": 0.00052459,
+        "median_abs_d_etot_over_d": 0.00083734,
+        "our_gauge": "bare",
+        "our_source": "v2",
+        "shared_cold_metal_points": 35
+      }
+    },
+    "counts": {
+      "crashed_rows": 29,
+      "row_counts": {
+        "bethe_b1": 1768,
+        "bethe_b3": 1768,
+        "square_b1": 800,
+        "square_b3": 800
+      },
+      "stalled_rows": 145,
+      "structure_rows": {
+        "bethe_b1": 0,
+        "bethe_b3": 1029,
+        "square_b1": 0,
+        "square_b3": 797
+      },
+      "sum_rule_gross_rows": 222,
+      "sum_rule_soft_rows": 488,
+      "total_rows": 5136
+    }
+  },
+  "external_sources": [
+    {
+      "id": "gem",
+      "revision": "e76cb4c288608b28de4f7e6da31dfaefaefff73f"
+    },
+    {
+      "id": "doi:10.1103/PhysRevB.107.L121104",
+      "revision": "pdf-sha256:32f39c77020c5f5e7389828c268219ffaf3dfbd34a14de51ea966c4b1b5d65f9"
+    }
+  ],
+  "grid": {
+    "bath_budgets": [
+      1,
+      3
+    ],
+    "bethe": {
+      "temperatures": 17,
+      "u_values": 52
+    },
+    "directions": [
+      "up",
+      "down"
+    ],
+    "matched_to": "single-site.scan-matrix-v2",
+    "square": {
+      "temperatures": 10,
+      "u_values": 40
+    }
+  },
+  "provenance": {
+    "command": [
+      "python3",
+      "studies/reference_data_import/import_gem_references.py"
+    ],
+    "dirty": true,
+    "python": "3.13.5",
+    "repository": "paper-consolidation",
+    "revision": "1d987593969520b8cd6e191ca284682738778a6d"
+  },
+  "release_status": "draft",
+  "schema_version": "gdmft.dataset.v1",
+  "title": "gem ghost-GA (g-RISB) benchmark scans v1",
+  "version": "0.1.0"
+}

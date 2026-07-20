@@ -276,6 +276,16 @@ def d08_point_rows(source: Path) -> Iterable[dict[str, Any]]:
     with source.open("r", encoding="utf-8", newline="") as stream:
         for row in csv.DictReader(stream):
             evidence = row["evidence_type"]
+            # D08 Mg=3 `Z_mats` was populated from the canonical Fermi-mode
+            # residue, so it is not an independent Matsubara estimator.  The
+            # older Mg=1 campaigns did evaluate a distinct Matsubara estimate.
+            # Keep those meanings in separate contract columns.
+            if row["M_g"] == "3":
+                z_from_r = row["Z_pole_from_R"] or row["Z_mats"]
+                z_matsubara = ""
+            else:
+                z_from_r = row["Z_pole_from_R"]
+                z_matsubara = row["Z_mats"]
             yield {
                 "schema_version": "gdmft.point.v1",
                 "run_id": f"d08:{row['campaign']}",
@@ -313,8 +323,8 @@ def d08_point_rows(source: Path) -> Iterable[dict[str, Any]]:
                 "u_raw": row["U_raw"],
                 "t_raw": row["T_raw"],
                 "quasiparticle_weight_pole": row["Z_pole"],
-                "quasiparticle_weight_from_r": row["Z_pole_from_R"],
-                "quasiparticle_weight_matsubara": row["Z_mats"],
+                "quasiparticle_weight_from_r": z_from_r,
+                "quasiparticle_weight_matsubara": z_matsubara,
                 "double_occupancy": row["D_occ"],
                 "density": row["n"],
                 "grand_potential": row["Omega"],
@@ -417,13 +427,21 @@ def d09_point_rows(
                 "source_optimizer_active_bound": active_bound,
                 "basin": row["basin"],
                 "lattice_quadrature": row["lattice_quadrature"],
-                "quadrature_node_count": row["node_count"],
+                # The projection copied the 256**2 two-dimensional default
+                # into Bethe metadata. The Bethe semicircle route actually
+                # evaluates 256 one-dimensional nodes.
+                "quadrature_node_count": (
+                    "256" if row["lattice"] == "bethe" else row["node_count"]
+                ),
                 "dos_node_count": row["n_eps_dos"],
                 "raw_half_bandwidth": raw["D"],
                 "u_raw": row["U_raw"],
                 "t_raw": row["T_raw"],
                 "quasiparticle_weight_pole": row["Z_pole"],
-                "quasiparticle_weight_matsubara": row["Z_mats"],
+                # The D09 producer called this scalar `Z_mats`, but it is the
+                # exact canonical quasiparticle-mode residue R_qp^2.
+                "quasiparticle_weight_from_r": row["Z_mats"],
+                "quasiparticle_weight_matsubara": "",
                 "double_occupancy": row["D_occ"],
                 "density": row["n"],
                 "grand_potential": row["Omega"],
@@ -699,6 +717,12 @@ No branch selection has been applied. The legacy `converged` flag is exposed
 as `solver_succeeded` because D08 did not retain a separate optimizer-success
 field; `equations_accepted`, physical admissibility, continuity, and selection
 remain unknown unless explicitly present in the source row.
+
+The normalized scalar view separates quasiparticle-weight estimators. For
+`m_g=3`, the legacy source field `Z_mats` was the canonical Fermi-mode residue
+and is imported as `quasiparticle_weight_from_r`; its Matsubara field is null.
+For the older `m_g=1` campaigns, the distinct stored Matsubara estimate remains
+in `quasiparticle_weight_matsubara`. The source projection is unchanged.
 """
 
 
@@ -733,6 +757,17 @@ No thermodynamic branch selection has been applied. `bounds_clear`,
 Active optimizer bounds are retained only as source evidence because the Mg=1
 bound-expansion test shows that absence of an active-mask bit is not enough to
 certify bound independence.
+
+The source projection named the canonical quasiparticle-mode residue `Z_mats`.
+In this normalized view it is correctly stored as
+`quasiparticle_weight_from_r = R_qp^2`; the independent Matsubara-estimator
+column is null. The source projection and raw archive remain unchanged.
+
+The normalized Bethe rows report the effective one-dimensional semicircle
+node count, 256. The source projection recorded 65,536 by copying the
+two-dimensional `256**2` default even though that was not the Bethe
+integration route. Both original source records remain unchanged, and the
+manifest records this correction as `d09-bethe-effective-node-count-v1`.
 
 `raw/raw_campaign.tar.gz` is the lossless source. It stores complete native
 vectors, full bare and canonical pole arrays, optimizer results, bound
@@ -838,6 +873,13 @@ def build_datasets(
                     "rows": d09_rows,
                     "source": "source_views/stage3_scalar_projection.csv "
                     "+ raw/raw_campaign.tar.gz",
+                    "normalizations": [
+                        "source Z_mats mapped to canonical R_qp^2 field",
+                        (
+                            "Bethe source node_count=65536 corrected to "
+                            "effective one-dimensional count 256"
+                        ),
+                    ],
                 },
                 "provenance/source-code-portable-1d987593.tar.gz": {
                     "files": len(source_inventory),
@@ -958,6 +1000,23 @@ def build_datasets(
             "registered": 4252,
             "complete": True,
         },
+        "metadata_corrections": [
+            {
+                "id": "d09-bethe-effective-node-count-v1",
+                "field": "quadrature_node_count",
+                "source_value": 65536,
+                "normalized_value": 256,
+                "scope": "bethe rows",
+                "reason": (
+                    "producer recorded the 256**2 two-dimensional default; "
+                    "the Bethe semicircle route used 256 one-dimensional nodes"
+                ),
+                "source_value_preserved_in": [
+                    "source_views/stage3_scalar_projection.csv",
+                    "raw/raw_campaign.tar.gz",
+                ],
+            }
+        ],
         "selection_status": "not applied",
         "source_code_archive_is_importable_core": False,
         "source_code_archive_is_byte_exact": False,

@@ -28,12 +28,14 @@ dev = [
 
 [project.scripts]
 gdmft-data = "gdmft.data.cli:main"
+gdmft-atlas = "gdmft.atlas.build:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
 "gdmft.schemas" = ["*.json"]
+"gdmft.atlas" = ["web/*.html", "web/*.css", "web/*.js", "web/tabs/*.js"]
 
 [tool.pytest.ini_options]
 addopts = "-ra"

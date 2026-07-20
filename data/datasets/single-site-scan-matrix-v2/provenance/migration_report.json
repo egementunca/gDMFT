@@ -1,6 +1,10 @@
 {
   "derived": {
     "points.csv": {
+      "normalizations": [
+        "source Z_mats mapped to canonical R_qp^2 field",
+        "Bethe source node_count=65536 corrected to effective one-dimensional count 256"
+      ],
       "rows": 15240,
       "source": "source_views/stage3_scalar_projection.csv + raw/raw_campaign.tar.gz"
     },

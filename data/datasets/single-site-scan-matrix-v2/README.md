@@ -29,6 +29,17 @@ Active optimizer bounds are retained only as source evidence because the Mg=1
 bound-expansion test shows that absence of an active-mask bit is not enough to
 certify bound independence.
 
+The source projection named the canonical quasiparticle-mode residue `Z_mats`.
+In this normalized view it is correctly stored as
+`quasiparticle_weight_from_r = R_qp^2`; the independent Matsubara-estimator
+column is null. The source projection and raw archive remain unchanged.
+
+The normalized Bethe rows report the effective one-dimensional semicircle
+node count, 256. The source projection recorded 65,536 by copying the
+two-dimensional `256**2` default even though that was not the Bethe
+integration route. Both original source records remain unchanged, and the
+manifest records this correction as `d09-bethe-effective-node-count-v1`.
+
 `raw/raw_campaign.tar.gz` is the lossless source. It stores complete native
 vectors, full bare and canonical pole arrays, optimizer results, bound
 distances, residual vectors and blocks, ancestry, observables, quadrature, and

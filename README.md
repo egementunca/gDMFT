@@ -35,6 +35,9 @@ The first validated draft data import is available:
 
 See the [single-site data snapshot](docs/datasets/single-site-20260717.md) for
 coverage, observables, validation evidence, and remaining selection work.
+The [interactive explorer guide](docs/atlas.md) gives the exact source route
+for each lattice and $M_g$, reference coverage, parameter correspondences,
+and the limits of provisional branch diagnostics.
 
 ## Quick start
 
@@ -47,6 +50,9 @@ gdmft-data validate data/example/manifest.json
 gdmft-data validate \
   data/datasets/single-site-scan-matrix-v2/manifest.json
 pytest
+
+# Build one checksum-verified offline HTML explorer.
+gdmft-atlas build --verify --stats
 ```
 
 The example dataset is intentionally small and is not a physics result.
@@ -85,6 +91,7 @@ tests/         unit, parity, schema, and end-to-end tests
 - [Data contract](docs/data-contract.md)
 - [Data and external-source policy](docs/data-policy.md)
 - [Roadmap](docs/roadmap.md)
+- [Interactive single-site explorer](docs/atlas.md)
 
 ## Reproducibility principles
 

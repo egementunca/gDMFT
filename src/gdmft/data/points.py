@@ -1,14 +1,17 @@
-"""Validation for canonical scalar point tables."""
+"""Validation and reading for canonical scalar point tables."""
 
 from __future__ import annotations
 
 import csv
 import json
 import math
+from collections.abc import Iterator
 from dataclasses import dataclass
 from importlib.resources import files
 from pathlib import Path
 from typing import Any
+
+NULL_VALUES = {"", "null"}
 
 
 @dataclass(frozen=True)
@@ -65,6 +68,50 @@ def _parse_nullable_boolean(
     if normalized == "false":
         return False
     return None
+
+
+def iter_point_rows(path: str | Path) -> Iterator[dict[str, str | None]]:
+    """Stream a scalar table as dictionaries with contract null decoding.
+
+    Values equal to one of the contract null encodings (empty string or
+    ``"null"``) are returned as ``None``; every other value is returned as
+    its verbatim CSV string. Works for any table that follows the point
+    contract's null convention (point tables, reference tables).
+    """
+    table_path = Path(path)
+    with table_path.open("r", encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream)
+        if reader.fieldnames is None:
+            raise ValueError(f"table has no header: {table_path}")
+        for row in reader:
+            yield {
+                key: (None if value in NULL_VALUES else value)
+                for key, value in row.items()
+            }
+
+
+def find_artifact(
+    document: dict[str, Any],
+    *,
+    role: str | None = None,
+    schema: str | None = None,
+    path: str | None = None,
+) -> dict[str, Any]:
+    """Return the single manifest artifact matching the given filters."""
+    matches = [
+        artifact
+        for artifact in document["artifacts"]
+        if (role is None or artifact.get("role") == role)
+        and (schema is None or artifact.get("schema") == schema)
+        and (path is None or artifact.get("path") == path)
+    ]
+    wanted = {"role": role, "schema": schema, "path": path}
+    filters = {key: value for key, value in wanted.items() if value is not None}
+    if not matches:
+        raise ValueError(f"no artifact matches {filters}")
+    if len(matches) > 1:
+        raise ValueError(f"multiple artifacts match {filters}")
+    return matches[0]
 
 
 def validate_point_table(

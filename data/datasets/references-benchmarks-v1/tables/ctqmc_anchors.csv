@@ -1,0 +1,2 @@
+method,budget,t_over_d,u_over_d,branch,z,double_occupancy,kinetic_energy_over_d,total_energy_over_d
+ctqmc_llk,0,0.005,2.4,exact,0.12,0.0545,,-0.0621

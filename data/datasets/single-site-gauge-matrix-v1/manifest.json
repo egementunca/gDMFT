@@ -2,11 +2,11 @@
   "artifacts": [
     {
       "artifact_id": "README.md",
-      "bytes": 1352,
+      "bytes": 1738,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "documentation",
-      "sha256": "e5933ef569567a9b44ad3f07942897225fd451ec3bface4dfb4786d6b9212344"
+      "sha256": "983c8b05c26190726af5c9c6fad51271cca005c1817692d81601a760847f8230"
     },
     {
       "artifact_id": "evidence.build_stats.json",
@@ -74,13 +74,13 @@
     },
     {
       "artifact_id": "points.csv",
-      "bytes": 11471375,
+      "bytes": 11299087,
       "media_type": "text/csv",
       "path": "points.csv",
       "role": "canonical-scalar-point-table",
       "rows": 20228,
       "schema": "gdmft.point.v1",
-      "sha256": "f9b4602b0885ca5a2bfb6edcca2d4a0debffca8a24b1ba603ab929e1c06725bf"
+      "sha256": "be9aba2e88eb7dabc3cc87ddfcc495f2a500410dd92d607474e1d2a7fc5765c4"
     },
     {
       "artifact_id": "provenance.migration_report.json",

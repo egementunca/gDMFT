@@ -2,11 +2,11 @@
   "artifacts": [
     {
       "artifact_id": "README.md",
-      "bytes": 2171,
+      "bytes": 2809,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "documentation",
-      "sha256": "8ed157a56f45ecb9830d17b5e5184578a9f63a5096548d4e1abea910b60da2ec"
+      "sha256": "9b5e03a8571a8aec98a6ea612f5be065a271a25d534476f5742904cc4ea18925"
     },
     {
       "artifact_id": "evidence.bare_R_pairing.csv",
@@ -154,13 +154,13 @@
     },
     {
       "artifact_id": "points.csv",
-      "bytes": 10650627,
+      "bytes": 10632947,
       "media_type": "text/csv",
       "path": "points.csv",
       "role": "canonical-scalar-point-table",
       "rows": 15240,
       "schema": "gdmft.point.v1",
-      "sha256": "6befa926bb5bfe4d8d3c641a36a5eb74aa74ded133dc7a85877d262d9ddc7764"
+      "sha256": "c9e5251da95a469576b072d764a30a94ab9419013e54c5ffff65fe18f269713d"
     },
     {
       "artifact_id": "provenance.execution_patch.diff",
@@ -172,11 +172,11 @@
     },
     {
       "artifact_id": "provenance.migration_report.json",
-      "bytes": 11690,
+      "bytes": 11872,
       "media_type": "application/json",
       "path": "provenance/migration_report.json",
       "role": "provenance",
-      "sha256": "80acc3abb413716ddcf232fa09b828cdddba3e391c71fc2a7905ce7763c9726b"
+      "sha256": "56aa4837d943908db0b16989aed8ec7437013abd7e1f5689ea23f8123b06f098"
     },
     {
       "artifact_id": "provenance.source-code-inventory.csv",
@@ -261,6 +261,20 @@
       "complete": true,
       "registered": 4252
     },
+    "metadata_corrections": [
+      {
+        "field": "quadrature_node_count",
+        "id": "d09-bethe-effective-node-count-v1",
+        "normalized_value": 256,
+        "reason": "producer recorded the 256**2 two-dimensional default; the Bethe semicircle route used 256 one-dimensional nodes",
+        "scope": "bethe rows",
+        "source_value": 65536,
+        "source_value_preserved_in": [
+          "source_views/stage3_scalar_projection.csv",
+          "raw/raw_campaign.tar.gz"
+        ]
+      }
+    ],
     "preservation_revision": "1d987593969520b8cd6e191ca284682738778a6d",
     "raw_half_bandwidth": {
       "bethe": 1.0,

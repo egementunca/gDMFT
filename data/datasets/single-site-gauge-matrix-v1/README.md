@@ -23,3 +23,9 @@ No branch selection has been applied. The legacy `converged` flag is exposed
 as `solver_succeeded` because D08 did not retain a separate optimizer-success
 field; `equations_accepted`, physical admissibility, continuity, and selection
 remain unknown unless explicitly present in the source row.
+
+The normalized scalar view separates quasiparticle-weight estimators. For
+`m_g=3`, the legacy source field `Z_mats` was the canonical Fermi-mode residue
+and is imported as `quasiparticle_weight_from_r`; its Matsubara field is null.
+For the older `m_g=1` campaigns, the distinct stored Matsubara estimate remains
+in `quasiparticle_weight_matsubara`. The source projection is unchanged.

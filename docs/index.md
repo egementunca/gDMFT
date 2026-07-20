@@ -10,5 +10,7 @@ Start with these documents:
 6. [Roadmap](roadmap.md): planned implementation sequence.
 7. [Single-site data snapshot](datasets/single-site-20260717.md): imported
    grids, observables, evidence, and unresolved decisions.
+8. [Interactive atlas](atlas.md): building and reading the self-contained
+   explorer over the registered datasets.
 
 The repository README provides installation and the shortest working example.

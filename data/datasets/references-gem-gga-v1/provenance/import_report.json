@@ -1,0 +1,60 @@
+{
+  "convention_cross_check": {
+    "bethe_b1": {
+      "median_abs_d_docc": 0.00103019,
+      "median_abs_d_etot_over_d": 0.00236288,
+      "our_gauge": "bare",
+      "our_source": "v2",
+      "shared_cold_metal_points": 52
+    },
+    "bethe_b3": {
+      "median_abs_d_docc": 0.00040804,
+      "our_gauge": "bare",
+      "our_source": "v1",
+      "shared_cold_metal_points": 34
+    },
+    "square_b1": {
+      "median_abs_d_docc": 0.00145962,
+      "median_abs_d_etot_over_d": 0.00363536,
+      "our_gauge": "bare",
+      "our_source": "v2",
+      "shared_cold_metal_points": 40
+    },
+    "square_b3": {
+      "median_abs_d_docc": 0.00052459,
+      "median_abs_d_etot_over_d": 0.00083734,
+      "our_gauge": "bare",
+      "our_source": "v2",
+      "shared_cold_metal_points": 35
+    }
+  },
+  "counts": {
+    "crashed_rows": 29,
+    "row_counts": {
+      "bethe_b1": 1768,
+      "bethe_b3": 1768,
+      "square_b1": 800,
+      "square_b3": 800
+    },
+    "stalled_rows": 145,
+    "structure_rows": {
+      "bethe_b1": 0,
+      "bethe_b3": 1029,
+      "square_b1": 0,
+      "square_b3": 797
+    },
+    "sum_rule_gross_rows": 222,
+    "sum_rule_soft_rows": 488,
+    "total_rows": 5136
+  },
+  "generating_script": {
+    "archived_sha256": "f80ae03d8503f94e769c88ab3e4f62e78b4041d2438620527a6fe27d1e5ed2b9",
+    "path": "scripts/gem_scan.py",
+    "source_sha256": "b969c3b5c4f90753be174c1e74da31fc72503e9f24ef05595ca227610c934035",
+    "transformation": "machine path replaced by repository-relative reference"
+  },
+  "source_dirty": true,
+  "source_note": "scan CSVs are gitignored run outputs; provenance is the per-file sha256 inventory, not git blobs",
+  "source_repository": "paper-consolidation",
+  "source_revision": "1d987593969520b8cd6e191ca284682738778a6d"
+}

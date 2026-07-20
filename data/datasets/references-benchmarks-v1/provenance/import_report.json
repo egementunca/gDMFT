@@ -1,0 +1,17 @@
+{
+  "counts": {
+    "compare_all_rows": 10936,
+    "nrg_rows": 72,
+    "prof_rows": 2562
+  },
+  "cross_check": {
+    "gem_rows_matched": 3510,
+    "ghost_rows_matched": 4092,
+    "nrg_rows_matched": 72,
+    "prof_rows_matched": 2562
+  },
+  "note": "benchmark tables are gitignored run outputs in the source worktree; provenance is the per-file sha256 inventory",
+  "source_dirty": true,
+  "source_repository": "paper-consolidation",
+  "source_revision": "1d987593969520b8cd6e191ca284682738778a6d"
+}

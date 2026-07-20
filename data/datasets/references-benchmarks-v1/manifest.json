@@ -1,0 +1,150 @@
+{
+  "artifacts": [
+    {
+      "artifact_id": "README.md",
+      "bytes": 1501,
+      "media_type": "text/markdown",
+      "path": "README.md",
+      "role": "documentation",
+      "sha256": "3685964457a6d07274b5ce099c757fdb83445149b00694b96176d5cb9620e605"
+    },
+    {
+      "artifact_id": "provenance.ACCEPTANCE.md",
+      "bytes": 431,
+      "media_type": "text/markdown",
+      "path": "provenance/ACCEPTANCE.md",
+      "role": "provenance",
+      "sha256": "efcbff7b11564d7b668aeb1d4beeb682560854c8e2a911e3b05b8030cf0a8abe"
+    },
+    {
+      "artifact_id": "provenance.import_report.json",
+      "bytes": 499,
+      "media_type": "application/json",
+      "path": "provenance/import_report.json",
+      "role": "provenance",
+      "sha256": "a5798802c4d236226ac89191a8de4cefa62ec2c468dbe2b463d5ece884562d1f"
+    },
+    {
+      "artifact_id": "provenance.source_files.csv",
+      "bytes": 2461,
+      "media_type": "text/csv",
+      "path": "provenance/source_files.csv",
+      "role": "provenance",
+      "sha256": "29b38279067fed9031843e8b8cb1b9b4040321003948a3616a2088191c7d2a43"
+    },
+    {
+      "artifact_id": "tables.compare_all.csv",
+      "bytes": 1223352,
+      "media_type": "text/csv",
+      "path": "tables/compare_all.csv",
+      "role": "reference-scalar-table",
+      "sha256": "73aee6c5111dc2eb5bfde4e6fdea9a423d487a05ee254bad04f96580f50e8374"
+    },
+    {
+      "artifact_id": "tables.compare_vs_T.csv",
+      "bytes": 74414,
+      "media_type": "text/csv",
+      "path": "tables/compare_vs_T.csv",
+      "role": "reference-scalar-table",
+      "sha256": "62d10fe31157e262cf982bc69895ce4a91a4e96a356a06234e8b7b6b1061ac55"
+    },
+    {
+      "artifact_id": "tables.convergence_U2.4.csv",
+      "bytes": 1063,
+      "media_type": "text/csv",
+      "path": "tables/convergence_U2.4.csv",
+      "role": "reference-scalar-table",
+      "sha256": "e01a33f38977ba09afbf7a96c4e02e0019181bd5b05644ec9899a9f15a75ead5"
+    },
+    {
+      "artifact_id": "tables.ctqmc_anchors.csv",
+      "bytes": 149,
+      "media_type": "text/csv",
+      "path": "tables/ctqmc_anchors.csv",
+      "role": "reference-scalar-table",
+      "sha256": "a31ea19b34aa0f2c14e1bcbd3684cf4f3286702c69abfac5b2784bc406d5f371"
+    },
+    {
+      "artifact_id": "tables.nrg_thermal.csv",
+      "bytes": 6068,
+      "media_type": "text/csv",
+      "path": "tables/nrg_thermal.csv",
+      "role": "reference-scalar-table",
+      "sha256": "4b03786bfff26d94018b391bc86b843f34a0cfaa96d920d85e2bdbfa1260784d"
+    },
+    {
+      "artifact_id": "tables.prof_gga_grids.csv",
+      "bytes": 177362,
+      "media_type": "text/csv",
+      "path": "tables/prof_gga_grids.csv",
+      "role": "reference-scalar-table",
+      "sha256": "bb4918d8d057adf1feb135c508d900fa25d5d185a55c931585c453379fcfc4ee"
+    },
+    {
+      "artifact_id": "tables.prof_ghost_mg3_markers.csv",
+      "bytes": 248,
+      "media_type": "text/csv",
+      "path": "tables/prof_ghost_mg3_markers.csv",
+      "role": "reference-scalar-table",
+      "sha256": "6b1af5bf5f5118dd7e051eaec36c98005dc8e9aea9c5685672e37e605cb8ca7d"
+    },
+    {
+      "artifact_id": "tables.prof_ghost_mg3_markers_T5orig.csv",
+      "bytes": 215,
+      "media_type": "text/csv",
+      "path": "tables/prof_ghost_mg3_markers_T5orig.csv",
+      "role": "reference-scalar-table",
+      "sha256": "7d39afb4bc61034bee65cf00b068803f6e758e838da2a22f85c6a910d2c19af4"
+    }
+  ],
+  "conventions": {
+    "double_occupancy": "per physical site",
+    "energy_unit": "D",
+    "grand_potential": "not recorded",
+    "half_bandwidth": 1.0,
+    "interaction_axis": "u_over_d",
+    "particle_hole": "half filling; LLK total-energy convention E_tot = E_kin + U * docc (prof grids stored raw, add U/2)",
+    "temperature_axis": "t_over_d"
+  },
+  "created_at": "2026-07-18T21:19:20Z",
+  "data_stage": "validated",
+  "dataset_id": "references.benchmarks-v1",
+  "dataset_kind": "external_reference",
+  "description": "Audited cross-method benchmark merge (ghost-DMFT, gem g-RISB, DMFT-ED, professor gGA grids, NRG, CTQMC anchor) plus its source-of-truth reference tables, on LLK axes.",
+  "extensions": {
+    "cross_check": {
+      "gem_rows_matched": 3510,
+      "ghost_rows_matched": 4092,
+      "nrg_rows_matched": 72,
+      "prof_rows_matched": 2562
+    },
+    "methods": [
+      "ghost_dmft",
+      "gga_gem",
+      "dmft_ed",
+      "gga_prof",
+      "nrg",
+      "ctqmc_llk"
+    ]
+  },
+  "external_sources": [
+    {
+      "id": "doi:10.1103/PhysRevB.107.L121104",
+      "revision": "pdf-sha256:32f39c77020c5f5e7389828c268219ffaf3dfbd34a14de51ea966c4b1b5d65f9"
+    }
+  ],
+  "provenance": {
+    "command": [
+      "python3",
+      "studies/reference_data_import/import_benchmark_references.py"
+    ],
+    "dirty": true,
+    "python": "3.13.5",
+    "repository": "paper-consolidation",
+    "revision": "1d987593969520b8cd6e191ca284682738778a6d"
+  },
+  "release_status": "draft",
+  "schema_version": "gdmft.dataset.v1",
+  "title": "Cross-method benchmark references v1",
+  "version": "0.1.0"
+}
