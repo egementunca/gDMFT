@@ -99,6 +99,48 @@
     };
   }
 
+  /* Associated pole weights behind the h-sector scales: V0 (central
+     g-sector hybridization coupling) is the metal's lifeline — it
+     collapses toward 0 as the quasiparticle peak dies near Uc2, so this
+     panel is where you watch V0 die under the same U/D as the ±Λ/±η
+     ladder above. V1 is the satellite coupling; W is the Σ-pole weight
+     that feeds Λ. Branch color matches the ladder; one marker per
+     coupling. All amplitudes are non-negative (≥ 0), so a single
+     positive axis with the 0 line suffices. */
+  function weightsPanel(ds, metal, insul, vlines) {
+    var series = [];
+    var specs = [
+      ["p_v0", "point", "V0"],
+      ["p_v1", "opoint", "V1"],
+      ["p_w", "square", "W"],
+    ];
+    function add(branch, color, name) {
+      if (!branch) return;
+      specs.forEach(function (spec) {
+        var points = [];
+        branch.rows.forEach(function (row, position) {
+          points.push([ds.u(row), ds.num(spec[0], row)]);
+          if (branch.breaks.indexOf(position) >= 0) points.push(null);
+        });
+        series.push({
+          label: name + " " + spec[2],
+          color: color,
+          marker: spec[1],
+          points: points,
+        });
+      });
+    }
+    add(metal, C.metal, "metal");
+    add(insul, C.insul, "insulator");
+    return {
+      yLabel: "pole weights (V0, V1, W) /D",
+      height: 230,
+      vlines: vlines,
+      hlines: [{ y: 0 }],
+      series: series,
+    };
+  }
+
   function branchSeries(ds, branch, qtyKey, color, label, marks) {
     var points = [];
     branch.rows.forEach(function (row, position) {
@@ -368,14 +410,20 @@
       };
     }
     var panel = E("div", "panel", null, chartHost);
+    var panels = [
+      panelFor("z_pole", "Z"),
+      panelFor("omega_d", "Ω/D"),
+      ladderPanel(ds, metal, insul, vlines),
+    ];
+    /* Only when the source carries an embedded pole table — otherwise the
+       couplings are all null and the panel would draw empty. */
+    if (ds.has("p_v0")) {
+      panels.push(weightsPanel(ds, metal, insul, vlines));
+    }
     var figure = Atlas.plot.figure({
       width: 940,
       xLabel: "U/D",
-      panels: [
-        panelFor("z_pole", "Z"),
-        panelFor("omega_d", "Ω/D"),
-        ladderPanel(ds, metal, insul, vlines),
-      ],
+      panels: panels,
     });
     panel.appendChild(figure.el);
     var actions = E("div", "chart-actions", null, panel);
