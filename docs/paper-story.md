@@ -473,6 +473,13 @@ transition happens where the gateway becomes atomic-like), not yet a law.
    run (fig_story_poleflight) on the square lattice — expected to land
    at its common weight floor U = D like Bethe; until then the square
    end is quoted as "railing onset ≈ 1.2–1.3".
+8. Cheap fourth column + stability demonstrator (optional, from the
+   TRIQS sweep): an IPT Bethe up/down hysteresis run on our T-ladder
+   (deterministic, minutes) gives IPT's U_c1/U_c2/Z(U) as a clearly
+   labeled reference scheme, and its DMFT loop is the clean place to
+   demonstrate the J_FP iteration-multiplier → 1 spinodal detector
+   before applying the same diagnostic to our matching loop (closes
+   ask 5 with a protocol the field recognizes).
 
 ## 3. Single site — what each bath budget buys
 
@@ -596,6 +603,31 @@ bath-pole positions are representation-laden; the invariant object is
 - Bellomia et al. (gRISB square up/down hysteresis) — verify against the
   gem companion (Giuli et al., arXiv:2603.20559) for the right
   gGA-hysteresis citation; ties to our gem up/down arms.
+- Pelz–Adler–Reitner–Toschi, arXiv:2303.01914 — inside the coexistence
+  region the two branches differ SHARPLY at the two-particle level (the
+  number of charge-channel vertex-divergence lines JUMPS across the
+  MIT, insulator side higher; lines accumulate as T → 0). Two uses:
+  (1) independent evidence that the coexisting branches are not smoothly
+  connected objects — consonant with our no-fold finding being a
+  statement about the representation, not the physics; (2) an honest
+  scope line: vertex divergences are a dynamical two-particle
+  phenomenon, invisible to any static equal-time closure by
+  construction — the same blindness class as the gap-closing
+  instability (§2.4(d)).
+
+**Ecosystem practice note (TRIQS sweep, 2026-07-22):** the standard
+tutorial stack (IPT on Bethe, cthyb Hubbard) scans U with a FRESH seed
+per point and never draws the hysteresis — coexistence work in that
+ecosystem lives in papers, with three tools: seeded up/down
+continuation (our protocol), critical slowing down of the DMFT loop as
+the practical spinodal detector (iteration multiplier → 1 = KLR soft
+mode = the J_FP eigenvalue of §2.4(d); Joo–Oudovenko made a convergence
+criterion of it, Strand a continuation method), and only rarely a free
+energy (hard in QMC). Consequences for us: our both-branch Ω machinery
+(U*, conjugacy, Clausius–Clapeyron) is a differentiator worth stating;
+and the field's own U_c1/U_c2 practice is seeded-continuation
+"solution disappears" boundaries — the same acceptance-vs-existence
+caveat we formalized, which the three-symbol discipline handles.
 
 **Reading core while the data cooks (5 sessions → 5 paper sections):**
 Georges lectures §1.1 + 4.2–4.4 (intro language); GKKR §VII.C–E (§3.2);
