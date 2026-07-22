@@ -172,6 +172,53 @@ converged (R,Λ) [BN §4b], per-U re-extraction [S]):
   <3% for T ≤ 0.01. Warm rows (T ≥ 0.05) are NOT a Z comparison axis —
   gem's warm Z drifts ≥ 1 and the static slope stops meaning Z [BN §2].
 
+### 2.2b Why R differs — one choice, every observed difference (plain words)
+
+What R IS in each scheme decides everything in the table above.
+
+- In gGA, R is computed from the embedding wavefunction — the normalized
+  overlap between the ghost quasiparticle orbitals and the physical
+  electron. Nothing in that construction enforces completeness of the
+  kept space: the scheme may represent only PART of the electron, and
+  ΣR² < 1 is that fraction. The unrepresented remainder is not hidden —
+  it IS the missing Σ-pole weight and it IS the linear term
+  (sig_lin = 1 − 1/ΣR², verified per-U to 4 digits): three names for
+  one number. Since gGA coincides with DMFT exactly under the isometric
+  condition R†R = 1 [draft; LLK], the deficit 1 − ΣR² is the scheme's
+  distance from DMFT measured in its own variables.
+- In ghost-DMFT, R̃ comes from a canonical (unitary) rotation of the
+  gateway — a change of basis, not a compression. A basis change cannot
+  lose electron: ΣR̃² = 1 identically, and Z = R̃₀² is then a mode
+  weight, not a fit. The matching equalities must therefore place FULL
+  spectral weight; our pair carries a flat ~90% of the exact U²/4, the
+  missing ~10% being the multi particle-hole tail no single pair can
+  represent at ANY normalization — a representation error, not a
+  bookkeeping loss.
+- WHY the variational closure sheds weight: the energy it minimizes is
+  dominated by the occupied low-frequency region. Pulling pole weight
+  closer to ω = 0 buys correlation energy; high-frequency sum rules
+  cost the energy nothing, so they are simply not enforced. Hence the
+  measured signature: gem's poles sit closer in (smaller η, every U)
+  with less weight (49% → 72% of U²/4, RISING with U as Mott physics
+  forces more of the atomic weight to be represented) — while ours
+  stays flat at ~90% because an identity, not a physics regime, pins it.
+- WHY Z still nearly agrees (the compensation): the Z of a mirrored
+  pair is set by weight/position² (1/Z − 1 = 2W²/η²). A closer, lighter
+  pole and a farther, heavier pole can produce nearly the same
+  low-frequency slope — measured: |Δη| = 0.20 and |ΔW²| = 0.10 median,
+  yet |ΔZ| = 0.028. That is the concrete content of LLK's "Z is the
+  framework-sensitive observable": in the variational scheme Z is a
+  ratio of two misplaced quantities protected by no sum rule; in ours
+  it is pinned to the canonical mode structure.
+- The division of wins follows from the same choice, with no extra
+  input: energy — variational by construction (their home turf, §2.3);
+  structure — unitarity, interlacing, moment accounting, and the
+  both-branch thermodynamic identities (§3b) — matching by
+  construction. One sentence for the draft: the variational closure
+  optimizes the number it reports; the matching closure preserves the
+  structure it represents; every observed difference in §2.2 follows
+  from that division.
+
 ### 2.3 The honest scoreboard (fixed budget; do not overclaim)
 
 At U/D = 2.4 cold: E_tot — gGA −0.06184, ours −0.06098, ED5 −0.06052,
