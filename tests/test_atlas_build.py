@@ -11,7 +11,9 @@ import pytest
 from gdmft.atlas.build import _build_time, assemble_html, build_atlas
 
 ROOT = Path(__file__).parents[1]
-SIZE_BUDGET_BYTES = 3_500_000
+# Revision 0.2.0: the v2 dataset quadrupled (61,294 rows, two
+# campaigns, denser grid); the built page is ~5.7 MB.
+SIZE_BUDGET_BYTES = 8_000_000
 
 
 @pytest.fixture(scope="module")
@@ -45,7 +47,7 @@ def test_payload_carries_all_registered_data(built) -> None:
     _, _, _, payload = built
     datasets = payload["datasets"]
     assert datasets["single-site.gauge-matrix-v1"]["n"] == 20228
-    assert datasets["single-site.scan-matrix-v2"]["n"] == 15240
+    assert datasets["single-site.scan-matrix-v2"]["n"] == 61294
 
     gem = payload["references"]["gem"]
     assert gem["n"] == 5136
@@ -74,20 +76,21 @@ def test_payload_carries_explicit_primary_route_catalog(built) -> None:
         for route in catalog["policy"]["routes"]
     }
     assert routes[("bethe", 1)]["dataset_id"] == "single-site.scan-matrix-v2"
-    assert routes[("bethe", 3)]["dataset_id"] == "single-site.gauge-matrix-v1"
+    assert routes[("bethe", 3)]["dataset_id"] == "single-site.scan-matrix-v2"
     assert routes[("square", 1)]["dataset_id"] == "single-site.scan-matrix-v2"
     assert routes[("square", 3)]["dataset_id"] == "single-site.scan-matrix-v2"
-    assert catalog["default_physics_count"] == 6648
+    assert catalog["default_physics_count"] == 9772
     assert catalog["selection_status"] == "not applied"
     assert payload["derived"]["basis"]["kind"] == "attempt-level diagnostic"
 
     d08 = catalog["datasets"]["single-site.gauge-matrix-v1"]
     d09 = catalog["datasets"]["single-site.scan-matrix-v2"]
-    assert d08["role_counts"]["primary-physics"] == 5506
-    assert d08["default_row_count"] == 4633
-    assert d09["role_counts"]["primary-physics"] == 3368
-    assert d09["role_counts"]["gauge-evidence"] == 8504
-    assert d09["default_row_count"] == 2015
+    # 0.2.0: every primary route points at D09; D08 is historical evidence.
+    assert "primary-physics" not in d08["role_counts"]
+    assert d08["default_row_count"] == 0
+    assert d09["role_counts"]["primary-physics"] == 15036
+    assert d09["role_counts"]["gauge-evidence"] == 31222
+    assert d09["default_row_count"] == 9772
 
 
 def test_d09_ed_payload_keeps_complete_protocol_semantics(built) -> None:
@@ -242,14 +245,14 @@ def test_payload_gate_tallies_match_dataset_invariants(built) -> None:
     _, _, _, payload = built
     gates = payload["datasets"]["single-site.scan-matrix-v2"]["gates"]
     assert gates["solver_succeeded"] == {
-        "true": 15224,
-        "false": 16,
+        "true": 61250,
+        "false": 44,
         "null": 0,
     }
     assert gates["physical_guards_clear"] == {
         "true": 0,
-        "false": 5136,
-        "null": 10104,
+        "false": 19693,
+        "null": 41601,
     }
     for gate in (
         "bounds_clear",
@@ -257,16 +260,18 @@ def test_payload_gate_tallies_match_dataset_invariants(built) -> None:
         "physically_admissible",
         "selected",
     ):
-        assert gates[gate] == {"true": 0, "false": 0, "null": 15240}
+        assert gates[gate] == {"true": 0, "false": 0, "null": 61294}
 
 
 def test_payload_grids_and_encoding_are_consistent(built) -> None:
     _, _, _, payload = built
     scan = payload["datasets"]["single-site.scan-matrix-v2"]
-    assert len(scan["grids"]["bethe"]["u"]) == 52
+    assert len(scan["grids"]["bethe"]["u"]) == 111
     assert len(scan["grids"]["bethe"]["t"]) == 17
-    assert len(scan["grids"]["square"]["u"]) == 40
-    assert len(scan["grids"]["square"]["t"]) == 10
+    assert len(scan["grids"]["square"]["u"]) == 103
+    # union of the old square ladder (10 rows incl. 0.006) and the unified
+    # fill ladder (17 rows incl. 0.0065)
+    assert len(scan["grids"]["square"]["t"]) == 18
     assert scan["raw_d"] == {"bethe": 1.0, "square": 2.0}
     assert len(scan["cols"]["iu"]) == scan["n"]
     assert len(scan["cols"]["pid"]) == scan["n"]
@@ -285,13 +290,13 @@ def test_payload_embeds_poles_and_dos(built) -> None:
     gauge = payload["datasets"]["single-site.gauge-matrix-v1"]
     # every row joined 1:1; v2 is fully PH-symmetric, v1 keeps exotics as
     # full arrays and 3,092 rows use the canonical-R h-sector view
-    assert scan["poles"]["counts"]["rows"] == 15240
+    assert scan["poles"]["counts"]["rows"] == 61294
     assert scan["poles"]["counts"]["full"] == 0
     assert scan["poles"]["counts"]["h_from_R"] == 0
     assert gauge["poles"]["counts"]["rows"] == 20228
     assert gauge["poles"]["counts"]["full"] > 0
     assert gauge["poles"]["counts"]["h_from_R"] == 3092
-    assert len(scan["poles"]["red"]["v0"]) == 15240
+    assert len(scan["poles"]["red"]["v0"]) == 61294
 
     dos = payload["dos"]["square"]
     assert len(dos["eps"]) == 512

@@ -36,31 +36,33 @@ def test_single_site_manifests_and_artifacts_are_valid() -> None:
 
 def test_native_point_tables_have_expected_dimensions() -> None:
     d08 = validate_point_table(D08 / "points.csv", expected_rows=20228)
-    d09 = validate_point_table(D09 / "points.csv", expected_rows=15240)
+    d09 = validate_point_table(D09 / "points.csv", expected_rows=61294)
     assert len(d08.run_ids) > 1
-    assert len(d09.run_ids) == 7
+    assert len(d09.run_ids) == 14  # 7 original + 7 fill-campaign cells
 
 
 def test_d09_attempt_and_gate_counts_are_preserved() -> None:
     rows = _rows(D09 / "points.csv")
+    # 0.2.0 = original campaign + 20260721 fill (bare/conv/reopt each
+    # 3,368 + 11,668; native 5,136 + 11,050).
     assert Counter(row["gauge"] for row in rows) == {
-        "bare": 3368,
-        "canonical-r-converted": 3368,
-        "canonical-r-reoptimized": 3368,
-        "canonical-r-native": 5136,
+        "bare": 15036,
+        "canonical-r-converted": 15036,
+        "canonical-r-reoptimized": 15036,
+        "canonical-r-native": 16186,
     }
     assert Counter(row["source_category"] for row in rows) == {
-        "converged_branch": 9753,
-        "branch_not_found": 5136,
-        "failed_branch": 351,
+        "converged_branch": 40253,
+        "branch_not_found": 19693,
+        "failed_branch": 1348,
     }
     assert Counter(row["solver_succeeded"] for row in rows) == {
-        "true": 15224,
-        "false": 16,
+        "true": 61250,
+        "false": 44,
     }
     assert Counter(row["physical_guards_clear"] for row in rows) == {
-        "null": 10104,
-        "false": 5136,
+        "null": 41601,
+        "false": 19693,
     }
     for field in (
         "bounds_clear",
@@ -80,8 +82,8 @@ def test_d09_grid_and_square_quadrature_are_canonical() -> None:
     }
     square = [row for row in rows if row["lattice"] == "square"]
     square_keys = {(row["u_over_d"], row["t_over_d"]) for row in square}
-    assert len(bethe_keys) == 884
-    assert len(square_keys) == 400
+    assert len(bethe_keys) == 1887
+    assert len(square_keys) == 1791
     assert {row["lattice_quadrature"] for row in square} == {
         "continuum_elliptic_dos"
     }

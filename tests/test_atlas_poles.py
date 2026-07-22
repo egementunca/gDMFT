@@ -126,11 +126,30 @@ def test_real_archives_match_declared_counts() -> None:
     import csv
 
     with (v2 / "points.csv").open(encoding="utf-8", newline="") as stream:
-        point_ids = [row["point_id"] for row in csv.DictReader(stream)]
-    table = extract_pole_table(
-        v2 / "raw/raw_campaign.tar.gz", point_ids, kind="tar", cells=cells
-    )
-    assert table["counts"]["rows"] == 15240
+        point_rows = list(csv.DictReader(stream))
+    # Revision 0.2.0: two campaigns whose grids overlap share attempt ids,
+    # so records are namespaced by campaign and each archive read separately.
+    from gdmft.atlas.poles import assemble_pole_table, collect_pole_records
+
+    merged = {
+        f"d09|{pid}": entry
+        for pid, entry in collect_pole_records(
+            v2 / "raw/raw_campaign.tar.gz", kind="tar", cells=cells
+        ).items()
+    }
+    merged.update({
+        f"fill|{pid}": entry
+        for pid, entry in collect_pole_records(
+            v2 / "raw/fill_attempts_20260721.jsonl.gz", kind="v2-jsonl"
+        ).items()
+    })
+    keys = [
+        ("fill|" if row["run_id"].startswith("d09-fill-") else "d09|")
+        + row["point_id"]
+        for row in point_rows
+    ]
+    table = assemble_pole_table(keys, merged)
+    assert table["counts"]["rows"] == 61294
     # every v2 record is PH-symmetric: no full-array fallbacks
     assert table["counts"]["full"] == 0
     assert table["counts"]["h_from_R"] == 0
