@@ -622,6 +622,24 @@ numerics: it belongs to the h-sector Mott pole, the bath is a passenger.
 Data: bethe_mg2_bare (222 records) is wired into the promotion list and
 enters D09 on the next pass.
 
+### (d2) Physical-window insulator seeds (user ask, 2026-07-22 night)
+
+Forcing the satellite into the physical window (box ε_g ∈ [U/4, U],
+seed ε = U/2, V₁ ≈ D/2, V₀ = 0, W from the law): in the DEEP Mott
+regime (U ≳ 3.5) a no-extreme-values insulator root exists near
+plateau (‖F‖ 3.5e-5 at U = 4; ε_g = 3.87 interior, V₁ = 0.53) and its
+invariant lands on the superexchange scale — V₁²/ε_g = 0.072 vs
+D²/4U = 0.0625 (+15%): the t²/U intuition is real there. Below
+U ≈ 3.5 the demand leaves the window (ε rails at U, ‖F‖ ramps to
+3.4e-3 by U = 1.25): the far-pole preference at moderate U is genuine
+matching physics, not seed pathology. Practical seed recipe for
+figures/GUI: deep branch may be re-emitted with physical positions;
+moderate-U positions are valley-soft and must be quoted as invariants
+regardless (§(f) doctrine). Note the position-dependence of the
+residual offsets: physical-window roots sit slightly BELOW the weight
+law (−0.03) where far-parked roots sit above (+0.045) — the offset is
+bath-placement-dependent, one more reason to quote laws, not poles.
+
 ### (e) V₀ along the metal: the law, the ending, and the plateau that
 confused everyone (measured 2026-07-22; resolves the parked V0 ask)
 
