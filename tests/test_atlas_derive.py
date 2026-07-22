@@ -32,7 +32,22 @@ def test_family_kind_maps_known_and_exotic_families() -> None:
 
 
 def test_omega_crossing_interpolates_exactly() -> None:
-    # d_omega = U - 2.5 crosses zero at exactly 2.5.
+    # d_omega = U - 2.52 crosses zero at exactly 2.52. Grid satisfies the
+    # coverage gate (canonical-step brackets, >= 10 shared points).
+    us = [round(2.30 + 0.05 * k, 4) for k in range(11)]
+    metal = assemble_branch(_points([(u, 0.5, u - 2.52) for u in us]), "m")
+    insul = assemble_branch(_points([(u, 0.01, 0.0) for u in us]), "i")
+    result = omega_crossing(metal, insul)
+    assert result["status"] == "crossed"
+    assert abs(result["ustar"] - 2.52) < 1e-12
+    assert result["u_lo"] == 2.5
+    assert result["u_hi"] == 2.55
+    assert result["n_overlap"] == 11
+
+
+def test_omega_crossing_sparse_rows_report_no_number() -> None:
+    # A crossing interpolated across a 0.2-wide hole (or from a thin row)
+    # is not a U* diagnostic: status reported, number withheld.
     metal = assemble_branch(
         _points([(u, 0.5, u - 2.5) for u in (2.0, 2.2, 2.4, 2.6, 2.8)]), "m"
     )
@@ -40,11 +55,8 @@ def test_omega_crossing_interpolates_exactly() -> None:
         _points([(u, 0.01, 0.0) for u in (2.0, 2.2, 2.4, 2.6, 2.8)]), "i"
     )
     result = omega_crossing(metal, insul)
-    assert result["status"] == "crossed"
-    assert abs(result["ustar"] - 2.5) < 1e-12
-    assert result["u_lo"] == 2.4
-    assert result["u_hi"] == 2.6
-    assert result["n_overlap"] == 5
+    assert result["status"] == "crossing_unresolved_sparse"
+    assert "ustar" not in result
 
 
 def test_omega_crossing_statuses() -> None:

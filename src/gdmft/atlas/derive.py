@@ -210,6 +210,13 @@ def omega_crossing(metal: Branch, insul: Branch) -> dict[str, Any]:
     result["u_hi"] = min(u for u in shared if u > u_lo) if u_lo < shared[-1] else u_lo
     result["d_omega_lo"] = d_lo
     result["d_omega_hi"] = d_hi
+    # Coverage gate: a crossing interpolated across a hole in the grid
+    # (bracket wider than one canonical coarse step) or from a thin
+    # both-branch row is not a U* diagnostic — report the status but no
+    # number, so overlays have nothing to draw until the data lands.
+    if (result["u_hi"] - result["u_lo"]) > 0.06 or len(shared) < 10:
+        result["status"] = "crossing_unresolved_sparse"
+        del result["ustar"]
     return result
 
 
