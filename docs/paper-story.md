@@ -464,6 +464,30 @@ demonstrated branch end. Results:
    coefficient as a free parameter), which would make the boundary
    branch regular and answer whether W → 0 in the true ε → ∞ limit
    (§7 ask).
+5. **M_g=5 control (2026-07-22, night; PH-symmetric, central + two
+   pairs, 7 params, T=0.001 Bethe descent U=4.0 → 0.90): the crossover
+   is BUDGET-INDEPENDENT.** Plateau-quality roots (‖F‖ ≈ 2e-5) down to
+   U = 1.125; flight onset between 1.125 and 1.100 — U_x^(5) = U_x^(3)
+   = 1.11(2) within grid resolution. With M_g=2's consistent endpoint,
+   the crossover does NOT creep with bath expressivity: it is pinned
+   by the h-sector, and the external U_c1^(M_g) superscript is
+   unnecessary at these budgets — the crossover belongs to the CLOSURE
+   (static matching) and lattice, not the budget. Sharper structure,
+   both budgets: 2W² sits ABOVE the dressed law by a finite-T offset
+   (+0.045 at U=1.6 → +0.03 at 1.2 → +0.017 at 1.125 → +0.005 at
+   1.10) and the flight starts EXACTLY where the offset is exhausted —
+   U_x is where the measured pole weight meets the law line. Below,
+   2W² freezes at ≈ 0.05 at BOTH budgets (the same scale as the
+   offset) while the law goes negative. Also: V₀ = 0 the whole way
+   (proper insulator), the second pair parks at Hubbard positions
+   (never takes a screening role — M_g=2's lesson again), and there is
+   NO new instability anywhere near U ≈ 2.0–2.4: smooth plateau roots
+   straight through the exact insulator's death region — the
+   closure-deep blindness confirmed at a third budget. Prediction this
+   creates: U_x(T) should track the offset's T-dependence (testable;
+   not run). Data: scratch descent log; codec = 10-line PH-symmetric
+   extension of the M_g=2 control's, reproducible from the frozen
+   producers.
 
 **Three different "ends", three symbols, never to be conflated** (this
 replaces the earlier bracketing claim, whose gem-side number was a
