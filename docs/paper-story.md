@@ -380,10 +380,11 @@ demonstrated branch end. Results:
    physics); measured, it does NOT — the equations demand unboundedly
    more bath influence than any finite configuration supplies. Formal
    name: a NONCOMPACT ENDPOINT of the finite-pole representation.
-   Onset where (U²−D²)/4 crosses zero at U = D; the endpoint sits ~10%
-   above the exact floor (finite T; the other matching equalities fail
-   first). Figure: fig_story_poleflight (story set); source CSV with
-   provenance in studies/paper_figures/data/.
+   Onset where (U²−D²)/4 crosses zero at U = D. Figure:
+   fig_story_poleflight (story set); source CSV with provenance in
+   studies/paper_figures/data/. PARTLY SUPERSEDED by test 4: the ‖F‖
+   ramp is box-limited (falls ∝ 1/ε as the box grows) — the runaway is
+   a minimizing SEQUENCE, not a dead end.
 3. **Hessian stability test — structurally uninformative.** ∂²F has two
    negative modes on BOTH branches (metal control: −4.3 at U=2.7): the
    matching functional is a saddle by construction [Mott+ §3], so
@@ -395,6 +396,39 @@ demonstrated branch end. Results:
    is where that eigenvalue reaches 1 (Strand's boundary; the KLR soft
    mode in our variables [sharpen_KLR]). Computing J_FP is the open
    follow-up — raw parameter space cannot decide it.
+4. **Box-scaling test (same day, evening) — the runaway is a boundary
+   SOLUTION.** Repeating the descent with satellite boxes 24 / 80 / 240
+   (external protocol: compactified variables x = 1/ε, c = V₁²/ε²):
+   (i) at every U below the crossover, ‖F‖ FALLS with the box, ∝ 1/ε
+   (U=1.00: 5.6e-4 → 1.7e-4 → 1.1e-4) — the finite-box ramp of test 2
+   was approximation error, and the infimum is 0 at the boundary;
+   (ii) the mixing ratio is box-INDEPENDENT at matched U and saturates:
+   V₁/ε → 0.61–0.68, i.e. c* ≈ 0.40–0.46 finite (so the critique's
+   dimensionless c = V₁²/ε² stays controlled while V₁²/ε diverges ∝ ε
+   at fixed c — both statements were right, about different
+   combinations); (iii) for U ≥ 1.125 genuine finite roots persist at
+   plateau residual with the POSITION soft (valley ε ≈ 14–20 at box
+   240 vs 11–12 at the registered caps — mild cap-squeeze all along,
+   invariants unaffected, consistent with [PCN] position-sloppiness);
+   (iv) 2W² tracks (U²−D²)/4 with a small positive finite-T offset
+   down through the crossover, then DEPARTS the law below U ≈ 1.05 and
+   SATURATES at ≈ 0.05 to at least U = 0.85 — the prediction
+   "compactified branch terminates at the weight-law zero U = D" was
+   tested and REFUTED at the probed ε ≤ 200. Limit object: a PH pair at
+   ε → ∞ with V/ε → √c* contributes Δ_pair(iω) → −2c·iω — a pure
+   ω-LINEAR bath term, i.e. a RENORMALIZER (the NCS M_h=4 pole-at-
+   infinity concept, emerging spontaneously in the single-site
+   insulator's g-sector). Below the crossover the insulator wants part
+   of its bath budget spent as a renormalizer, which finite-position
+   M_g=3 cannot express. Consequences: U_flight is REINTERPRETED as the
+   finite-root → boundary crossover, still 1.11(2) at plateau
+   tolerance but not a branch DEATH; no raw parameter (V₁, ε₁, or any
+   cutoff on them) can locate a physical U_c1 — thresholds on them
+   measure the box, not physics; the right next implementation is the
+   compactified solve itself (two finite poles + an explicit ω-linear
+   coefficient as a free parameter), which would make the boundary
+   branch regular and answer whether W → 0 in the true ε → ∞ limit
+   (§7 ask).
 
 **Three different "ends", three symbols, never to be conflated** (this
 replaces the earlier bracketing claim, whose gem-side number was a
@@ -424,8 +458,11 @@ larger coupling and larger distance; even V₁²/ε_g, the grip a far
 satellite keeps on the low-energy sector, must grow without bound.
 Every step outward improves the residual slightly; no finite point
 satisfies it; the root exits through the boundary of parameter space.
-Nothing became unstable (s_min regular) and nothing collided (no fold):
-the DEMAND left the representable region. That is why this endpoint
+Nothing became unstable (s_min regular) and nothing collided (no fold).
+[Refined by forensics test 4: the exit is a CONVERGING limit, not a
+failure — the boundary object is the insulator with a renormalizer
+(ω-linear) bath component at fixed mixing c* ≈ 0.40, and the residual
+of the finite-box approximants falls as 1/ε.] That is why this endpoint
 must never be called U_c1. The trend is visible long before the end:
 along the cold insulator, V₁ rises monotonically as U falls from 4, the
 demanded satellite position rises with it (detached from the cap at a
@@ -479,7 +516,38 @@ numerics: it belongs to the h-sector Mott pole, the bath is a passenger.
 Data: bethe_mg2_bare (222 records) is wired into the promotion list and
 enters D09 on the next pass.
 
-### (e) The gateway scale crossover sits just below the transition
+### (e) V₀ along the metal: the law, the ending, and the plateau that
+confused everyone (measured 2026-07-22; resolves the parked V0 ask)
+
+Cold Bethe m_g=3 bare metal-up (registered v2, basin=metal rows only):
+- **V₀ never goes to 0 because the metal branch dies first.** The
+  first-order spinodal ends the branch at U_c2 = 2.816 with Z still
+  finite (last basin=metal row U=2.81: Z = 0.025, V₀ = 0.072). V₀ → 0
+  would need Z → 0 continuously — the T = 0 second-order scenario that
+  never happens at finite T.
+- **The measured law is V₀ = c·√Z with c = 0.455 D** — constant to
+  0.6% over the endgame (U = 2.76–2.81 while Z halves), drifting only
+  from 0.335 at U = 0.5 (weak-coupling crossover). Physically: V₀² is
+  the bath's low-energy spectral weight, and the quasiparticle part of
+  Δ = (D²/4)·G carries weight Z·D²/4 — measured V₀²/(Z D²/4) ≈ 0.83.
+  The central level IS the screening resonance's weight, and it scales
+  with Z, not with any exchange scale.
+- **A/U is refuted**: V₀·U is non-monotone (0.16 → 0.48 peak near
+  U ≈ 2 → 0.18) — no meaningful A exists. The t²/U-type intuition
+  lives elsewhere: in the INSULATOR'S V₁²/ε₁ (virtual-excitation
+  scale, §2.4(d)), not in the metal's V₀.
+- **The "V₀ converges to a value ≈ 0.06" observation is the
+  post-spinodal tail**: for U ≥ 2.82 the up-chain's rows carry
+  basin=other (the registered classifier itself says the chain left
+  the metal basin) — a weak-resonance junk root with V₀ ≈ 0.059–0.064,
+  Z ≈ 0.018 flat. Not metal physics; Series/Inspect show it honestly
+  once the basin column is read.
+- Companion constants now measured on BOTH sectors of the metal: the
+  Σ-pole pair holds 89–90% of its exact weight U²/4; the central bath
+  level holds ≈ 83% of the naive quasiparticle weight Z D²/4. Same
+  ~10–17% multi-particle-hole tail, two sectors — one derivation ask.
+
+### (f) The gateway scale crossover sits just below the transition
 
 Λ/(U/2) along the cold metal: 2.07 (U=1) → 1.00 at **U = 2.62** → the
 gateway's outer scale switches from band-dominated to
@@ -737,6 +805,17 @@ arc/pseudogap beyond the outlook paragraph).
 
 ## 6. Session corrections (so this file self-heals)
 
+- 2026-07-22 (evening): the pole-flight interpretation was UPGRADED by
+  the box-scaling test (§2.4(d) test 4): "the demand leaves the
+  representable region / no solution exists below U_flight" was too
+  strong — no FINITE root exists, but the finite-box residual ramp was
+  approximation error (∝ 1/ε), the minimizing sequence converges to a
+  boundary object (renormalizer bath at mixing c* ≈ 0.40), and the
+  predicted hard termination of the compactified branch at the
+  weight-law zero U = D was tested and refuted (2W² saturates ≈ 0.05
+  below it, probed to U = 0.85, ε ≤ 200). No-fold, no-scheme-U_c1, and
+  the three-symbol discipline all stand; U_flight is now the
+  finite-root → boundary crossover.
 - 2026-07-22: §2.2b's first draft conflated the ISOMETRY deficit
   (1 − ΣR² = linear term, ≤3%) with the FIRST-MOMENT deficit of gem's
   Σ-pole weights (28–51%) — "three names for one number" was wrong.
@@ -805,11 +884,22 @@ figures' ×-at-cap treatment is the honest display.
 4. Confirm gem = draft ref [13] [RB flag 4].
 5. Lanatà U_c1 ≈ 2.0 pin + BCV exact U_c1 pin (the three-ends taxonomy).
 6. Us, still open: wedge U*(T) line (NCS, the one substantial new run);
-   V0 reconciliation with the user's own view; ladder-figure insulator cut
+   ladder-figure insulator cut
    at the gated end; GUI warning banners + corridor cap (last two
    enforcement items); square m_g=3 SCC resubmit on wall-clock + gem fill
    completion (B=3 running, B=1 + square queued); stability follow-up
    (fixed-point-map Jacobian / KLR mode).
+   NEW ask (2026-07-22 evening): the COMPACTIFIED SOLVE — two finite
+   bath poles + an explicit ω-linear bath coefficient (renormalizer) as
+   a free parameter, replacing the runaway pair below the crossover;
+   makes the boundary branch regular, answers whether W → 0 in the true
+   limit, and is the correct implementation of the external
+   compactified-variables protocol. Related smaller ask: re-emit the
+   registered insul-down satellite positions with a wider box or mark
+   them valley-soft (ε ≈ 14–20 equal-residual at box 240) — positions
+   were mildly cap-squeezed branch-wide; invariants unaffected.
+   RESOLVED same day: the V0 reconciliation (now §2.4(e) — the law is
+   V₀ = 0.455·√Z·D, the plateau was the basin=other tail).
    DONE since first written: `_parse_arr` + gem overlays; v2-native repair
    (fill campaign); single source 0.2.0 + routing; campaign dedup;
    pole-cap keep-and-mark; M_g=2 control; U_c1 forensics; pole-flight

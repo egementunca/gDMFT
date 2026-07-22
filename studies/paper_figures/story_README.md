@@ -122,8 +122,10 @@ insulator dies much earlier (near U/D = 2.4) by a different mechanism —
 the gap closes — which equal-time matching data cannot see.
 
 Trust: filled symbols are stored, independently re-checked solutions;
-open symbols are the recorded failed descent (no solution exists
-there). The error level of the filled symbols (a few 1e-5) is
+open symbols are the descent past the last finite solution — there the
+stationary point retreats to infinite satellite energy at fixed
+V1/eps_g, and the plotted error is the finite-box approximation error
+(it falls as the box grows; the run shown uses the box 24). The error level of the filled symbols (a few 1e-5) is
 re-evaluation noise on stored roots, not a solver limitation. Source
 data with full provenance: studies/paper_figures/data/.
 
