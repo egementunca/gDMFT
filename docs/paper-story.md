@@ -376,6 +376,26 @@ U_c1: Lanatà's published variational endpoint is ≈ 2.0 [their PRB;
 pin]. The honest cross-method statement is the three-ends taxonomy
 below, which REPLACES an earlier "closures bracket the spinodal" claim.
 
+**The eigenvalue form of the over-survival (user observation,
+2026-07-22 night — the sharpest version we have):** the inner gateway
+eigenvalue obeys the first-order Landau expansion of the matching
+conditions, λ₋ ≈ V₀η/(√2 W), essentially EXACTLY along the metal (the
+λ-frame figure, panel c: exact eigenvalue and expansion coincide) — the
+Landau reconstruction is the correct linearization of the scheme near
+its soft mode. Substituting the measured laws V₀ = 0.455·√Z·D and
+η = Λ√Z gives λ₋ ≈ 0.32·(Λ/W)·Z·D ∝ Z — the inner eigenvalue IS the
+coherence scale ε*_F ~ Z·D in disguise [check the prefactor
+numerically; sharpen_KLR]. On the insulator the same formula is the
+whole U_c1 story in one line: exact DMFT's self-consistency sets the
+low-energy bath from G_loc and therefore NEVER exactly zero (finite-T
+tails; at T = 0 the gap-edge weight that closes in at U_c1) — its λ₋
+is small but FINITE and can grow to criticality. Static matching parks
+V₀ ≡ 0 on the insulator (equal-time rows cannot see exponentially
+small weight), so λ₋ = 0 at machine precision — the death mode is not
+weak, it is STRUCTURALLY ABSENT. "DMFT keeps V₀ finite; matching sets
+it exactly zero; λ₋ = V₀η/(√2W) does the rest" — the M_g = 2/3/5 and
+M_h = 4 controls are this one sentence measured four ways.
+
 Mechanism of the over-survival (plain words, for the paper): exact
 DMFT's insulator dies when the gap closes and the screening resonance
 re-forms inside it — low-energy bath weight is always available to seed
