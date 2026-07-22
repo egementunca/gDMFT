@@ -93,9 +93,9 @@ ghost construction.
 What was done: we followed the insulating solution down in U at the
 coldest temperature, with the usual limits on the bath parameters
 removed (raised from 5 and 12 to 24), and at every step recorded the
-bath satellite's coupling and position, their combination V1^2/eps_g,
-the size of the matching-equation error, and the smallest singular
-value of its Jacobian. The last quantity is the direct test for a
+bath satellite's coupling and position, their combinations V1^2/eps_g
+and V1/eps_g, the size of the matching-equation error, and the
+smallest singular value of its Jacobian. The last quantity is the direct test for a
 spinodal: if the branch died by meeting its unstable partner (a fold),
 that number would go to zero.
 
@@ -110,7 +110,12 @@ is built on the self-energy pole at zero frequency, whose measured
 weight is U^2/4 minus the band's mean square energy; that budget runs
 out at U = D (dotted line). Below it the equations still ask for an
 insulator but there is nothing left to build one from, and the bath
-tries to fake it with infinite coupling at infinite energy. The branch
+tries to fake it with infinite coupling at infinite energy. The mixing
+ratio V1/eps_g (third panel) makes the approach visible: about 0.1
+deep in the insulator — a weakly admixed high-energy level, the
+textbook perturbative satellite — it climbs to 0.56 at the last
+solution and heads toward V1 = eps_g along the escape. The satellite
+stops being a far, weak level before the branch ends. The branch
 end is the representation running out of material, not a phase becoming
 unstable. For this reason we never call this endpoint Uc1: the exact
 insulator dies much earlier (near U/D = 2.4) by a different mechanism —

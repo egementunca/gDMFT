@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """How the cold insulator branch ends: the pole-flight signature.
 
+Four panels: parameters run away; the demanded second-order scale
+V1^2/eps_g diverges with them; the mixing ratio V1/eps_g climbs from
+the perturbative regime (~0.1 deep in the insulator) through ~0.56 at
+the last root toward V1 = eps_g along the escape; and nothing folds.
+
 The one-run answer to "is U ~ 1.1 a spinodal?": five quantities along the
 insulator descent with the parameter boxes lifted (V1, eps_g <= 24
 instead of the registered 5, 12). If the branch ended at a fold, s_min of
@@ -83,9 +88,11 @@ def annotate_region(ax, rows, top=False):
 
 def main():
     rows = load()
-    fig, (a1, a2, a3) = plt.subplots(
-        3, 1, figsize=(4.6, 6.6), sharex=True,
-        gridspec_kw={"hspace": 0.14})
+    for r in rows:
+        r["mix"] = float(r["V1"]) / float(r["eps_g"])
+    fig, (a1, a2, am, a3) = plt.subplots(
+        4, 1, figsize=(4.6, 8.6), sharex=True,
+        gridspec_kw={"hspace": 0.16})
 
     draw(a1, rows, "V1", C_V1, r"$V_1$ (satellite coupling)")
     draw(a1, rows, "eps_g", C_EPS, r"$\epsilon_g$ (satellite position)")
@@ -109,6 +116,21 @@ def main():
     a2.set_ylabel(r"$V_1^2/\epsilon_g$ (raw)")
     a2.legend(fontsize=7, loc="center left")
     a2.set_title("...the demanded coupling scale diverges with them...",
+                 fontsize=9, loc="left")
+
+    draw(am, rows, "mix", "#7b1fa2", r"$V_1/\epsilon_g$ (mixing ratio)")
+    am.axhline(1.0, color="#7F7F7F", lw=0.8, ls=(0, (4, 2)))
+    am.text(1.62, 1.0, r"$V_1=\epsilon_g$", fontsize=7, color="#7F7F7F",
+            ha="right", va="bottom")
+    annotate_region(am, rows)
+    am.text(1.62, 0.06,
+            "deep insulator (registered branch):\n"
+            "0.11 at U=4, 0.14 at U=3 — perturbative",
+            fontsize=6.5, color="#555555", ha="right", va="bottom")
+    am.set_ylim(0, 1.12)
+    am.set_ylabel(r"$V_1/\epsilon_g$")
+    am.legend(fontsize=7, loc="center left")
+    am.set_title("...the satellite leaves the perturbative regime...",
                  fontsize=9, loc="left")
 
     root, flight = split(rows, "normF")

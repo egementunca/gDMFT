@@ -433,7 +433,12 @@ soft raw ≈ 10 on both lattices deep in the insulator — near the seed
 scale, weakly determined, quote V₁²/ε_g not ε_g — back on the cap by
 U ≈ 2.5–2.9), and V₁²/ε_g runs 0.20 (U=3) → 0.83 (1.6) → ∞ (U_flight):
 the bath must grip harder as the Mott pole weakens, and the demanded
-grip diverges when the weight law hits its floor.
+grip diverges when the weight law hits its floor. The bare mixing
+ratio V₁/ε_g tells the same story as a regime statement: 0.11 (U=4)
+→ 0.27 (1.6) → 0.56 (last root) → toward V₁ = ε_g along the escape —
+the satellite leaves the perturbative far-weak-level regime BEFORE the
+branch ends (fig_story_poleflight, third panel; ratio crosses ~0.3
+near U ≈ 1.5).
 
 Draft summary sentence (tightened per an external critique, adopted): "We
 explicitly tested whether the low-U termination of the insulating
