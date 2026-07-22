@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import csv
 import math
+import shutil
+from pathlib import Path
 
 import common
 import figstyle as fs
@@ -269,11 +271,15 @@ def fig_closures():
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    # the plain-words README is authored in the tracked tree; runs/ is
+    # a build product and must stay reproducible from the repo alone
+    shutil.copyfile(Path(__file__).parent / "story_README.md",
+                    OUT / "README.md")
     fig_phase()
     fig_pomeranchuk()
     fig_mottpole()
     fig_closures()
-    print(f"wrote 4 figures -> {OUT}")
+    print(f"wrote 4 figures + README -> {OUT}")
 
 
 if __name__ == "__main__":

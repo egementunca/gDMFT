@@ -1,0 +1,40 @@
+# Pole-flight signature along the cold insulator descent (Bethe, m_g=3, bare, T/D=0.001).
+# Generated 2026-07-22 from the dmft worktree (feat/paper-consolidation, db65950),
+# scripts/gauge_matrix scan machinery: stored fill-campaign roots for U>=1.15,
+# then a fresh least-squares descent with parameter boxes LIFTED to
+# V0<=5, V1<=24, eps_g<=24, W<=10, eta<=8 (the registered campaign caps V1<=5, eps_g<=12).
+# Columns: U = U/D; V1, eps_g = satellite coupling/position; inv = V1^2/eps_g
+# (second-order virtual-excitation scale, meaningful when positions rail);
+# normF = 2-norm of the matching residual (NOTE: for stored=1 rows this is
+# re-evaluation noise on campaign roots, ~2-6e-5, not the solver's own floor);
+# smin = smallest singular value of the residual Jacobian (central differences);
+# stored = 1 if x is a stored campaign root; root = 1 if a genuine interior root
+# (criterion: parameters interior to the LIFTED box and normF at the root plateau).
+# Reading: root ends between U=1.125 and U=1.100; below, eps_g then V1 rail at 24,
+# inv diverges, normF ramps smoothly x20, smin never -> 0 (no fold).
+U,V1,eps_g,inv,normF,smin,stored,root
+1.6,3.0473,11.2044,0.828783,2.471e-05,4.394e-06,1,1
+1.5,3.3705,11.3791,0.998345,2.707e-05,5.301e-06,1,1
+1.4,3.72721,11.3794,1.22081,3.084e-05,5.283e-06,1,1
+1.3,4.36439,11.8095,1.61294,3.29e-05,5.407e-06,1,1
+1.25,4.69654,11.7846,1.87172,3.557e-05,6.658e-06,1,1
+1.2,4.94148,11.2793,2.16488,4.199e-05,7.951e-06,1,1
+1.15,4.99999,9.94361,2.51417,5.896e-05,1.093e-05,1,1
+1.125,6.26942,11.2745,3.48624,4.82e-05,8.378e-06,0,1
+1.1,12.8017,20.8372,7.8649,6.952e-05,4.458e-06,0,0
+1.075,14.9009,24,9.25154,0.0001863,7.802e-06,0,0
+1.05,15.268,24,9.71302,0.0003147,1.099e-05,0,0
+1.025,15.6652,24,10.2249,0.0004403,1.272e-05,0,0
+1.0,16.1007,24,10.8013,0.0005624,1.552e-05,0,0
+0.975,16.6972,24,11.6165,0.0006799,1.819e-05,0,0
+0.95,17.4147,24,12.6364,0.0007919,1.914e-05,0,0
+0.925,18.4371,24,14.1636,0.0008961,2.147e-05,0,0
+0.9,20.4832,24,17.4816,0.0009859,2.277e-05,0,0
+0.875,23.401,24,22.817,0.001042,2.192e-05,0,0
+0.85,23.5508,24,23.1099,0.001104,2.492e-05,0,0
+0.825,23.6631,24,23.3309,0.001166,2.794e-05,0,0
+0.8,24,24,24,0.00122,2.888e-05,0,0
+0.775,24,24,24,0.001281,2.819e-05,0,0
+0.75,24,24,24,0.001342,2.782e-05,0,0
+0.725,24,24,24,0.001404,2.756e-05,0,0
+0.7,24,24,24,0.001465,2.695e-05,0,0

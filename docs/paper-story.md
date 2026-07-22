@@ -240,12 +240,19 @@ only a finite-pole Σ makes visible. Second semianalytic ask: derive the
 ### (d) The insulator's over-survival, its ending, and the three kinds of
 branch end (fully audited 2026-07-22)
 
-(U² − D²)/4 → 0 at U = D, and the scheme's insulating branch reaches
-**U ≈ 1.10–1.15 (Bethe) / ≈ 1.0 (square)** — the dressed Mott-pole
-weight's own floor. The ENDING was then audited (forensics below): it is
-a pole-flight boundary of the finite-pole parametrization, NOT a
-thermodynamic spinodal — the weight law sets WHERE the branch ends, the
-runaway is HOW. gem's Mott-pole deficit is roughly TWICE ours (0.52 at
+(U² − D²)/4 → 0 at U = D, and the scheme's insulating branch ends at
+**U_flight = 1.11(2) (Bethe, forensics-grade: last interior root
+U = 1.125, none at 1.100)**. Square: the registered scan's
+`equations_accepted` flag extends to ≈ 1.0, but that is a LOOSE
+per-campaign gate — the rows below ≈ 1.25 sit with V₁ on its cap and
+‖F‖ off the root plateau (the Series left-tail the GUI currently draws;
+the coupling-railed onset ≈ 1.2–1.3 is the honest square end pending a
+forensics-grade run). Same lesson at home as in the taxonomy:
+ACCEPTANCE BOUNDARY ≠ BRANCH END, and our own registered flags contain
+both. The ENDING was audited (forensics below): it is a pole-flight
+boundary of the finite-pole parametrization, NOT a thermodynamic
+spinodal — the weight law sets WHERE the branch ends, the runaway is
+HOW. gem's Mott-pole deficit is roughly TWICE ours (0.52 at
 U=3, opposite U-trend), and its cold down-sweep loses the insulator at
 U = 2.90 — but that number is gem's iteration-basin artifact, not gGA's
 U_c1: Lanatà's published variational endpoint is ≈ 2.0 [their PRB;
@@ -266,33 +273,96 @@ what is missing at M_g=3, and the paper quotes NO scheme U_c1.
 "our insulator survives to U ≈ 1.1" was itself audited after an external
 critique (correctly) noted that 1.125 is an acceptance boundary, not a
 demonstrated branch end. Results:
-1. **Fold test — negative.** s_min of the residual Jacobian along the
-   descent RISES (4.4e-6 → 1.6e-4 over U = 1.6 → 0.95), never → 0: no
-   spinodal at 1.125; ‖F‖ drifts smoothly through the 1e-4 gate.
-2. **Lifted-box continuation — pole flight, not continuation.** With
-   V₁/ε_g boxes raised to 24: V₁ explodes (6.3 → 24), ε_g rails at any
-   cap, ‖F‖ climbs off the gate with s_min still ordinary — no nearby
-   root exists; the branch ends as a RUNAWAY of the restricted finite-
-   pole parametrization, with onset exactly where the dressed-weight law
-   (U²−D²)/4 crosses zero at U ≈ D. So: demonstrated end ≈ 1.10–1.15,
-   characterized as pole-flight onset at the weight-law floor — not a
-   thermodynamic spinodal.
+1. **Fold test — negative** (re-measured 2026-07-22 in the five-quantity
+   signature run, which supersedes the first coarse scan; conclusion
+   unchanged). s_min of the residual Jacobian stays within
+   [4.4e-6, 2.9e-5] from U = 1.6 through the entire failed descent to
+   0.70, mildly RISING toward small U, never → 0: no fold, no partner
+   root, no spinodal. ‖F‖ leaves the root plateau (2–6e-5 =
+   re-evaluation noise on stored campaign roots) at U = 1.100 and ramps
+   SMOOTHLY ×20 to 1.5e-3 by U = 0.70 — a supply failure, not a
+   collision.
+2. **Lifted-box continuation — pole flight with DIVERGING DEMAND.**
+   Boxes raised to 24: the last interior root is U = 1.125
+   (V₁ = 6.27 — above the registered cap 5 that was already squeezing
+   the U = 1.15 row — ε_g = 11.27, genuinely interior); at U = 1.100
+   the optimizer's best point jumps to V₁ = 12.8, ε_g = 20.8 with ‖F‖
+   off-plateau; below, ε_g rails at 24, then V₁ rails at 24 by
+   U = 0.80. The sharpener (external critique's test, run verbatim):
+   **V₁²/ε_g — the second-order virtual-excitation scale, the
+   combination a far satellite still exerts on low energies and the
+   number that stays meaningful when positions rail — also diverges**
+   (0.20 at U = 3 → 0.83 at 1.6 → 3.49 at 1.125 → 7.9 at 1.10 → 24,
+   railed). The critique expected this invariant to stay controlled
+   (which would have meant a redundant flat-direction escape at fixed
+   physics); measured, it does NOT — the equations demand unboundedly
+   more bath influence than any finite configuration supplies. Formal
+   name: a NONCOMPACT ENDPOINT of the finite-pole representation.
+   Onset where (U²−D²)/4 crosses zero at U = D; the endpoint sits ~10%
+   above the exact floor (finite T; the other matching equalities fail
+   first). Figure: fig_story_poleflight (story set); source CSV with
+   provenance in studies/paper_figures/data/.
 3. **Hessian stability test — structurally uninformative.** ∂²F has two
    negative modes on BOTH branches (metal control: −4.3 at U=2.7): the
    matching functional is a saddle by construction [Mott+ §3], so
-   metastable-vs-saddle needs the fixed-point-map Jacobian (Strand) or
-   the KLR mode — open follow-up, not achievable in raw parameter space.
+   Hessian signature counting CANNOT distinguish stable from unstable
+   DMFT branches — negative directions are present even for the
+   physical metal. The correct stability object is the linearized
+   self-consistency map δx_{n+1} = J_FP δx_n: a branch is iteratively
+   stable while the leading eigenvalue of J_FP is < 1, and a SPINODAL
+   is where that eigenvalue reaches 1 (Strand's boundary; the KLR soft
+   mode in our variables [sharpen_KLR]). Computing J_FP is the open
+   follow-up — raw parameter space cannot decide it.
 
-**Three different "ends", never to be conflated** (this replaces the
-earlier bracketing claim, whose gem-side number was a sweep artifact):
-- ≈ 1.10–1.15: matching's stationary root ceases to exist as a finite-
-  pole object (pole flight; today's result);
-- ≈ 2.0: gGA's VARIATIONAL existence endpoint (Lanatà's published U_c1;
-  our local gem down-sweep's 2.90 was its iteration-basin artifact — a
-  third kind of end, algorithmic);
-- ≈ 2.4: exact DMFT's metastability endpoint (BCV pin pending).
+**Three different "ends", three symbols, never to be conflated** (this
+replaces the earlier bracketing claim, whose gem-side number was a
+sweep artifact):
+- **U_flight ≈ 1.1 D**: matching's stationary root ceases to exist as a
+  finite-pole object (pole flight / noncompact endpoint; Bethe
+  forensics-grade 1.11(2); square registered railing onset ≈ 1.2–1.3,
+  forensics-grade run pending);
+- **U_c1^gGA ≈ 2.0 D**: gGA's VARIATIONAL existence endpoint (Lanatà's
+  published number; pin pending; our local gem down-sweep's 2.90 was
+  its iteration-basin artifact — a third kind of end, algorithmic);
+- **U_c1^DMFT ≈ 2.4 D**: exact DMFT's metastability endpoint (BCV pin
+  pending).
 The paper quotes NO scheme U_c1; "converged = true" is never "metastable
-phase exists" — today's numbers are that discipline made explicit.
+phase exists" — the symbols exist precisely so that no numerical branch
+termination gets mistaken for a physical critical point.
+
+**Why flight, in plain words (the Aspen paragraph):** the insulator's
+identity is the Σ-pole at ω = 0, and its measured weight budget is
+2W² = U²/4 − ⟨ε_k²⟩ — the atomic weight minus what band motion eats.
+As U → D from above, that budget runs out: the wall the insulator is
+built of runs out of bricks. The down-sweep's equal-time data still
+describe an insulator (n = 1/2, low double occupancy, U-scale
+high-energy weight), so the matching equations keep demanding one — and
+the only lever left is the bath satellite, pushed simultaneously to
+larger coupling and larger distance; even V₁²/ε_g, the grip a far
+satellite keeps on the low-energy sector, must grow without bound.
+Every step outward improves the residual slightly; no finite point
+satisfies it; the root exits through the boundary of parameter space.
+Nothing became unstable (s_min regular) and nothing collided (no fold):
+the DEMAND left the representable region. That is why this endpoint
+must never be called U_c1. The trend is visible long before the end:
+along the cold insulator, V₁ rises monotonically as U falls from 4, the
+demanded satellite position rises with it (detached from the cap at a
+soft raw ≈ 10 on both lattices deep in the insulator — near the seed
+scale, weakly determined, quote V₁²/ε_g not ε_g — back on the cap by
+U ≈ 2.5–2.9), and V₁²/ε_g runs 0.20 (U=3) → 0.83 (1.6) → ∞ (U_flight):
+the bath must grip harder as the Mott pole weakens, and the demanded
+grip diverges when the weight law hits its floor.
+
+Marathon sentence (tightened per the external critique, adopted): "We
+explicitly tested whether the low-U termination of the insulating
+finite-pole branch is a fold and found that it is not: the residual
+Jacobian remains regular while the auxiliary pole parameters — and the
+low-energy coupling scale V₁²/ε_g they leave behind — run to infinity.
+The endpoint is therefore a noncompact pole-flight boundary of the
+restricted spectral representation, occurring at the dressed Mott-pole
+weight floor U ≈ D, rather than a thermodynamic spinodal. Consequently
+the left edge of the physical coexistence wedge is not predicted by
+static matching at the bath budgets examined."
 
 **The M_g=2 knob (same day, 20 s): prediction REFUTED, and the
 refutation is the better result.** M_g=2 = one PH bath pair with free position and no central
@@ -304,8 +374,11 @@ U = 2.5/3/4). Two conclusions: (1) the dressed Mott-pole residue law
 U²/4 − ⟨ε²⟩ is bath-budget-independent — a property of the Σ-sector and
 lattice alone; (2) the over-survival is closure-deep, not budget-shallow:
 **static equal-time matching has no counterpart of the dynamical
-gap-closing instability that kills the exact insulator at U_c1, at any
-bath budget.** The Aspen question this creates is pointed at the
+gap-closing instability that kills the exact insulator at U_c1, at the
+budgets examined (M_g = 2 and 3).** Not claimed for all budgets — in
+the large-pole limit the parametrization must recover exact DMFT,
+stability structure included; what the control establishes is that the
+blindness is not curable by one more bath knob. The Aspen question this creates is pointed at the
 professor's own construction: his consistency-matched closure (the
 Kadanoff–Baym rank-restoring conditions, Mott+ §9) is the natural
 candidate for what would reintroduce the insulator's death — the
@@ -336,9 +409,24 @@ transition happens where the gateway becomes atomic-like), not yet a law.
 4. Pin the literature numbers for the three-ends taxonomy in (d):
    exact U_c1 from BCV Fig. 9, and gGA's variational U_c1 (~2.0) from
    Lanatà PRB 96, 195126.
-5. Stability follow-up (open): metastable-vs-saddle needs the
-   fixed-point-map Jacobian (Strand) or the KLR mode — raw parameter
-   space cannot decide it (§2.4(d) test 3).
+5. Stability follow-up (open): metastable-vs-saddle needs the leading
+   eigenvalue of the linearized self-consistency map J_FP (spinodal =
+   eigenvalue → 1; Strand / KLR soft mode) — raw parameter space cannot
+   decide it (§2.4(d) test 3).
+6. GUI honesty (from the 2026-07-22 screenshot session): the Series tab
+   draws the recorded NON-converged descent tails (bound-railed V₁,
+   wandering ε_g below U_flight) indistinguishably from data — mark
+   rows hollow/× when the coupling sits on its cap or ‖F‖ is off the
+   root plateau. Related data-quality item: `physically_admissible` is
+   NULL throughout v2 and `equations_accepted` is a loose per-campaign
+   gate (admits Bethe cold rows to 0.95, below the demonstrated
+   U_flight = 1.11(2)) — either populate the admissibility verdict or
+   have consumers derive it; the selection audit should never read
+   `equations_accepted` as "root exists".
+7. Square forensics-grade endpoint: repeat the five-quantity signature
+   run (fig_story_poleflight) on the square lattice — expected to land
+   at its common weight floor U = D like Bethe; until then the square
+   end is quoted as "railing onset ≈ 1.2–1.3".
 
 ## 3. Single site — what each bath budget buys
 
@@ -598,4 +686,9 @@ figures' ×-at-cap treatment is the honest display.
    (fixed-point-map Jacobian / KLR mode).
    DONE since first written: `_parse_arr` + gem overlays; v2-native repair
    (fill campaign); single source 0.2.0 + routing; campaign dedup;
-   pole-cap keep-and-mark; M_g=2 control; U_c1 forensics.
+   pole-cap keep-and-mark; M_g=2 control; U_c1 forensics; pole-flight
+   signature run + fig_story_poleflight + three-symbol nomenclature
+   (U_flight / U_c1^gGA / U_c1^DMFT) + J_FP stability formulation
+   (2026-07-22, external critique adopted where it survived testing —
+   its "controlled invariant" expectation measured FALSE, which
+   sharpened the diagnosis to a noncompact endpoint).
