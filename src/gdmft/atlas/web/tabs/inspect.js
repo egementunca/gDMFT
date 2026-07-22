@@ -84,6 +84,7 @@
       it: 0,
       iu: 0,
       row: null,
+      family: null,
       delta: 0.04,
       gem: true,
       hSector: "lattice",
@@ -470,16 +471,32 @@
     bodyHost.innerHTML = "";
     var rows = rowsAtKey(ds, state);
     if (state.row === null || rows.indexOf(state.row) < 0) {
-      var preferred = rows.filter(function (i) {
-        return ds.converged(i);
-      });
-      state.row = preferred.length ? preferred[0] : rows[0];
+      // sticky branch: an attempt picked by hand pins its family, and
+      // slider moves re-select that family at the new point when present
+      // (converged first, else the recorded failed attempt, labeled)
+      var pick = null;
+      if (state.family) {
+        var fam = rows.filter(function (i) {
+          return ds.str("family", i) === state.family;
+        });
+        var famConv = fam.filter(function (i) {
+          return ds.converged(i);
+        });
+        pick = famConv.length ? famConv[0] : fam.length ? fam[0] : null;
+      }
+      if (pick === null) {
+        var preferred = rows.filter(function (i) {
+          return ds.converged(i);
+        });
+        pick = preferred.length ? preferred[0] : rows[0];
+      }
+      state.row = pick;
     }
     if (rows.length) {
       bodyHost.appendChild(
         ui.row([
           ui.field(
-            "attempt",
+            "attempt (sticky)",
             ui.select(
               rows.map(function (i) {
                 return {
@@ -490,11 +507,29 @@
                 };
               }),
               state.row,
-              set("row", Number)
+              function (value) {
+                state.family = ds.str("family", Number(value));
+                set("row", Number)(value);
+              }
             )
           ),
         ])
       );
+      if (
+        state.family &&
+        state.row !== null &&
+        state.row !== undefined &&
+        ds.str("family", state.row) !== state.family
+      ) {
+        E(
+          "p",
+          "muted ds-note",
+          "followed branch '" + state.family +
+            "' has no attempt at this point — showing " +
+            ds.str("family", state.row),
+          bodyHost
+        );
+      }
     }
 
     if (state.row === undefined || state.row === null) {
