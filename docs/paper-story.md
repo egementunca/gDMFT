@@ -80,7 +80,10 @@ for the whole flagship cell. The satellite POSITION is not determined by
 matching in either frame (verified: refit rails at the same box) — figures
 KEEP capped poles as × (§6b) and quote only V0, V1²/ε1, Δ(iω) [PCN].
 
-Branch rules: metal = up assembly, insulator = down; U*/U_c2 drawn only
+Branch rules: metal = up assembly, insulator = down; cutoff doctrine
+§2.4(f): metal quotable to U_c2 (first basin flip / break — prefix
+cut), insulator raw params to U_x = 1.11(2) with positions never
+quoted alone; U*/U_c2 drawn only
 below the corridors (bethe (0.010, 0.015), square (0.004, 0.005)); NO
 scheme U_c1 is ever quoted (§2.4(d) forensics: the branch end is a
 pole-flight boundary, not a spinodal); derived chains resolve
@@ -596,7 +599,55 @@ Cold Bethe m_g=3 bare metal-up (registered v2, basin=metal rows only):
   basin flip, and W-at-cap should be an admissibility flag like the
   satellite caps (§7).
 
-### (f) The gateway scale crossover sits just below the transition
+### (f) The cutoff doctrine — where each direction's numbers end, and
+the physical reason (2026-07-22; answers "how do I choose the cutoff")
+
+**Principle: a quantity is quotable exactly where its branch exists as
+a finite regular root. The cutoff is never a threshold on the quantity
+itself** (no "V₀ < 0.05 = dead", no "ε > 10⁴ = gone") **— it is the
+existence boundary of the stationary object, read from recorded
+columns** (basin, cap flags, residual vs the campaign's root plateau).
+The two sweep directions end by DIFFERENT physical events, so their
+cutoffs have different standing:
+
+- **METAL (up): ends at the spinodal U_c2(T) — a thermodynamic event.**
+  The branch loses existence (in iteration language: the J_FP
+  eigenvalue reaches 1, the KLR soft mode). Everything metallic (Z,
+  V₀, η, W) is quotable up to and including U_c2, and V₀'s apparent
+  survival is just the law V₀ = c√Z ending at finite Z. Operational
+  cut: the FIRST basin flip or recorded continuity break, whichever
+  comes first (prefix cut — the classifier flip-flops in the
+  pseudo-family region, so filtering is wrong; fig_v0_death implements
+  it). U_c2 itself is physics: it belongs on the phase diagram (below
+  the corridor), and the pseudo-family beyond it is never drawn.
+- **INSULATOR (down): two rules, because the ending is a handover, not
+  a death.** (1) Variable rule, all U: the satellite POSITION is
+  valley-soft everywhere (ε ≈ 14–20 at equal residual, box 240) —
+  never quote ε₁ or V₁ alone; quote the invariants V₁²/ε₁, V₁/ε₁,
+  Δ(iω). (2) Branch rule: finite roots end at the crossover
+  U_x = 1.11(2) (Bethe cold; square pending). Below U_x the stationary
+  point exists only at the compactification boundary (the ω-linear /
+  renormalizer bath limit, (d) test 4): raw parameters there are
+  BOX-RELATIVE and must never be plotted as data; the preserved
+  combinations (c* ≈ 0.40 and the equal-time entries) remain finite
+  and may appear only as boundary-limit diagnostics with an explicit
+  O(1/ε_box) error label. U_x is METHOD, not physics — quote it as the
+  finite-representation crossover U_x^(M_g=3), never as U_c1, and
+  take no thermodynamics from below it.
+- **The asymmetry is itself a paper claim:** in this scheme the metal
+  ends PHYSICALLY (a true spinodal — a trustworthy U_c2(T), the sharp
+  right edge of the hysteresis wedge) while the insulator ends
+  REPRESENTATIONALLY (no fold; handover to a renormalizer bath). That
+  is exactly why the computed wedge has a sharp right edge and an open
+  left edge at finite bath budget, and why the left edge awaits the
+  compactified solve (§7).
+- Recorded-column status: basin, breaks, and residual are recorded;
+  W-at-cap is NOT captured by source_optimizer_active_bound (measured:
+  the U = 3.5 pseudo-row carries bound = false with W exactly at its
+  cap) — until the flag ask lands, the operational metal cut is basin
+  flip + first break.
+
+### (g) The gateway scale crossover sits just below the transition
 
 Λ/(U/2) along the cold metal: 2.07 (U=1) → 1.00 at **U = 2.62** → the
 gateway's outer scale switches from band-dominated to
@@ -634,7 +685,11 @@ transition happens where the gateway becomes atomic-like), not yet a law.
    run (fig_story_poleflight) on the square lattice — expected to land
    at its common weight floor U = D like Bethe; until then the square
    end is quoted as "railing onset ≈ 1.2–1.3".
-9. Cheap fourth column + stability demonstrator (optional, from the
+9. Housekeeping: fig_story.py/compare ROUTE still pins bethe m_g=3 to
+   v1 (predates the route flip; values agree with v2 to 4+ decimals) —
+   flip to v2 and re-verify the quoted constants on rebuild.
+   fig_v0_death is already v2 + doctrine-cut.
+10. Cheap fourth column + stability demonstrator (optional, from the
    TRIQS sweep): an IPT Bethe up/down hysteresis run on our T-ladder
    (deterministic, minutes) gives IPT's U_c1/U_c2/Z(U) as a clearly
    labeled reference scheme, and its DMFT loop is the clean place to
