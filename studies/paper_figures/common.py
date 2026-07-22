@@ -111,18 +111,37 @@ def derived(ds: str) -> dict:
 
 @cache
 def pole_table(ds: str) -> dict:
-    """Per-row pole parameters from the registered lossless raw archive."""
-    ids = [row["point_id"] for row in point_rows(ds)]
+    """Per-row pole parameters from the registered lossless raw archives.
+
+    v2 (0.2.0) carries TWO campaigns whose grids overlap, and overlapping
+    keys share attempt ids across campaigns — so records are namespaced by
+    the row's campaign (run_id prefix) and each campaign is read from its
+    own archive: the 20260717 tar and the 20260721 fill JSONL."""
+    rows = point_rows(ds)
     root = DS_DIR[ds]
     if ds == "v1":
         return extract_pole_table(
-            root / "raw/roots.jsonl.gz", ids, kind="jsonl"
+            root / "raw/roots.jsonl.gz",
+            [row["point_id"] for row in rows], kind="jsonl"
         )
+    from gdmft.atlas.poles import assemble_pole_table, collect_pole_records
+
     manifest = json.loads((root / "manifest.json").read_text())
     cells = set(manifest["grid"]["cells"])
-    return extract_pole_table(
-        root / "raw/raw_campaign.tar.gz", ids, kind="tar", cells=cells
-    )
+    old = collect_pole_records(
+        root / "raw/raw_campaign.tar.gz", kind="tar", cells=cells)
+    merged = {f"d09|{pid}": entry for pid, entry in old.items()}
+    fill_path = root / "raw/fill_attempts_20260721.jsonl.gz"
+    if fill_path.exists():
+        fill = collect_pole_records(fill_path, kind="v2-jsonl")
+        merged.update(
+            {f"fill|{pid}": entry for pid, entry in fill.items()})
+    keys = [
+        ("fill|" if row["run_id"].startswith("d09-fill-") else "d09|")
+        + row["point_id"]
+        for row in rows
+    ]
+    return assemble_pole_table(keys, merged)
 
 
 def pole_params(ds: str, index: int) -> dict:

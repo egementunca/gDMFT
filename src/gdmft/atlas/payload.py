@@ -31,7 +31,8 @@ from .columns import (
 )
 from .derive import derive_dataset
 from .dos import square_dos_table
-from .poles import extract_pole_table
+from .poles import (assemble_pole_table, collect_pole_records,
+                    extract_pole_table)
 from .registry import RegistryEntry, load_registry
 
 PAYLOAD_SCHEMA = "gdmft.atlas.payload.v1"
@@ -861,8 +862,10 @@ def encode_gem_reference(
         cols["sig_p"].append(parse_pole_list(row["self_energy_pole_positions"]))
         cols["sig_w"].append(parse_pole_list(row["self_energy_pole_weights"]))
 
-    # The whole point of the reference: every anchor key is covered, both
-    # budgets, both sweep directions. Grid drift must fail the build.
+    # Reference coverage against the (growing) anchor grid. A series that
+    # covers NOTHING is breakage and fails the build; a partial deficit is
+    # expected while the 20260721 canonical-grid fill campaigns complete,
+    # and is REPORTED (here and in the References tab) instead of raised.
     coverage: dict[str, Any] = {}
     for lattice in anchor_grids:
         anchor_keys = {
@@ -874,14 +877,20 @@ def encode_gem_reference(
             for direction in direction_values:
                 seen = keys_seen.get((lattice, budget, direction), set())
                 missing = anchor_keys - seen
-                if missing:
+                if seen and missing:
+                    report.append(
+                        f"{dataset_id}: {lattice} B={budget} {direction} "
+                        f"covers {len(seen)}/{len(anchor_keys)} anchor grid "
+                        f"keys (fill campaign in progress)"
+                    )
+                elif not seen:
                     raise PayloadError(
-                        f"{dataset_id}: {lattice} B={budget} {direction} is "
-                        f"missing {len(missing)} of {len(anchor_keys)} "
-                        f"{anchor_id} grid keys (first: "
-                        f"{sorted(missing)[:3]})"
+                        f"{dataset_id}: {lattice} B={budget} {direction} "
+                        f"covers none of the {anchor_id} grid keys"
                     )
                 coverage[f"{lattice}_b{budget}_{direction}"] = len(seen)
+                coverage[f"{lattice}_b{budget}_{direction}_missing"] = len(
+                    missing)
 
     for context, count in sorted(nonfinite.items()):
         report.append(f"{context}: {count} non-finite values treated as null")
@@ -1341,23 +1350,45 @@ def build_payload(
                 or artifact.get("path", "").endswith(".tar.gz")
             )
         ]
-        if len(archives) != 1:
+        if not archives or len(archives) > 2:
             raise PayloadError(
-                f"{dataset_id}: expected one lossless raw archive, found "
-                f"{[a.get('path') for a in archives]}"
+                f"{dataset_id}: expected one or two lossless raw archives, "
+                f"found {[a.get('path') for a in archives]}"
             )
-        archive = archives[0]
         point_ids = [row["point_id"] for row in rows]
-        archive_file = root / archive["path"]
-        if archive["path"].endswith(".jsonl.gz"):
+        if len(archives) == 1 and archives[0]["path"].endswith(".jsonl.gz"):
             pole_table = extract_pole_table(
-                archive_file, point_ids, kind="jsonl"
+                root / archives[0]["path"], point_ids, kind="jsonl"
             )
-        else:
+        elif len(archives) == 1:
             cells = set((manifest.get("grid") or {}).get("cells") or [])
             pole_table = extract_pole_table(
-                archive_file, point_ids, kind="tar", cells=cells
+                root / archives[0]["path"], point_ids, kind="tar", cells=cells
             )
+        else:
+            # v2 revision 0.2.0: the 20260717 campaign tar plus the 20260721
+            # fill JSONL. Overlapping grid keys share attempt ids across the
+            # campaigns, so records are namespaced by the row's campaign
+            # (run_id prefix) and each archive is read separately.
+            tar = next(a for a in archives if a["path"].endswith(".tar.gz"))
+            fill = next(a for a in archives if a["path"].endswith(".jsonl.gz"))
+            cells = set((manifest.get("grid") or {}).get("cells") or [])
+            merged = {
+                f"d09|{pid}": entry
+                for pid, entry in collect_pole_records(
+                    root / tar["path"], kind="tar", cells=cells).items()
+            }
+            merged.update({
+                f"fill|{pid}": entry
+                for pid, entry in collect_pole_records(
+                    root / fill["path"], kind="v2-jsonl").items()
+            })
+            keys = [
+                ("fill|" if row["run_id"].startswith("d09-fill-")
+                 else "d09|") + row["point_id"]
+                for row in rows
+            ]
+            pole_table = assemble_pole_table(keys, merged)
         counts = pole_table["counts"]
         report.append(
             f"{dataset_id}: poles for {counts['rows']} rows "

@@ -51,3 +51,16 @@ were made repository-relative without changing numerical code.
 The archived square node-certification JSON is evidence from the source
 campaign; its interacting-node producer rows were not committed, so it is not
 independently rederived by this repository.
+
+## Superseding revision 0.2.0 (fill campaign 20260721)
+
+Appends the canonical-grid fill campaign as rows with run_id prefix
+`d09-fill-20260721` (source: dmft worktree deliverable 09/fill_20260721 at
+commit `db6595009654`): the unified 17-row T-ladder on BOTH lattices,
+uniform 0.05 U-grid plus 0.01 coexistence windows, and the previously
+missing `bethe_mg3_bare` cell — every bare root accompanied by its exact
+canonical-R conversion and its R-reoptimized refit; R-native chains grown
+from bare roots (seed provenance recorded). All evidence routes are rows
+of fact; nothing is selected. Raw lossless records:
+`raw/fill_attempts_20260721.jsonl.gz`. square_mg3 rows are partial until
+the SCC pass completes; the import is idempotent and re-run per pass.

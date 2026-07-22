@@ -205,6 +205,55 @@ def _iter_v2_records(path: Path, cells: set[str]):
                 yield record["attempt_id"], record, float(record["D"])
 
 
+def _iter_v2_jsonl_records(path: Path):
+    """Fill-campaign lossless records: gzip JSONL of the v2 attempt schema
+    (stage3_attempts promotion; same record shape as the tar members)."""
+    with gzip.open(path, "rt", encoding="utf-8") as stream:
+        for line in stream:
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            if record.get("bare_h_sectors") is None and \
+                    record.get("g_sector") is None:
+                continue  # solver_failed record: no pole payload
+            yield record["attempt_id"], record, float(record["D"])
+
+
+def collect_pole_records(
+    archive_path: Path,
+    *,
+    kind: str,
+    cells: set[str] | None = None,
+) -> dict[str, dict[str, Any]]:
+    """id -> reduced pole entry for one archive (duplicate ids rejected
+    WITHIN an archive; merging across archives is the caller's job, keyed
+    by campaign)."""
+    if kind == "jsonl":
+        iterator = _iter_v1_records(archive_path)
+    elif kind == "tar":
+        if not cells:
+            raise PoleError("tar extraction needs the registered cell set")
+        iterator = _iter_v2_records(archive_path, cells)
+    elif kind == "v2-jsonl":
+        iterator = _iter_v2_jsonl_records(archive_path)
+    else:  # pragma: no cover - closed set
+        raise PoleError(f"unknown archive kind {kind}")
+    by_id: dict[str, dict[str, Any]] = {}
+    for point_id, record, raw_d in iterator:
+        if point_id in by_id:
+            raise PoleError(f"duplicate point id {point_id} in {archive_path}")
+        by_id[point_id] = _record_poles(record, raw_d)
+    return by_id
+
+
+def assemble_pole_table(
+    point_ids: list[str],
+    by_id: dict[str, dict[str, Any]],
+    archive_label: str = "<merged archives>",
+) -> dict[str, Any]:
+    return _assemble(point_ids, by_id, archive_label)
+
+
 def extract_pole_table(
     archive_path: Path,
     point_ids: list[str],
@@ -214,24 +263,19 @@ def extract_pole_table(
 ) -> dict[str, Any]:
     """Build the payload pole table aligned to the point-id row order.
 
-    kind: "jsonl" (v1 roots.jsonl.gz) or "tar" (v2 raw_campaign.tar.gz,
-    which needs the manifest's registered cell whitelist).
+    kind: "jsonl" (v1 roots.jsonl.gz), "tar" (v2 raw_campaign.tar.gz, which
+    needs the manifest's registered cell whitelist), or "v2-jsonl" (the
+    fill-campaign lossless gzip JSONL).
     """
-    if kind == "jsonl":
-        iterator = _iter_v1_records(archive_path)
-    elif kind == "tar":
-        if not cells:
-            raise PoleError("tar extraction needs the registered cell set")
-        iterator = _iter_v2_records(archive_path, cells)
-    else:  # pragma: no cover - closed set
-        raise PoleError(f"unknown archive kind {kind}")
+    by_id = collect_pole_records(archive_path, kind=kind, cells=cells)
+    return _assemble(point_ids, by_id, str(archive_path))
 
-    by_id: dict[str, dict[str, Any]] = {}
-    for point_id, record, raw_d in iterator:
-        if point_id in by_id:
-            raise PoleError(f"duplicate point id {point_id} in {archive_path}")
-        by_id[point_id] = _record_poles(record, raw_d)
 
+def _assemble(
+    point_ids: list[str],
+    by_id: dict[str, dict[str, Any]],
+    archive_path: str,
+) -> dict[str, Any]:
     missing = [pid for pid in point_ids if pid not in by_id]
     if missing:
         raise PoleError(

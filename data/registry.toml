@@ -11,7 +11,7 @@ release_status = "draft"
 
 [[dataset]]
 id = "single-site.scan-matrix-v2"
-version = "0.1.0"
+version = "0.2.0"
 manifest = "data/datasets/single-site-scan-matrix-v2/manifest.json"
 data_stage = "validated"
 release_status = "draft"
