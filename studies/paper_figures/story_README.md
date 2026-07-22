@@ -20,8 +20,8 @@ solutions coexist between the lines, and the winner switches at U*. The
 square lattice has its transition at slightly smaller U and its corridor
 at lower temperature than Bethe.
 
-Trust: our U*(T) numbers agree with the professor's own program, rerun
-fresh, to better than 0.1% at every temperature.
+Trust: our U*(T) numbers agree with the independent reference
+implementation, rerun fresh, to better than 0.1% at every temperature.
 
 Source papers: Georges, Kotliar, Krauth, Rozenberg, Rev. Mod. Phys. 68,
 13 (1996), Sec. VII (the standard picture of Uc1, Uc2, U*). Bulla, Costi,

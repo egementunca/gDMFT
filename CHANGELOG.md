@@ -20,7 +20,7 @@
   reconstruction from the lossless raw archives, and full manifest
   provenance. See docs/atlas.md.
 - Imported the cross-method benchmark references as a registered dataset
-  (audited compare merge, NRG thermal curves, professor gGA grids parsed
+  (audited compare merge, NRG thermal curves, reference gGA grids parsed
   from .npy, CTQMC anchor, fresh-ruler markers) with import-time
   machine-precision cross-checks against the registered point datasets.
 - Added the paper-figure pipeline (studies/paper_figures): the LLK-style

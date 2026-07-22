@@ -363,7 +363,7 @@
     });
     [
       ["nrg", "NRG thermal"],
-      ["professor_gga", "professor gGA"],
+      ["professor_gga", "reference gGA"],
       ["ctqmc", "LLK CTQMC anchor"],
     ].forEach(function (item) {
       var reference = refs[item[0]];

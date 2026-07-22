@@ -179,7 +179,7 @@
           "exact shared (U,T) keys only; energy convention needs review",
         ],
         [
-          "professor gGA",
+          "reference gGA",
           "Bethe",
           String(unique(professor, "t_over_d").length) + " T values",
           String(professor.length) + " rows; B=1,3",

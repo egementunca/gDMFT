@@ -5,7 +5,7 @@ and the U_c1 forensics (every stale claim from the fast-moving sessions was
 hunted and fixed in this pass; see §6 for the correction trail). One claim
 per line,
 each with its evidence source. Sources: [draft] = Static DMFT Draft April 28;
-[Mott+] = the professor's 39-page NCS document (dmft root, guide:
+[Mott+] = the 39-page NCS consolidation document (dmft root, guide:
 `docs/notes/MOTT_PLUS_GUIDE_20260720.md`); [RB] = PAPER_REBUILD_RUNBOOK;
 [PCN] = POLE_COUNTING_NOTE_20260713; [BN] = GGA_DMFT_BENCHMARK_20260715 (§ as
 noted); [SA] = SEMIANALYTICS_COMPARISON_20260711; [CL] = NCS_CLAIM_LEDGER;
@@ -179,8 +179,8 @@ ED3 −0.05772 vs exact −0.0621(1): gGA best (its home turf), ours second,
 ahead of ED at equal and larger bath [S, bench]. Z — everyone above the
 anchors (CTQMC β=200: 0.12, itself finite-T-biased per LLK; ED rising to
 0.137 at N_b=5): gem 0.169, ours 0.190; gGA closer; no clean exact-Z anchor
-exists (NRG rows carry docc/E only) — **one NRG/CTQMC Z(U) curve from the
-professor upgrades the whole section**. docc — all methods within 1e-3 of
+exists (NRG rows carry docc/E only) — **one NRG/CTQMC Z(U) reference curve
+upgrades the whole section**. docc — all methods within 1e-3 of
 NRG at T=0.001 (ours +6e-4 at U=1, gGA +1e-4; tie at U=2) [S]: docc does
 not discriminate. What is claimably ours at fixed budget: the exact
 identities (sum rule, unitarity, interlacing, no linear-Σ pathology), the
@@ -199,7 +199,7 @@ semianalytic questions they define)
 T-dependent (Bethe 0.881–0.892 at T=0.01). So the ~10% moment deficit is
 not universal noise and not U-physics: it is a **structural constant of
 the M_h=2 matching closure that knows about the lattice DOS**. Open
-semianalytic target for the professor: derive this constant from the
+semianalytic target: derive this constant from the
 M_h=2 matching conditions (his gateway machinery is exactly suited); a
 closed form for 0.89/0.85 would turn our largest unexplained number into
 a theorem.
@@ -330,7 +330,7 @@ The paper quotes NO scheme U_c1; "converged = true" is never "metastable
 phase exists" — the symbols exist precisely so that no numerical branch
 termination gets mistaken for a physical critical point.
 
-**Why flight, in plain words (the Aspen paragraph):** the insulator's
+**Why flight, in plain words (the paragraph for the draft):** the insulator's
 identity is the Σ-pole at ω = 0, and its measured weight budget is
 2W² = U²/4 − ⟨ε_k²⟩ — the atomic weight minus what band motion eats.
 As U → D from above, that budget runs out: the wall the insulator is
@@ -353,7 +353,7 @@ U ≈ 2.5–2.9), and V₁²/ε_g runs 0.20 (U=3) → 0.83 (1.6) → ∞ (U_flig
 the bath must grip harder as the Mott pole weakens, and the demanded
 grip diverges when the weight law hits its floor.
 
-Marathon sentence (tightened per the external critique, adopted): "We
+Draft summary sentence (tightened per an external critique, adopted): "We
 explicitly tested whether the low-U termination of the insulating
 finite-pole branch is a fold and found that it is not: the residual
 Jacobian remains regular while the auxiliary pole parameters — and the
@@ -378,10 +378,9 @@ gap-closing instability that kills the exact insulator at U_c1, at the
 budgets examined (M_g = 2 and 3).** Not claimed for all budgets — in
 the large-pole limit the parametrization must recover exact DMFT,
 stability structure included; what the control establishes is that the
-blindness is not curable by one more bath knob. The Aspen question this creates is pointed at the
-professor's own construction: his consistency-matched closure (the
-Kadanoff–Baym rank-restoring conditions, Mott+ §9) is the natural
-candidate for what would reintroduce the insulator's death — the
+blindness is not curable by one more bath knob. The open question this creates is pointed at the
+consistency-matched closure (the Kadanoff–Baym rank-restoring
+conditions, Mott+ §9): it is the natural candidate for what would reintroduce the insulator's death — the
 designed control says plainly that nothing less dynamical will.
 (Caveats: one cold T-row; below U ≈ 1.25 the failed descent rows are
 bound-railed, honestly recorded as non-converged.)
@@ -401,9 +400,9 @@ interaction-dominated ~5% below U* = 2.757, with the insulator's Λ
 approaching U/2 from below. Reported as a measured observation (the
 transition happens where the gateway becomes atomic-like), not yet a law.
 
-### Marathon asks distilled from this section
+### Derivation asks distilled from this section
 1. Derive the metal's Σ-weight constant (0.89 Bethe / 0.85 square) from
-   the M_h=2 matching — the professor's gateway algebra.
+   the M_h=2 matching — the draft's gateway algebra.
 2. Derive 2W²_ins = U²/4 − ⟨ε²⟩ + O(1/U) from the deep-Mott expansion.
 3. Exact Z(U) anchor (unchanged ask).
 4. Pin the literature numbers for the three-ends taxonomy in (d):
@@ -436,8 +435,8 @@ BR metal, continuous collapse; exact-T=0 window brackets the collapse at
 U_c/D ∈ (3.39, 3.40) vs analytic 32/3π = 3.3953 [BN §4]. The insulator is
 structurally impossible (PH bath level pinned at ε_F decouples; every
 descent fails the gate on both lattices — the documented negative result).
-Both semianalytic documents agree once translated; cite the professor's
-Secs. 12–18/24–25 only (his own Sec. 12 retracts the early purity sections)
+Both semianalytic documents agree once translated; cite the Mott+ document's
+Secs. 12–18/24–25 only (its Sec. 12 retracts the early purity sections)
 [SA]. Anchored (Λ=U/2) vs free-λ frames are the two known frames of the
 same theory; production numbers use the free frame [SA].
 
@@ -457,7 +456,7 @@ First-order machinery from registered data [v1, S]:
 
 Endpoint corridors (final flag state, fine-window 2026-07-15): **Bethe
 T*/D ∈ (0.01, 0.015); square (0.004, 0.005)** [RB flag 2] — matches the
-registered-data derivation [S]. U*(T) is a two-code line (prof's code rerun
+registered-data derivation [S]. U*(T) is a two-code line (the reference implementation rerun
 fresh, ≤0.1–0.5%); U_c2(0.001)=2.80–2.82 now AGREES with his fresh rerun
 (2.825; the old 2.9–3.0 was his loose acceptance) [RB flag 1]. Square U*
 sits ~4% lower and the endpoint genuinely colder — a real lattice effect.
@@ -478,7 +477,7 @@ that weight, → exact deep in). Λ→U/2 = atomic Hubbard levels. Transition =
 the rungs trading places; coexistence = both ladder configurations solving
 the equations; soft mode λ₋ ≈ V₀η/(√2W) near the jump (both semianalytic
 docs [SA]; insulator λ₋=0 machine precision) — the same mode the
-professor's endpoint detector sharpen_KLR tracks (2λ₋). Figure polish: gate the insulator cut at its gated end (still open);
+the consolidation code's endpoint detector sharpen_KLR tracks (2λ₋). Figure polish: gate the insulator cut at its gated end (still open);
 the `_parse_arr` semicolon bug is FIXED and the gGA ±η overlay renders
 (50 cold points) [S 07-22].
 
@@ -529,7 +528,7 @@ bath-pole positions are representation-laden; the invariant object is
 - Joo–Oudovenko, PRB 64, 193102 (2001) — critical slowing + convergence
   strictness near coexistence → the calibrated-gate protocol's ancestry.
 - Kotliar–Lange–Rozenberg, PRL 84, 5180 (2000) — Landau functional, soft
-  mode at the endpoint. **The professor's detector is literally named
+  mode at the endpoint. **The consolidation code's detector is literally named
   sharpen_KLR**; our λ₋ ≈ V₀η/(√2W) is this scalar mode in the gateway
   frame. Cite where ladder panel (c) meets the endpoint corridor.
 - Strand et al., PRB 83, 205136 (2011) — Z-shaped isotherm, saddle-node
@@ -574,7 +573,7 @@ paragraphs); Lanatà 2017 (§1 + §3.3 ladder).
 - gem's U=2.8/T=0.001 up-arm row (Z jumps to 0.132): arm crossing —
   exclude until checked [S].
 
-## 5. Two-site / NCS — the professor's installment and ours
+## 5. Two-site / NCS — the consolidation document's installment and ours
 
 His Mott+ document provides the derivation layer the user was asked for
 [Mott+]: inclusion–exclusion functional (weights −3/+4 at z=4), gateway
@@ -614,7 +613,7 @@ Established there + verified by us:
   (T = 0.01–0.045) with the unclipped Ω evaluator; optional M_g=2
   paired-bath control [RB 4e; Mott+ next-steps].
 
-Out of scope by the professor's own instruction: doping (and everything
+Out of scope for this paper: doping (and everything
 arc/pseudogap beyond the outlook paragraph).
 
 ## 6. Session corrections (so this file self-heals)
@@ -660,7 +659,7 @@ does NOT cure this: it compactifies only the h-sector; the g-sector
 satellite is bare in both routes — documented in
 symmetric_continuation_R.)
 
-The real fix is a solver-protocol decision for the professor (added to
+The real fix is a solver-protocol decision (added to
 asks): either (a) the renormalizer move applied to the g-sector — FREEZE
 ε₁ at the declared universal cap and fit the slope directly (his own
 M_h=4 h-sector construction; floors scale as 1/ε₁², his proof), making
@@ -670,7 +669,7 @@ the representation explicit instead of implicit-by-cap; or (b) add the
 — at the cost of changing the condition counting. Until decided, the
 figures' ×-at-cap treatment is the honest display.
 
-## 7. Asks (professor) and next actions
+## 7. Open asks and next actions
 
 1. Exact Z(U/D) anchor (NRG or CTQMC curve, Bethe, cold). Blocks §2.3's
    headline. One email.

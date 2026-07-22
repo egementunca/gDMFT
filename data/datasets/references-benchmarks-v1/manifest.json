@@ -2,19 +2,19 @@
   "artifacts": [
     {
       "artifact_id": "README.md",
-      "bytes": 1501,
+      "bytes": 1520,
       "media_type": "text/markdown",
       "path": "README.md",
       "role": "documentation",
-      "sha256": "3685964457a6d07274b5ce099c757fdb83445149b00694b96176d5cb9620e605"
+      "sha256": "697b087fdedbd44c87d938a64f400d5663a6efd4336f2220c8893c4ea46f48a5"
     },
     {
       "artifact_id": "provenance.ACCEPTANCE.md",
-      "bytes": 431,
+      "bytes": 436,
       "media_type": "text/markdown",
       "path": "provenance/ACCEPTANCE.md",
       "role": "provenance",
-      "sha256": "efcbff7b11564d7b668aeb1d4beeb682560854c8e2a911e3b05b8030cf0a8abe"
+      "sha256": "c2ff83f3d70464a9fb6cdfd7ae06ccae4267c6051bd66f174d7ef5988c0c00fa"
     },
     {
       "artifact_id": "provenance.import_report.json",
@@ -146,5 +146,5 @@
   "release_status": "draft",
   "schema_version": "gdmft.dataset.v1",
   "title": "Cross-method benchmark references v1",
-  "version": "0.1.0"
+  "version": "0.1.1"
 }

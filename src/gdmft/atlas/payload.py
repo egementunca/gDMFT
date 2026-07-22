@@ -2,7 +2,7 @@
 
 The payload (`gdmft.atlas.payload.v1`) is a single JSON document embedded in
 the built HTML: manifest-derived metadata, column-compressed point tables,
-reference tables (gem, DMFT-ED, NRG, professor gGA, CTQMC), build-time
+reference tables (gem, DMFT-ED, NRG, reference gGA, CTQMC), build-time
 derived diagnostics, and small evidence extracts. Every byte traces back to
 a registered artifact.
 """
@@ -1186,7 +1186,7 @@ def load_benchmark_references(
     professor_gga.update(
         {
             "n": len(prof_rows),
-            "title": "Professor gGA grids",
+            "title": "Reference gGA grids",
             "source": _manifest_source(dataset_id, manifest, prof_artifact),
             "upstream_files": _upstream_files(
                 inventory_rows, "refs/ref_data/ref_data2/"
@@ -1490,7 +1490,7 @@ def build_payload(
         },
         {
             "dataset_id": "references.benchmarks-v1",
-            "methods": ["NRG", "professor gGA", "CTQMC"],
+            "methods": ["NRG", "reference gGA", "CTQMC"],
             "n": sum(table["row_count"] for table in benchmark_tables),
             "tables": benchmark_tables,
             "availability": (
