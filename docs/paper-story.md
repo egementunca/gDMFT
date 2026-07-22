@@ -97,6 +97,38 @@ items). The earlier `paper-selection-v1` side-table idea is DROPPED per
 user directive (no extra datasets): the single dataset + catalog rules
 carry the whole truth.
 
+## 0c. What each scheme PRESERVES — the organizing axis (proposed
+2026-07-22; makes §0's frame operational)
+
+Every method here is a rule for what survives the projection of the
+exact local problem. Classify by the PRESERVED column and every
+measured difference in this file becomes a corollary:
+
+| scheme | finite object | preserved exactly | fixed by |
+|---|---|---|---|
+| exact DMFT | nothing | the whole function G_imp(iω) = G_loc(iω) | self-consistency |
+| DMFT-ED | Δ → N_b poles | nothing — Δ approximated in a Matsubara fit metric (low-ω weighted); impurity then exact | χ² fit |
+| gGA / gRISB | ghost QP space, B | energy stationarity (ground state variationally optimal) | energy minimization |
+| ghost-DMFT | M_h + M_g poles | stationarity of the exact functional on the manifold + equal-time density-matrix equalities + unitarity of the canonical frame | matching (saddle) |
+| SFT / VCA (Potthoff) | reference system | stationarity of the exact Ω[Σ] on the reference manifold, evaluated through the FULL function (all ω, no fit metric) | Ω-stationarity |
+
+Corollaries as measured: gGA preserves no structural bookkeeping →
+the two-deficit split (isometry ≤3% = linear term; moments 28–51%
+unbooked; §2.2b), poles pulled in, Z by compensation. DMFT-ED's fit
+metric → emergent Σ-pole content and opposite-side failure directions
+at matched budget (§4). Ours preserves bookkeeping → the exact laws
+(∫A = 1, interlacing, 2W² = U²/4 − ⟨ε_k²⟩, flat 89–90% Σ-weight,
+V₀ = 0.455·√Z·D) and both-branch thermodynamic identities (conjugacy,
+Clausius–Clapeyron) — at the price that nothing is optimal (saddle,
+junk families, selection discipline). Even the pole-flight
+compactification fits the frame: the combinations entering the
+PRESERVED equalities are exactly the ones that stay finite (c* ≈ 0.40)
+while unpreserved raw parameters flee (§2.4(d) test 4). SFT is the
+family relative — restricted-manifold stationarity of an exact
+functional, using low AND high frequencies with no fit metric — with
+Σ-space rather than density matrices as the restriction language
+[anchor: Potthoff, EPJB 32, 429 (2003); PRL 91, 206402 (2003) — §3c].
+
 ## 1. The knob dictionary — never misstate this again [PCN]
 
 | framework | knob | Δ poles | Σ poles | matching |
@@ -546,6 +578,23 @@ Cold Bethe m_g=3 bare metal-up (registered v2, basin=metal rows only):
   Σ-pole pair holds 89–90% of its exact weight U²/4; the central bath
   level holds ≈ 83% of the naive quasiparticle weight Z D²/4. Same
   ~10–17% multi-particle-hole tail, two sectors — one derivation ask.
+- **The post-spinodal region supports NO V₀ fit at all (probed
+  2026-07-22, U=3.5):** the basin=other tail family is a bound-railed
+  pseudo-root — W sits AT its box (W = 10, i.e. 2W² = 200 vs exact
+  U²/4 = 3.06), the satellite is dead (V₁ = 0), ‖F‖ is ~30× the root
+  plateau, and a stiffness probe finds V₀ SOFT with the refit
+  PREFERRING V₀ = 0 (‖F‖ 1.6e-4 at V₀=0 vs 4.5e-4 at the stored
+  0.0638) — the recorded 0.06 is chain-seed memory, and its raw value
+  is lattice-INDEPENDENT (bethe 0.0614, square raw 0.0616), which no
+  physical coupling is. Third instance today of acceptance ≠
+  existence, now on the metal side. Consequences: (i) any A/U (or
+  other) fit in that region is moot — there is nothing physical to
+  fit; the two real V₀ facts are the metal law V₀ = 0.455·√Z·D up to
+  the spinodal and V₀ ≡ 0 in the insulator; (ii) NEW enforcement ask:
+  branch assemblies currently splice basin=other rows onto the metal
+  branch past U_c2 — assemblies should cut (or families split) at the
+  basin flip, and W-at-cap should be an admissibility flag like the
+  satellite caps (§7).
 
 ### (f) The gateway scale crossover sits just below the transition
 
@@ -577,11 +626,15 @@ transition happens where the gateway becomes atomic-like), not yet a law.
    U_flight = 1.11(2)) — either populate the admissibility verdict or
    have consumers derive it; the selection audit should never read
    `equations_accepted` as "root exists".
-7. Square forensics-grade endpoint: repeat the five-quantity signature
+7. Branch-assembly honesty (from the V₀-tail probe, §2.4(e)): cut
+   assemblies (or split families) at the basin flip so basin=other
+   pseudo-roots stop extending the metal past U_c2; make W-at-cap an
+   admissibility flag alongside the satellite caps.
+8. Square forensics-grade endpoint: repeat the five-quantity signature
    run (fig_story_poleflight) on the square lattice — expected to land
    at its common weight floor U = D like Bethe; until then the square
    end is quoted as "railing onset ≈ 1.2–1.3".
-8. Cheap fourth column + stability demonstrator (optional, from the
+9. Cheap fourth column + stability demonstrator (optional, from the
    TRIQS sweep): an IPT Bethe up/down hysteresis run on our T-ladder
    (deterministic, minutes) gives IPT's U_c1/U_c2/Z(U) as a clearly
    labeled reference scheme, and its DMFT loop is the clean place to
@@ -711,6 +764,12 @@ bath-pole positions are representation-laden; the invariant object is
 - Bellomia et al. (gRISB square up/down hysteresis) — verify against the
   gem companion (Giuli et al., arXiv:2603.20559) for the right
   gGA-hysteresis citation; ties to our gem up/down arms.
+- Potthoff, EPJB 32, 429 (2003) + Potthoff–Aichhorn–Dahnken, PRL 91,
+  206402 (2003) — self-energy-functional theory / VCA: stationarity of
+  the exact Ω[Σ] on a reference-system manifold, no fit metric. Cite
+  as the family relative of our restricted-manifold stationarity
+  (§0c); the contrast (Σ-space vs density-matrix matching as the
+  restriction language) is a framing sentence for the introduction.
 - Pelz–Adler–Reitner–Toschi, arXiv:2303.01914 — inside the coexistence
   region the two branches differ SHARPLY at the two-particle level (the
   number of charge-channel vertex-divergence lines JUMPS across the
