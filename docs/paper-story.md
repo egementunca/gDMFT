@@ -685,11 +685,27 @@ transition happens where the gateway becomes atomic-like), not yet a law.
    run (fig_story_poleflight) on the square lattice — expected to land
    at its common weight floor U = D like Bethe; until then the square
    end is quoted as "railing onset ≈ 1.2–1.3".
-9. Housekeeping: fig_story.py/compare ROUTE still pins bethe m_g=3 to
+9. Landau reconstruction port (user request 2026-07-22 — "atlas lost
+   my landau fittings"): NOTHING was lost — the corpus lives on the
+   dmft side and was never ported: study/landau_recon/
+   (landau_reconstruction.py, ghost_dmft_landau_v2.tex/pdf),
+   study/{canonical_landau_reconstruction, landau_functional_bethe,
+   STUDY_PACK_canonical_R_landau}.md, deliverable
+   results/deliverables/06_square-landau/ (two-field finite-T), plus
+   archive drafts (landau_two_variable_matching.tex). The frame: Ω as
+   a Landau-type functional in the canonical R₀ [study pack §0].
+   Target port: a paper_figures module refitting fresh per the
+   reconstruction protocol — v2 carries canonical_r_reduced and
+   grand_potential_over_d on both branches; if the protocol needs
+   off-root constrained solves, they run dmft-side and the fit results
+   import as a small reference table. Meanwhile the GUI already plots
+   the canonical columns: Series → quantity groups "lambda" (λ_red/D)
+   and "R" (R_red).
+10. Housekeeping: fig_story.py/compare ROUTE still pins bethe m_g=3 to
    v1 (predates the route flip; values agree with v2 to 4+ decimals) —
    flip to v2 and re-verify the quoted constants on rebuild.
    fig_v0_death is already v2 + doctrine-cut.
-10. Cheap fourth column + stability demonstrator (optional, from the
+11. Cheap fourth column + stability demonstrator (optional, from the
    TRIQS sweep): an IPT Bethe up/down hysteresis run on our T-ladder
    (deterministic, minutes) gives IPT's U_c1/U_c2/Z(U) as a clearly
    labeled reference scheme, and its DMFT loop is the clean place to
