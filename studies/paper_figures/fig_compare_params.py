@@ -56,8 +56,19 @@ def _ghost_series(lattice, m_g, t, key):
                   if abs(tt - t) < 1e-12), None)
     us, ys, dropped, tail = [], [], 0, 0
     cap_us, cap_ys = [], []
+    first_break = min(entry["breaks"]) if entry.get("breaks") else None
     for position, index in enumerate(entry["rows"]):
         u_here = float(rows[index]["u_over_d"])
+        # cutoff doctrine: the metal branch ends at the first basin flip
+        # or the first recorded continuity break, whichever comes first
+        # (prefix cut — the classifier flip-flops in the pseudo-family
+        # region past the spinodal, so filtering is wrong)
+        if rows[index].get("basin") not in (None, "", "metal"):
+            tail += len(entry["rows"]) - position
+            break
+        if first_break is not None and position >= first_break:
+            tail += len(entry["rows"]) - position
+            break
         if (ustar is not None and position > 0
                 and (position - 1) in entry["breaks"]
                 and u_here > ustar):

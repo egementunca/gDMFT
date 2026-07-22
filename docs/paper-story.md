@@ -1107,6 +1107,28 @@ the representation explicit instead of implicit-by-cap; or (b) add the
 — at the cost of changing the condition counting. Until decided, the
 figures' ×-at-cap treatment is the honest display.
 
+## 6c. Figure oddities a reader will circle (named before they ask)
+
+Three visible features in the comparison set, with their current status:
+1. **The endgame spikes in W, Λ, and V₁²/ε₁ near U = 2.5–2.8
+   (compare_params):** mostly REAL physics, not junk — the warm shades
+   (T at or above the bethe corridor 0.010–0.015) have no branch end
+   and walk the CROSSOVER there, while the approach itself is the
+   documented gateway atomization (Λ crosses U/2 at U = 2.62, §2.4(g))
+   with 2W² completing toward U²/4. The figure's defect is stylistic:
+   sub- and supercritical temperatures share one style, so crossover
+   walking reads as noise. Basin-flip + first-break doctrine cuts are
+   now applied (they removed the true pseudo-family rows; 2 rows cut);
+   a style split at the corridor is the remaining polish item.
+2. **The mid-U swell of the coldest V₁²/ε₁ (bump near U ≈ 2.0–2.4):**
+   UNEXPLAINED. Real rows, plateau residuals, no flag. Open item.
+3. **The square Mott-pole deficit crossing the band variance**
+   (0.26 > ⟨ε²⟩ = 0.25 at U = 4, trend rising; fig_story_mottpole):
+   UNEXPLAINED — the law says approach from below; a rising overshoot
+   at the deepest U is not covered by the stated O(1/U) corrections.
+   Open item; check the square quadrature's variance normalization
+   first (cheapest suspect) before calling it physics.
+
 ## 7. Open asks and next actions
 
 1. Exact Z(U/D) anchor (NRG or CTQMC curve, Bethe, cold). Blocks §2.3's
