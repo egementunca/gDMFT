@@ -511,7 +511,8 @@ demonstrated branch end. Results:
    straight through the exact insulator's death region — the
    closure-deep blindness confirmed at a third budget. Prediction this
    creates: U_x(T) should track the offset's T-dependence (testable;
-   not run). Data: scratch descent log; codec = 10-line PH-symmetric
+   not run). Figure: fig_story_budget_controls (story set; data with provenance
+   in studies/paper_figures/data/). Data: scratch descent log; codec = 10-line PH-symmetric
    extension of the M_g=2 control's, reproducible from the frozen
    producers.
 6. **M_h=4 control (same night; two Σ pairs at M_g=3, 7 params): the

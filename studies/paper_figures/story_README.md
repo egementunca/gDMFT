@@ -133,3 +133,34 @@ Source papers: Georges, Kotliar, Krauth, Rozenberg, RMP 68, 13 (1996),
 Sec. VII for Uc1/Uc2; Strand, PRB 83, 205136 (2011) for what a genuine
 DMFT fold looks like; Kotliar, Lange, Rozenberg, PRL 84, 5180 (2000)
 for the soft mode that would signal one.
+
+## fig_story_budget_controls — what the budget scans say about Uc1
+
+What was done: the insulating solution was followed down in U at the
+coldest temperature with three different resource budgets — the
+standard bath (m_g = 3, with its limits raised to 240 so nothing is
+squeezed), a doubled bath (m_g = 5, one extra symmetric pair), and a
+doubled self-energy (m_h = 4) — plus one run of the split-duty bath
+(a physical pair near the Hubbard band together with an explicit
+omega-linear channel).
+
+What it says, panel by panel: (a) the Mott-pole weight follows the
+same dressed law at every budget, with a small finite-temperature
+offset that runs out exactly at the crossover marked U_x — and shows
+no feature at all near U/D = 2.0 or 2.4, where the variational and
+exact insulators die. (b) The satellite position leaves its finite
+valley at the same U_x for both bath budgets: adding poles does not
+move the endpoint. (c) The matching error stays at solver quality
+straight through the exact death region — the closure carries no
+death mechanism there, which is why no scheme Uc1 is quoted. (d) What
+the insulator increasingly wants as U falls is the omega-linear
+channel share, heading for the value the runaway converges to.
+
+Trust: every curve is a fresh descent from stored campaign roots with
+the commands in the data-file headers; the m_g = 3 and split-duty
+tables are transcribed from the session runs verbatim.
+
+Source papers: Georges-Kotliar-Krauth-Rozenberg RMP 68, 13 (1996) for
+Uc1; Lanata et al. PRB 96, 195126 (2017) for the variational endpoint;
+Liebsch-Ishida, JPCM 24, 053201 (2012) for bath-size convergence
+discipline.
