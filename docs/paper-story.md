@@ -127,11 +127,15 @@ carry the whole truth.
 - gGA is variational: E_tot → exact monotonically from above (LLK Table I;
   gem −0.06184 vs LLK B=3 −0.06155 vs CTQMC −0.0621(1); the 3e-4 is the
   thermal ensemble [BN §3]).
-- gGA's R is unnormalized: ΣR² = captured weight ≤ 1 (0.970 at U=2.4 cold).
-  Its Σ carries a linear term **sig_lin = 1 − 1/ΣR² exactly** — "the sum
-  rule and the linear term are the same fact seen two ways" [BN §4b;
-  re-verified per-U to 4 digits [S]]. An exact Σ decays at ∞; the linear
-  term is the unitarity deficit made visible. Also a junk detector: gem
+- gGA's R is unnormalized: ΣR² ≤ 1 is the ISOMETRY — how much of the
+  electron the quasiparticle space represents (0.970 at U=2.4 cold).
+  Its Σ carries a linear term **sig_lin = 1 − 1/ΣR² exactly** — the
+  R²-sum shortfall and the linear term are the same fact seen two ways
+  [BN §4b; re-verified per-U to 4 digits [S]]. An exact Σ decays at ∞;
+  the linear term is the unitarity deficit made visible. DISTINCT and
+  an order of magnitude larger: the first-moment shortfall of its pole
+  weights vs U²/4 (§2.2 table; decomposed in 2.2b — the two deficits
+  even trend oppositely in U). Also a junk detector: gem
   rows with ΣR² > 1.1 are junk; their warm metal drifts to 1.06+ [BN §2].
 - Ours closes the books: canonical transformation is unitary on the (1+M_h)
   d–h block, ΣR̃² = 1 identically, Z = R̃₀² (9e-16 on 1932 points [RB R3]);
@@ -179,13 +183,25 @@ What R IS in each scheme decides everything in the table above.
 - In gGA, R is computed from the embedding wavefunction — the normalized
   overlap between the ghost quasiparticle orbitals and the physical
   electron. Nothing in that construction enforces completeness of the
-  kept space: the scheme may represent only PART of the electron, and
-  ΣR² < 1 is that fraction. The unrepresented remainder is not hidden —
-  it IS the missing Σ-pole weight and it IS the linear term
-  (sig_lin = 1 − 1/ΣR², verified per-U to 4 digits): three names for
-  one number. Since gGA coincides with DMFT exactly under the isometric
-  condition R†R = 1 [draft; LLK], the deficit 1 − ΣR² is the scheme's
-  distance from DMFT measured in its own variables.
+  kept space, and nothing enforces moment bookkeeping on its Σ. That
+  single omission has TWO distinct symptoms of very different size
+  (this file's own conflation, corrected 2026-07-22 — §6): the
+  ISOMETRY deficit 1 − ΣR² — the fraction of the electron the
+  quasiparticle space fails to represent — is SMALL (0.3% at U=0.5 →
+  3% at 2.75, cold metal) and equals the linear Σ term exactly
+  (sig_lin = 1 − 1/ΣR²); the FIRST-MOMENT deficit — pole weight
+  missing vs the exact U²/4 — is an order of magnitude LARGER (51% at
+  U=0.5 → 28% at 2.75) and is not that number. Measured, they trend
+  OPPOSITELY along the metal: at small U the scheme is nearly
+  perfectly isometric (ΣR² = 0.9967 at U=0.5 — nearly DMFT by the LLK
+  criterion) while its Σ carries barely half the exact moment — the
+  occupied low-frequency physics needs almost no high-energy weight
+  and nothing else asks for it; deeper in U, Mott physics forces
+  atomic weight into the poles (moment deficit falls) while
+  compressing the electron into the ghost space gets harder (isometry
+  deficit grows). 1 − ΣR² remains the scheme's distance from DMFT in
+  its own variables [draft; LLK]; the moment deficit is the running
+  price of no bookkeeping.
 - In ghost-DMFT, R̃ comes from a canonical (unitary) rotation of the
   gateway — a change of basis, not a compression. A basis change cannot
   lose electron: ΣR̃² = 1 identically, and Z = R̃₀² is then a mode
@@ -202,6 +218,24 @@ What R IS in each scheme decides everything in the table above.
   with less weight (49% → 72% of U²/4, RISING with U as Mott physics
   forces more of the atomic weight to be represented) — while ours
   stays flat at ~90% because an identity, not a physics regime, pins it.
+- The INSULATOR contrast is a weights story, NOT an isometry story
+  (measured 2026-07-22): gem's insulating ΣR² is 0.976–0.992 — in the
+  gapped state completeness is cheap (no low-energy competition), so
+  the isometry deficit explains only 0.03–0.05 of its Mott-pole
+  deficit. The rest is under-weighted Hubbard-band poles: gem removes
+  0.47 (U=3) → 0.40 (U=4) beyond the atomic U²/4, where our matching
+  removes exactly the band variance ⟨ε_k²⟩ = 0.25, U-independent and
+  bath-budget-independent (§2.4). Same cause as the metal — weight
+  only where energy wants it — shrinking toward the atomic limit as
+  the Hubbard bands come to dominate the energy as well. That is the
+  entire content of "gem's Mott-pole deficit is ~2× ours with the
+  opposite U-trend": ours is pinned constant by bookkeeping, theirs is
+  an energy choice decaying with U.
+- Same division in the mode frame (the GUI's gem overlays): our
+  canonical modes sit at (0, ±Λ) with weights exactly (Z, (1−Z)/2,
+  (1−Z)/2); gem's quasiparticle modes carry total weight ΣR² < 1 at
+  energy-optimized positions. Mode POSITIONS compare freely; mode
+  WEIGHTS only with the isometry deficit in mind.
 - WHY Z still nearly agrees (the compensation): the Z of a mirrored
   pair is set by weight/position² (1/Z − 1 = 2W²/η²). A closer, lighter
   pole and a farther, heavier pole can produce nearly the same
@@ -300,7 +334,8 @@ both. The ENDING was audited (forensics below): it is a pole-flight
 boundary of the finite-pole parametrization, NOT a thermodynamic
 spinodal — the weight law sets WHERE the branch ends, the runaway is
 HOW. gem's Mott-pole deficit is roughly TWICE ours (0.52 at
-U=3, opposite U-trend), and its cold down-sweep loses the insulator at
+U=3, opposite U-trend; decomposed in §2.2b — an under-weighting
+choice at near-perfect isometry, not a representation loss), and its cold down-sweep loses the insulator at
 U = 2.90 — but that number is gem's iteration-basin artifact, not gGA's
 U_c1: Lanatà's published variational endpoint is ≈ 2.0 [their PRB;
 pin]. The honest cross-method statement is the three-ends taxonomy
@@ -697,6 +732,14 @@ arc/pseudogap beyond the outlook paragraph).
 
 ## 6. Session corrections (so this file self-heals)
 
+- 2026-07-22: §2.2b's first draft conflated the ISOMETRY deficit
+  (1 − ΣR² = linear term, ≤3%) with the FIRST-MOMENT deficit of gem's
+  Σ-pole weights (28–51%) — "three names for one number" was wrong.
+  Two deficits, one cause (no bookkeeping), OPPOSITE U-trends
+  (measured cold: metal ΣR² 0.9967 → 0.9713 while moment capture
+  0.490 → 0.723; insulator ΣR² 0.976–0.992 with absolute deficit
+  0.52 → 0.43). Corrected same day; the decomposition is now the
+  content of 2.2b and the insulator bullet there.
 - 2026-07-21: budget dictionary corrected — Σ poles are M_h (=2 always in
   the single-site set), NOT M_g; earlier "M_g=3 is the minimal Σ topology"
   wording was wrong. The Mott transition is bought by the *bath* satellites

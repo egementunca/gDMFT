@@ -39,9 +39,12 @@ renormalizer at M_g=1, the M_g=2 control.]
 STUB: Both frameworks' Σ at matched budget is one mirrored pole pair; the
 closures spend it differently. Ours holds the pole weight at a flat
 89.1–89.7% (Bethe) / 83.7–87.2% (square) of the exact first moment U²/4
-along the entire metal branch; gem spends 49→72%, placing poles closer in,
-with the remainder in a linear-in-ω term equal to 1 − 1/ΣR² at every U —
-the isometry deficit made spectroscopically visible. Our canonical frame is
+along the entire metal branch; gem spends 49→72%, placing poles closer in —
+that moment shortfall is simply unbooked (nothing in the variational
+closure enforces it). A separate and much smaller violation, the
+isometry deficit 1 − ΣR² (0.3–3%), appears as its linear-in-ω term
+(sig_lin = 1 − 1/ΣR² at every U); the two deficits trend oppositely
+in U (isometry grows, moment shortfall shrinks). Our canonical frame is
 unitary: ΣR̃² = 1 identically, R₀² = Z to 9e-16, interlacing with zero
 violations on 1932 roots; G integrates to 1 by construction.
 Scoreboard at U/D = 2.4 (exact E = −0.0621(1)): gGA −0.0618, ours −0.0610,
