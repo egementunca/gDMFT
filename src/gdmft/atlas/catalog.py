@@ -72,19 +72,24 @@ PRIMARY_ROUTES = (
         status_policy_id=_D09_STATUS_POLICY,
     ),
     PrimaryRoute(
-        route_id="bethe-mg3-bare-d08",
+        route_id="bethe-mg3-bare-d09-fill",
         lattice="bethe",
         m_g=3,
-        dataset_id=D08_DATASET_ID,
+        dataset_id=D09_DATASET_ID,
         gauge="bare",
         purpose=PRIMARY_PHYSICS,
         reason=(
-            "D08 contains the Bethe m_g=3 bare population; D09 contains "
-            "only the independent canonical-R continuation for this cell."
+            "D09 revision 0.2.0 carries the bethe_mg3_bare fill campaign "
+            "on the canonical grid (111 U x 17 T with 0.01 coexistence "
+            "windows), every bare root paired with its exact canonical-R "
+            "conversion and R-reoptimized refit; it reproduces the D08 "
+            "population's physics at shared keys to 4+ decimals and "
+            "supersedes it as the primary route. D08 remains historical "
+            "evidence."
         ),
-        quadrature="bethe_semicircle_closed_form",
+        quadrature="bethe_semicircle",
         quadrature_status="canonical-route",
-        status_policy_id=_D08_STATUS_POLICY,
+        status_policy_id=_D09_STATUS_POLICY,
     ),
     PrimaryRoute(
         route_id="square-mg1-bare-d09",

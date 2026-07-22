@@ -57,7 +57,7 @@ def _row(
     ("lattice", "m_g", "dataset_id", "quadrature"),
     [
         ("bethe", 1, D09_DATASET_ID, "bethe_semicircle"),
-        ("bethe", 3, D08_DATASET_ID, "bethe_semicircle_closed_form"),
+        ("bethe", 3, D09_DATASET_ID, "bethe_semicircle"),
         ("square", 1, D09_DATASET_ID, "continuum_elliptic_dos"),
         ("square", 3, D09_DATASET_ID, "continuum_elliptic_dos"),
     ],
@@ -224,10 +224,14 @@ def test_real_tables_have_expected_catalog_roles() -> None:
                 counts[decision.purpose] += 1
                 accepted_primary += int(decision.include_default_physics)
 
+    # Revision 0.2.0 totals (fill campaign merged; bethe-mg3 routed to D09):
+    # primary = 3,368 old bare + 11,668 fill bare roots (= the stage3
+    # pairing-row count); excluded = the exact conversions of both
+    # campaigns + D08's converted view.
     assert counts == {
-        PRIMARY_PHYSICS: 8874,
-        GAUGE_EVIDENCE: 8504,
-        EXCLUDED_REPRESENTATION: 11936,
-        SUPPLEMENTARY: 6154,
+        PRIMARY_PHYSICS: 15036,
+        GAUGE_EVIDENCE: 31222,
+        EXCLUDED_REPRESENTATION: 23604,
+        SUPPLEMENTARY: 11660,
     }
     assert 0 < accepted_primary < counts[PRIMARY_PHYSICS]
