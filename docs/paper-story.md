@@ -1129,6 +1129,14 @@ Three visible features in the comparison set, with their current status:
    Open item; check the square quadrature's variance normalization
    first (cheapest suspect) before calling it physics.
 
+### Ask from the 2026-07-22 meeting (gem bath hybridization)
+- gem's V0-analog exists (the embedding D-matrix's central component;
+  at B=1 its single bath coupling) but the import does not record it —
+  extend gem_scan.py to emit the embedding bath couplings, then test
+  the RISB expectation D proportional to R proportional to sqrt(Z)
+  against our measured V0 = 0.455 sqrt(Z) D: two constants, one sqrt(Z)
+  law, variational vs matching. Cheap and quotable.
+
 ### GUI/data asks from the 2026-07-22 late session (Series bath panel)
 - Series ED overlays: V0 and V1 of the same ED run share one marker
   (shape = N_b, fill = direction leaves nothing for the quantity) —
