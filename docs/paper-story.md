@@ -1129,6 +1129,17 @@ Three visible features in the comparison set, with their current status:
    Open item; check the square quadrature's variance normalization
    first (cheapest suspect) before calling it physics.
 
+### GUI/data asks from the 2026-07-22 late session (Series bath panel)
+- Series ED overlays: V0 and V1 of the same ED run share one marker
+  (shape = N_b, fill = direction leaves nothing for the quantity) —
+  ambiguous without the tooltip; give quantity its own channel (e.g.
+  outline color) and collapse up/down into one marker where they agree
+  to display precision (no hysteresis, e.g. U = 1).
+- ED coupling normalization check BEFORE quoting any V0/V1 comparison:
+  ED central coupling 0.091 vs ours 0.31 at U = 1 is too far to be
+  physics unchecked — verify the ED import's convention (raw vs /D,
+  V vs V^2) against the LLK protocol.
+
 ## 7. Open asks and next actions
 
 1. Exact Z(U/D) anchor (NRG or CTQMC curve, Bethe, cold). Blocks §2.3's
