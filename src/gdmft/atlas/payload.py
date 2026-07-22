@@ -767,6 +767,31 @@ def thin_rows_for_derive(
                 "converged": converged,
             }
         )
+    # Campaign-duplicate resolution (revision 0.2.0): the fill campaign
+    # re-solves grid keys the original campaign already carries. Splicing
+    # both into one chain forks it wherever the campaigns found different
+    # solution families (the old satellite-dead native metal vs the
+    # protected fill chains), so derived chains keep the NEWEST campaign
+    # at each duplicate key. Provenance, not selection: every row stays in
+    # the point table and the Tables campaign filter.
+    def campaign_rank(row_index: int) -> int:
+        run = rows[row_index]["run_id"] or ""
+        return 1 if run.startswith("d09-fill-") else 0
+
+    best: dict[tuple, int] = {}
+    for j, entry in enumerate(thin):
+        key = (entry["lattice"], entry["m_g"], entry["gauge"],
+               entry["family"], entry["u"], entry["t"])
+        k = best.get(key)
+        if k is None or campaign_rank(entry["i"]) > campaign_rank(thin[k]["i"]):
+            best[key] = j
+    kept = sorted(best.values())
+    if len(kept) != len(thin):
+        report.append(
+            f"{dataset_id}: {len(thin) - len(kept)} older-campaign duplicate "
+            f"keys superseded in derived chains (rows remain in the table)"
+        )
+        thin = [thin[j] for j in kept]
     return thin
 
 

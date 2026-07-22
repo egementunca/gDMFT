@@ -106,6 +106,23 @@ def derived(ds: str) -> dict:
         )
     for lattice, (us, ts) in per_lattice.items():
         grids[lattice] = (sorted(us), sorted(ts))
+    # Campaign-duplicate resolution (v2 revision 0.2.0): where the fill
+    # campaign re-solved an existing grid key, derived chains keep the
+    # NEWEST campaign's row — otherwise chains fork wherever the campaigns
+    # found different families (old satellite-dead native vs protected
+    # fill). Provenance rule, not selection; all rows stay in point_rows.
+    if ds == "v2":
+        best: dict[tuple, int] = {}
+        for j, entry in enumerate(thin):
+            key = (entry["lattice"], entry["m_g"], entry["gauge"],
+                   entry["family"], entry["u"], entry["t"])
+            k = best.get(key)
+            rank = rows[entry["i"]]["run_id"].startswith("d09-fill-")
+            prev = (k is not None
+                    and rows[thin[k]["i"]]["run_id"].startswith("d09-fill-"))
+            if k is None or (rank and not prev):
+                best[key] = j
+        thin = [thin[j] for j in sorted(best.values())]
     return derive_dataset(ds, thin, grids)
 
 
