@@ -166,16 +166,18 @@ def build() -> None:
     print(f"Vieta product identity on {n_vieta} resolvable points: "
           f"max rel deviation {vieta_dev:.2e}")
 
-    # ---------------- (d) identity residuals, all converged points ----------
+    # ---------------- (d) identity residuals: worst case per U ----------
+    # Not a point cloud (thousands of overlapping dots): for each identity
+    # take the WORST residual over all converged points at each U. Four clean
+    # envelopes that all sit near machine precision — the actual message.
     floor = 1e-18
     series = {
         "norm_error": ("#7f7f7f", "norm error"),
         "closure_error": ("#2ca02c", "closure error"),
         "roundtrip_error": ("#9467bd", "roundtrip error"),
     }
-    xs: dict[str, list] = {key: [] for key in series}
-    ys: dict[str, list] = {key: [] for key in series}
-    zr_x, zr_y = [], []
+    worst: dict[str, dict[float, float]] = {key: {} for key in series}
+    zr_worst: dict[float, float] = {}
     for row in rows:
         if (
             row["lattice"] != "bethe"
@@ -187,21 +189,28 @@ def build() -> None:
         for key in series:
             value = common.fnum(row[key])
             if value is not None:
-                xs[key].append(u)
-                ys[key].append(abs(value) + floor)
+                worst[key][u] = max(worst[key].get(u, 0.0), abs(value))
         z_pole = common.fnum(row["quasiparticle_weight_pole"])
         z_from_r = common.fnum(row["quasiparticle_weight_from_r"])
         if z_pole is not None and z_from_r is not None:
-            zr_x.append(u)
-            zr_y.append(abs(z_from_r - z_pole) + floor)
+            zr_worst[u] = max(zr_worst.get(u, 0.0), abs(z_from_r - z_pole))
+
+    def envelope(mapping):
+        us = sorted(mapping)
+        return us, [mapping[u] + floor for u in us]
+
     for key, (color, label) in series.items():
-        dx.plot(xs[key], ys[key], ".", ms=1.6, color=color, label=label)
-    dx.plot(zr_x, zr_y, ".", ms=1.6, color="#e377c2",
+        us, ys = envelope(worst[key])
+        dx.plot(us, ys, "-", lw=1.1, color=color, label=label)
+    us, ys = envelope(zr_worst)
+    dx.plot(us, ys, "-", lw=1.1, color="#e377c2",
             label=r"$|\,|\tilde R_0|^2 - Z\,|$")
+    dx.axhline(1e-8, color="0.7", lw=0.7, ls=":")
+    dx.annotate(r"$10^{-8}$", xy=(0.55, 1.4e-8), fontsize=6, color="0.5")
     dx.set_yscale("log")
     dx.set_xlabel(r"$U/D$")
-    dx.set_ylabel("identity residual")
-    dx.set_title("(d) canonical-map identities, all converged points",
+    dx.set_ylabel("worst identity residual")
+    dx.set_title("(d) canonical-map identities (worst case per $U$)",
                  fontsize=9, loc="left")
     dx.legend(fontsize=6, frameon=False, loc="upper right")
 
