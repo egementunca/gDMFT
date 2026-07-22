@@ -488,6 +488,27 @@ demonstrated branch end. Results:
    not run). Data: scratch descent log; codec = 10-line PH-symmetric
    extension of the M_g=2 control's, reproducible from the frozen
    producers.
+6. **M_h=4 control (same night; two Σ pairs at M_g=3, 7 params): the
+   extra Σ freedom is INERT under the present matching set — and the
+   crossover does not move.** The residual builder returns the SAME 14
+   matching rows as M_h=2 (no equalities exist for the new h-ghosts),
+   and the run shows exactly what the preservation frame predicts for
+   undetermined freedom: the second pair sits FROZEN at its seed
+   (W₂ = 0.3000, η₂ = 2.0000, unmoved over 73 points, U = 4.0 → 0.85)
+   — an exact flat direction. The active pair keeps η₁ = 0 (the Mott
+   pole) and rides law + the same finite-T offset once the spectator's
+   frozen 2W₂² = 0.18 is subtracted (active weight at the crossover
+   0.087 vs law 0.066; frozen sub-floor active weight ≈ 0.058 — the
+   same ≈ 0.05). Flight onset again between 1.125 and 1.100: **U_x
+   unmoved at a THIRD budget axis.** Fits ~10× tighter on the plateau
+   (‖F‖ ~ 1e-6): more parameters fit the same rows better, determine
+   nothing new. Honest scope: this tests M_h=4 under the M_h=2 row
+   set; the REAL M_h=4 question needs the enlarged equal-time set
+   (draft Eqs. 16/19 generalized to the new h-ghosts — the NCS
+   renormalizer machinery has the two-site version; single-site port
+   is the ask). Until then the statement is: enlarging Σ without
+   enlarging the PRESERVED data does nothing — representation is not
+   the bottleneck, the matched data is.
 
 **Three different "ends", three symbols, never to be conflated** (this
 replaces the earlier bracketing claim, whose gem-side number was a
@@ -729,7 +750,12 @@ transition happens where the gateway becomes atomic-like), not yet a law.
    v1 (predates the route flip; values agree with v2 to 4+ decimals) —
    flip to v2 and re-verify the quoted constants on rebuild.
    fig_v0_death is already v2 + doctrine-cut.
-11. Cheap fourth column + stability demonstrator (optional, from the
+11. M_h=4 matching rows (from control 6): generalize the equal-time
+   matching set to added h-ghosts for the single site (the NCS
+   renormalizer machinery carries the two-site version) — the true
+   M_h=4 insulator test, and the precise sense in which "the matched
+   data, not the representation, is the bottleneck" becomes testable.
+12. Cheap fourth column + stability demonstrator (optional, from the
    TRIQS sweep): an IPT Bethe up/down hysteresis run on our T-ladder
    (deterministic, minutes) gives IPT's U_c1/U_c2/Z(U) as a clearly
    labeled reference scheme, and its DMFT loop is the clean place to
