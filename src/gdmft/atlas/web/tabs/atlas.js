@@ -5,6 +5,11 @@
   var Atlas = window.Atlas;
   var E = Atlas.E;
   var C = Atlas.colors;
+  // Registered endpoint corridors (same constants as the figure suite):
+  // the first-order construction ends inside (T_low, T_high); the U*(T)
+  // diagnostic is meaningful only at T <= T_low. Above it the crossing
+  // wanders through crossover territory and must not be drawn.
+  var CORRIDOR_TMAX = { bethe: 0.010, square: 0.004 };
 
   var SCALAR_VIEWS = [
     { key: "z_pole", label: "Z (pole)" },
@@ -518,10 +523,14 @@
     var grid = ds.grids[state.lattice];
     var overlay = null;
     if (provisional && state.ustar) {
+      var corridorMax = CORRIDOR_TMAX[state.lattice];
       overlay = Atlas.store
         .ustarFor(state.ds, state.lattice, Number(state.mg), state.gauge)
         .filter(function (entry) {
-          return entry.ustar !== undefined;
+          return (
+            entry.ustar !== undefined &&
+            (corridorMax === undefined || entry.t <= corridorMax + 1e-12)
+          );
         })
         .sort(function (a, b) {
           return a.t - b.t;
@@ -588,7 +597,7 @@
           E("div", "muted", "click for attempt details", node);
         },
         overlay: overlay,
-        overlayLabel: "candidate U*(T) crossing",
+        overlayLabel: "candidate U*(T) crossing (below corridor)",
         onClick: function (it, iu) {
           showCellDetail(state, it, iu);
         },
@@ -647,7 +656,7 @@
           E("div", "muted", "click for attempt details", node);
         },
         overlay: overlay,
-        overlayLabel: "candidate U*(T) crossing",
+        overlayLabel: "candidate U*(T) crossing (below corridor)",
         onClick: function (it, iu) {
           showCellDetail(state, it, iu);
         },
