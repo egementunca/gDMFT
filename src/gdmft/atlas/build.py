@@ -31,6 +31,7 @@ WEB_MODULES = (
     "tabs/bench.js",
     "tabs/references.js",
     "tabs/branches.js",
+    "tabs/poles.js",
     "tabs/gauge.js",
     "tabs/qa.js",
     "tabs/tables.js",

@@ -218,7 +218,9 @@
             label: options.struct
               ? "gem B=" + budget + " " + structLabel + " " + direction
               : "gem B=" + budget + " " + direction + " (" + def.lattice + ")",
-            tipLabel: "gem " + direction,
+            tipLabel: options.struct
+              ? "gem B=" + budget + " " + structLabel + " " + direction
+              : "gem B=" + budget + " " + direction,
             legendKey:
               "gem-" + budget + "-" + direction + "-" +
               (options.struct ? structLabel : def.qty),

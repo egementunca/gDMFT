@@ -1064,9 +1064,32 @@
       }
     }
 
-    /* axis tick labels: subset to ~9 on U, every cell (or subset) on T */
-    var uEvery = Math.max(1, Math.round(nU / 9));
-    for (iu = 0; iu < nU; iu += uEvery) {
+    /* axis tick labels: the U axis is CATEGORICAL (one equal-width column
+       per grid value), and the union grid is non-uniform (0.05 coarse +
+       0.01 windows), so every-Nth-column ticks land on ragged values.
+       Instead tick the columns nearest to round U values. */
+    var uTickIdx = [];
+    if (nU) {
+      var uLoVal = spec.uValues[0];
+      var uHiVal = spec.uValues[nU - 1];
+      var stepU = (uHiVal - uLoVal) / 8;
+      var mag = Math.pow(10, Math.floor(Math.log(stepU) / Math.LN10));
+      var norm = stepU / mag;
+      var niceStep = (norm < 1.5 ? 1 : norm < 3.5 ? 2 : norm < 7.5 ? 5 : 10)
+        * mag;
+      var used = {};
+      for (var uv = Math.ceil(uLoVal / niceStep) * niceStep;
+           uv <= uHiVal + 1e-9; uv += niceStep) {
+        var bestI = 0;
+        for (var k = 1; k < nU; k++) {
+          if (Math.abs(spec.uValues[k] - uv)
+              < Math.abs(spec.uValues[bestI] - uv)) bestI = k;
+        }
+        if (!used[bestI]) { used[bestI] = true; uTickIdx.push(bestI); }
+      }
+    }
+    for (var ti = 0; ti < uTickIdx.length; ti++) {
+      iu = uTickIdx[ti];
       var uText = S(
         "text",
         {
@@ -1192,6 +1215,215 @@
     return { el: container, svgs: [svg] };
   }
 
+  /* --- pole map ------------------------------------------------------- */
+  /* Analytic-structure scatter: pole POSITION on y (energy /D), U/D on x,
+     each pole's WEIGHT encoded by marker color (log ramp by default). A
+     pole whose weight falls below `threshold` is drawn as a muted × so a
+     coupling's death (V0 → 0 near the Mott edge) is visible at a glance.
+     Marker SHAPE encodes the pole family, leaving color free for weight —
+     the caller picks which branch(es) to show; nothing forces metal and
+     insulator together. Per-marker hover reports the exact weight.
+     spec = { width?, height?, xLabel?, yLabel?, t, threshold, logColor?,
+       markers: [{ u, pos, weight, shape, family, branch }],
+       uDomain?, yDomain?, vlines?: [{x,label}],
+       shapeLegend?: [{shape,label}], scaleLabel? } */
+  function poleMap(spec) {
+    var container = E("div", "viz-figure");
+    var width = spec.width || 900;
+    var margin = { left: 66, right: 16, top: 12, bottom: 40 };
+    var plotH = spec.height || 430;
+    var height = margin.top + plotH + margin.bottom;
+    var svg = S("svg", {
+      viewBox: "0 0 " + width + " " + height,
+      width: "100%",
+      "font-family": 'system-ui, -apple-system, "Segoe UI", sans-serif',
+    });
+    svg.style.display = "block";
+    container.appendChild(svg);
+
+    var markers = spec.markers.filter(function (m) {
+      return (
+        m &&
+        m.weight !== null && m.weight !== undefined &&
+        m.pos !== null && m.pos !== undefined &&
+        m.u !== null && m.u !== undefined
+      );
+    });
+    var plotX = [margin.left, width - margin.right];
+    var plotY = [margin.top + plotH, margin.top];
+
+    var us = markers.map(function (m) { return m.u; });
+    var uLo, uHi;
+    if (spec.uDomain) {
+      uLo = spec.uDomain[0]; uHi = spec.uDomain[1];
+    } else if (us.length) {
+      uLo = Math.min.apply(null, us); uHi = Math.max.apply(null, us);
+      var padU = (uHi - uLo) * 0.03 || 0.1; uLo -= padU; uHi += padU;
+    } else { uLo = 0; uHi = 1; }
+
+    var poss = markers.map(function (m) { return m.pos; });
+    var yLo, yHi;
+    if (spec.yDomain) {
+      yLo = spec.yDomain[0]; yHi = spec.yDomain[1];
+    } else if (poss.length) {
+      yLo = Math.min.apply(null, poss); yHi = Math.max.apply(null, poss);
+      var padY = (yHi - yLo) * 0.08 || 0.1; yLo -= padY; yHi += padY;
+    } else { yLo = -1; yHi = 1; }
+
+    var xScale = makeScale([uLo, uHi], plotX, false);
+    var yScale = makeScale([yLo, yHi], plotY, false);
+
+    var positiveWeights = markers
+      .map(function (m) { return m.weight; })
+      .filter(function (w) { return w > 0; });
+    var wLo = positiveWeights.length
+      ? Math.min.apply(null, positiveWeights) : 1e-6;
+    var wHi = positiveWeights.length
+      ? Math.max.apply(null, positiveWeights) : 1;
+    if (!(wHi > wLo)) wHi = wLo * 10 || 1;
+    var logColor = spec.logColor !== false;
+    function weightColor(w) {
+      var t = logColor
+        ? (Math.log10(w) - Math.log10(wLo)) /
+          (Math.log10(wHi) - Math.log10(wLo) || 1)
+        : (w - wLo) / (wHi - wLo || 1);
+      return seqColor(Math.max(0, Math.min(1, t)));
+    }
+
+    S("rect", {
+      x: plotX[0], y: margin.top, width: plotX[1] - plotX[0],
+      height: plotH, fill: C.surface,
+    }, svg);
+
+    /* y gridlines (position); the pos=0 line is emphasized */
+    yScale.ticks(6).forEach(function (tv) {
+      var y = yScale(tv);
+      if (y < margin.top - 0.5 || y > margin.top + plotH + 0.5) return;
+      var zero = Math.abs(tv) < 1e-9;
+      S("line", {
+        x1: plotX[0], x2: plotX[1], y1: y, y2: y,
+        stroke: zero ? C.axis : C.grid, "stroke-width": zero ? 1.4 : 1,
+      }, svg);
+      var lab = S("text", {
+        x: plotX[0] - 8, y: y + 3.5, "text-anchor": "end",
+        "font-size": 11, fill: C.muted,
+      }, svg);
+      lab.textContent = fmt(tv);
+    });
+    /* x ticks (U/D) */
+    xScale.ticks(8).forEach(function (tv) {
+      var x = xScale(tv);
+      if (x < plotX[0] - 0.5 || x > plotX[1] + 0.5) return;
+      S("line", {
+        x1: x, x2: x, y1: margin.top, y2: margin.top + plotH,
+        stroke: C.grid, "stroke-width": 1,
+      }, svg);
+      var lab = S("text", {
+        x: x, y: margin.top + plotH + 16, "text-anchor": "middle",
+        "font-size": 11, fill: C.muted,
+      }, svg);
+      lab.textContent = fmt(tv);
+    });
+    /* reference vlines (e.g. U*) */
+    (spec.vlines || []).forEach(function (v) {
+      var x = xScale(v.x);
+      if (x < plotX[0] || x > plotX[1]) return;
+      S("line", {
+        x1: x, x2: x, y1: margin.top, y2: margin.top + plotH,
+        stroke: C.ink2, "stroke-width": 1.2, "stroke-dasharray": "5 4",
+      }, svg);
+      if (v.label) {
+        var lab = S("text", {
+          x: x + 4, y: margin.top + 12, "font-size": 10.5, fill: C.ink2,
+        }, svg);
+        lab.textContent = v.label;
+      }
+    });
+    /* axis labels */
+    var xl = S("text", {
+      x: plotX[0] + (plotX[1] - plotX[0]) / 2, y: height - 6,
+      "text-anchor": "middle", "font-size": 11.5, fill: C.ink2,
+    }, svg);
+    xl.textContent = spec.xLabel || "U/D";
+    var yl = S("text", {
+      x: 15, y: margin.top + plotH / 2,
+      transform: "rotate(-90 15 " + (margin.top + plotH / 2) + ")",
+      "text-anchor": "middle", "font-size": 11.5, fill: C.ink2,
+    }, svg);
+    yl.textContent = spec.yLabel || "pole position /D";
+
+    /* markers: alive = weight-colored shape, dead = muted × */
+    var below = 0;
+    markers.forEach(function (m) {
+      var cx = xScale(m.u), cy = yScale(m.pos);
+      if (cx < plotX[0] - 3 || cx > plotX[1] + 3) return;
+      if (cy < margin.top - 3 || cy > margin.top + plotH + 3) return;
+      var dead = m.weight < spec.threshold;
+      var group = S("g", {}, svg);
+      var shownColor;
+      if (dead) {
+        below++;
+        shownColor = C.muted;
+        var r = 3.5;
+        var cross = S("g", {
+          stroke: C.muted, "stroke-width": 1.6, "stroke-linecap": "round",
+        }, group);
+        S("line", { x1: cx - r, y1: cy - r, x2: cx + r, y2: cy + r }, cross);
+        S("line", { x1: cx - r, y1: cy + r, x2: cx + r, y2: cy - r }, cross);
+      } else {
+        shownColor = weightColor(m.weight);
+        drawSeriesMarker(group, m.shape || "dot", cx, cy,
+          { color: shownColor, markerSize: 4.2 });
+      }
+      var hit = S("circle", {
+        cx: cx, cy: cy, r: 8, fill: "transparent",
+      }, group);
+      hit.style.cursor = "crosshair";
+      hit.addEventListener("pointerenter", function (event) {
+        showTip(event.clientX, event.clientY, function (node) {
+          E("div", "viz-tip-head",
+            (m.branch ? m.branch + " · " : "") + "U/D = " + fmt(m.u) +
+            " · T/D = " + fmt(spec.t), node);
+          tipRow(node, shownColor, m.family + " weight",
+            fmt(m.weight) + (dead ? "  (below threshold)" : ""), false);
+          tipRow(node, null, "position /D",
+            (m.pos > 0 ? "+" : "") + fmt(m.pos), false);
+        });
+      });
+      hit.addEventListener("pointerleave", hideTip);
+    });
+
+    /* colorbar for weight */
+    var legendBox = E("div", "viz-scalebar", null, container);
+    var bar = E("span", "viz-gradient", null, legendBox);
+    var stops = [];
+    for (var s = 0; s <= 10; s++) {
+      stops.push(seqColor(s / 10) + " " + s * 10 + "%");
+    }
+    bar.style.background = "linear-gradient(90deg," + stops.join(",") + ")";
+    E("span", "muted", fmt(wLo), legendBox);
+    E("span", "viz-scalebar-label",
+      spec.scaleLabel || ("pole weight" + (logColor ? " (log)" : "")),
+      legendBox);
+    E("span", "muted", fmt(wHi), legendBox);
+
+    /* shape + threshold legend */
+    var shapeBox = E("div", "viz-scalebar", null, container);
+    (spec.shapeLegend || []).forEach(function (sl) {
+      var chip = E("span", "viz-legend-chip", null, shapeBox);
+      var glyph = E("span", "viz-marker-key", markerSymbol(sl.shape), chip);
+      glyph.style.color = C.ink2;
+      E("span", null, sl.label, chip);
+    });
+    var deadChip = E("span", "viz-legend-chip", null, shapeBox);
+    var deadGlyph = E("span", "viz-marker-key", "×", deadChip);
+    deadGlyph.style.color = C.muted;
+    E("span", null,
+      "weight < " + fmt(spec.threshold) + " (" + below + " poles)", deadChip);
+
+    return { el: container, svgs: [svg], below: below };
+  }
+
   function interpIndex(sorted, value) {
     if (value < sorted[0] || value > sorted[sorted.length - 1]) return null;
     for (var i = 0; i < sorted.length - 1; i++) {
@@ -1251,6 +1483,7 @@
   Atlas.plot = {
     figure: figure,
     heatmap: heatmap,
+    poleMap: poleMap,
     dlSVG: dlSVG,
     dlPNG: dlPNG,
   };
