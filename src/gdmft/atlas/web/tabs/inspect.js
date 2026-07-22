@@ -470,6 +470,21 @@
     function renderBody() {
     bodyHost.innerHTML = "";
     var rows = rowsAtKey(ds, state);
+    // campaign tag from run_id ("d09-fill-20260721:cell" -> "d09-fill-20260721");
+    // duplicate keys exist as rows of fact, so picks prefer the newest
+    // campaign (same rule the derived chains apply) and duplicate labels
+    // carry the tag
+    function runTag(i) {
+      var run = ds.has("run") ? ds.str("run", i) : null;
+      return run ? run.split(":")[0] : "";
+    }
+    function newestFirst(list) {
+      return list.slice().sort(function (a, b) {
+        var ra = runTag(a);
+        var rb = runTag(b);
+        return ra < rb ? 1 : ra > rb ? -1 : a - b;
+      });
+    }
     if (state.row === null || rows.indexOf(state.row) < 0) {
       // sticky branch: an attempt picked by hand pins its family, and
       // slider moves re-select that family at the new point when present
@@ -482,27 +497,41 @@
         var famConv = fam.filter(function (i) {
           return ds.converged(i);
         });
-        pick = famConv.length ? famConv[0] : fam.length ? fam[0] : null;
+        pick = famConv.length
+          ? newestFirst(famConv)[0]
+          : fam.length
+            ? newestFirst(fam)[0]
+            : null;
       }
       if (pick === null) {
         var preferred = rows.filter(function (i) {
           return ds.converged(i);
         });
-        pick = preferred.length ? preferred[0] : rows[0];
+        pick = preferred.length
+          ? newestFirst(preferred)[0]
+          : newestFirst(rows)[0];
       }
       state.row = pick;
     }
     if (rows.length) {
+      var famCount = {};
+      rows.forEach(function (i) {
+        var f = ds.str("family", i);
+        famCount[f] = (famCount[f] || 0) + 1;
+      });
       bodyHost.appendChild(
         ui.row([
           ui.field(
             "attempt (sticky)",
             ui.select(
               rows.map(function (i) {
+                var fam = ds.str("family", i);
+                var tag = famCount[fam] > 1 ? runTag(i) : "";
                 return {
                   value: i,
                   label:
-                    ds.str("family", i) +
+                    fam +
+                    (tag ? " · " + tag : "") +
                     (ds.converged(i) ? "" : " (not converged)"),
                 };
               }),
